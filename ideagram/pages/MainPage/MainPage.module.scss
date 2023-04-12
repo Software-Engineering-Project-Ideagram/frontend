@@ -1,0 +1,90 @@
+.container {
+  width: 100%;
+  height: 100%;
+
+  .toolbar {
+    width: 100%;
+    background-color: #e14d2a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Verdana, sans-serif;
+
+    button {
+      color: white;
+      background-color: #e14d2a;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      cursor: pointer;
+    }
+  }
+
+  .body {
+    width: 100%;
+    height: 100%;
+    text-align: right;
+
+    .seeAllIdeas {
+      background-color: #4ad295;
+      color: white;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.2rem;
+      margin: 1rem;
+      cursor: pointer;
+
+      &.disableButton {
+        opacity: 0.5;
+        cursor: none;
+      }
+    }
+
+    .ideas {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: auto auto;
+      justify-items: center;
+      align-items: center;
+      gap: 1rem;
+      max-height: 18rem;
+      overflow: hidden;
+      text-align: left;
+
+      &.scrollable {
+        overflow-y: scroll;
+        padding: 2rem 0;
+      }
+
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: lightgray;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgb(158, 158, 158);
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: gray;
+      }
+    }
+  }
+}
+
+@font-face {
+  font-family: Verdana;
+  src: url("../../fonts/Verdana.ttf");
+}
