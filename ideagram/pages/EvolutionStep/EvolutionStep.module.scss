@@ -1,0 +1,76 @@
+.container {
+  width: 100%;
+  height: 100%;
+
+  .toolbar {
+    width: 100%;
+    background-color: #e14d2a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Verdana, sans-serif;
+
+    button {
+      color: white;
+      background-color: #e14d2a;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      cursor: pointer;
+    }
+  }
+
+  .body {
+    width: 100%;
+
+    h2 {
+      font-family: Rubik, sans-serif;
+      margin: 0.5rem 1rem;
+    }
+
+    .steps {
+      border: 1px solid #303030;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      border-radius: 0.5rem;
+
+      h4 {
+        font-family: Rubik, sans-serif;
+      }
+
+      .stepper {
+        margin: 1rem;
+      }
+    }
+
+    .stepsInfo {
+      display: flex;
+      align-items: flex-start;
+      justify-content: start;
+      padding: 0.5rem 1rem;
+
+      h4 {
+        font-family: Verdana, sans-serif;
+      }
+
+      .stepInfo {
+        margin-left: 10rem;
+      }
+    }
+  }
+}
+
+@font-face {
+  font-family: Verdana;
+  src: url("../../fonts/Verdana.ttf");
+}
+
+@font-face {
+  font-family: Rubik;
+  src: url("../../fonts/Rubik-VariableFont_wght.ttf");
+}
