@@ -1,0 +1,95 @@
+.container {
+  width: 30rem;
+  height: 8rem;
+  font-family: Rubik, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #303030;
+  border-radius: 0.5rem;
+
+  .ideaInfo {
+    height: 100%;
+    padding: 0.2rem 0.5rem;
+
+    .ideaTitle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .title {
+        font-size: 1rem;
+      }
+
+      .saveIdea {
+        border: none;
+        outline: none;
+        background-color: #2a5c9f;
+        padding: 0.2rem;
+        font-size: 0.5rem;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.3rem;
+      }
+    }
+
+    .ideaGoal {
+      margin: 0.3rem 0;
+    }
+
+    .ideaDesc {
+      width: 100%;
+      height: fit-content;
+      max-height: 3rem;
+      word-break: break-all;
+      white-space: normal;
+      overflow: hidden;
+      overflow-y: scroll;
+      margin-bottom: 0.5rem;
+      font-size: 0.7rem;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .feedback {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 2px solid #8f8f8f;
+      padding: 0.2rem;
+
+      div {
+        flex: 1;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.2rem;
+
+        .icon {
+          width: 0.8rem;
+          height: 0.8rem;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+
+  .ideaImage {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    border-bottom: 2px solid #303030;
+    border-top: 2px solid #303030;
+  }
+}
+
+@font-face {
+  font-family: Rubik;
+  src: url("../../fonts/Rubik-VariableFont_wght.ttf");
+}
