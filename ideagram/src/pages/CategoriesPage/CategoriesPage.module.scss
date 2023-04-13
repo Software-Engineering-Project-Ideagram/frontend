@@ -31,6 +31,7 @@
     text-align: right;
 
     .selectedIdea {
+      height: 10rem;
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
@@ -38,6 +39,11 @@
       font-family: Inter, sans-serif;
       padding: 0 1rem;
       border: 2px solid #303030;
+
+      img {
+        width: 15rem;
+        height: 9.7rem;
+      }
 
       p {
         display: block;
@@ -55,7 +61,7 @@
       font-size: 1rem;
       padding: 0.5rem 1rem;
       border-radius: 0.2rem;
-      margin: 1rem;
+      margin: 0.5rem 1rem;
       cursor: pointer;
 
       &.disableButton {

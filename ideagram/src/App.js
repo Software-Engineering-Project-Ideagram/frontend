@@ -17,7 +17,7 @@ function App() {
     <div className={classes.container}>
       <Header />
       <div className={classes.body}>
-        <CategoriesPage />
+        <AccountReport />
       </div>
       <Footer />
     </div>

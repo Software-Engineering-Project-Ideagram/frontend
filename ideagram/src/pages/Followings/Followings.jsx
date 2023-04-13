@@ -40,19 +40,19 @@ const Followings = () => {
         <h2>Followings</h2>
 
         <div className={classes.followings}>
-          <UserAccount />
-          <UserAccount />
-          <UserAccount />
-          <UserAccount />
-          <UserAccount />
-          <UserAccount />
-          <UserAccount />
-          <UserAccount />
-          <UserAccount />
-          <UserAccount />
-          <UserAccount />
-          <UserAccount />
-          <UserAccount />
+          <UserAccount type="Followings" />
+          <UserAccount type="Followings" />
+          <UserAccount type="Followings" />
+          <UserAccount type="Followings" />
+          <UserAccount type="Followings" />
+          <UserAccount type="Followings" />
+          <UserAccount type="Followings" />
+          <UserAccount type="Followings" />
+          <UserAccount type="Followings" />
+          <UserAccount type="Followings" />
+          <UserAccount type="Followings" />
+          <UserAccount type="Followings" />
+          <UserAccount type="Followings" />
         </div>
       </div>
     </div>

@@ -6,15 +6,17 @@ import Followers from "../../images/Multiple users silhouette.png";
 import Followings from "../../images/Subscriber.png";
 import Ideas from "../../images/Idea.png";
 
-const UserAccount = () => {
+const UserAccount = ({ type }) => {
   return (
     <div className={classes.container}>
-      <div className={classes.delete}>
-        <button>
-          <img src={Delete} alt="delete" />
-          Delete
-        </button>
-      </div>
+      {type !== "AccountReport" && (
+        <div className={classes.delete}>
+          <button>
+            <img src={Delete} alt="delete" />
+            Delete
+          </button>
+        </div>
+      )}
       <div className={classes.userInfo}>
         <img src={Profile} alt="profile" />
 

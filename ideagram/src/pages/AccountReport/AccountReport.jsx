@@ -35,7 +35,7 @@ const AccountReport = () => {
         <div className={classes.reportAccount}>
           <div className={classes.accountInfo}>
             <h3>Account Information</h3>
-            <UserAccount />
+            <UserAccount type="AccountReport" />
           </div>
           <div className={classes.report}>
             <div>
