@@ -18,7 +18,7 @@ function App() {
     <div className={classes.container}>
       <Header />
       <div className={classes.body}>
-        <SavedIdeas />
+        <MainPage />
       </div>
       <Footer />
     </div>

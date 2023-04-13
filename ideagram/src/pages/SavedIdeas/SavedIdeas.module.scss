@@ -60,6 +60,7 @@
         max-height: 21rem;
         overflow: hidden;
         overflow-y: scroll;
+        background-color: #ffffff;
 
         &.scrollable {
           overflow-y: scroll;
@@ -95,6 +96,7 @@
         padding: 0.5em 1rem;
         border: 2px solid #303030;
         border-radius: 0.5rem;
+        background-color: #ffffff;
 
         h3 {
           font-family: Rubik, sans-serif;
