@@ -8,3 +8,4 @@ export { default as EditProfile } from "./EditProfile/EditProfile";
 export { default as Profile } from "./Profile/Profile";
 export { default as CategoriesPage } from "./CategoriesPage/CategoriesPage";
 export { default as SavedIdeas } from "./SavedIdeas/SavedIdeas";
+export { default as MyIdeas } from "./MyIdeas/MyIdeas";

@@ -11,6 +11,7 @@ import {
   Profile,
   CategoriesPage,
   SavedIdeas,
+  MyIdeas,
 } from "./pages";
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
     <div className={classes.container}>
       <Header />
       <div className={classes.body}>
-        <MainPage />
+        <Profile />
       </div>
       <Footer />
     </div>
