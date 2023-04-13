@@ -36,30 +36,6 @@ const EditProfile = () => {
   return (
     <div>
       <div className={classes.container}>
-        <div className={classes.sidebar}>
-          <button>
-            <img src={Profile} alt="Profile" /> Profile
-          </button>
-          <button>
-            <img src={My_Idea} alt="My_Idea" /> My Idea
-          </button>
-          <button>
-            <img src={Saved_Ideas} alt="Saved_Ideas" /> Saved Ideas
-          </button>
-          <button>
-            <img src={Follower} alt="Follower" /> Follower
-          </button>
-          <button>
-            <img src={Following} alt="Following" /> Following
-          </button>
-          <button>
-            <img src={Edit_Profile} alt="Edit_Profile" /> Edit Profile
-          </button>
-          <button>
-            <img src={User_Guid} alt="User_Guid" /> User Guid
-          </button>
-        </div>
-
         <div className={classes.body}>
           <h2>Edit Profile</h2>
           <div className={classes.steps}>

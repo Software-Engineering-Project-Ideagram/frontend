@@ -1,17 +1,13 @@
 import { Header, Footer } from "./components";
 import classes from "./App.module.scss";
 import {
-  Followings,
   MainPage,
   AccountReport,
   EvolutionStep,
   ForgotPassword,
-  EditProfile,
   ShowProfile,
-  Profile,
   CategoriesPage,
-  SavedIdeas,
-  MyIdeas,
+  ProfileStructure,
 } from "./pages";
 
 function App() {
@@ -19,7 +15,7 @@ function App() {
     <div className={classes.container}>
       <Header />
       <div className={classes.body}>
-        <Profile />
+        <ProfileStructure />
       </div>
       <Footer />
     </div>
