@@ -9,6 +9,7 @@ import {
   EditProfile,
   ShowProfile,
   Profile,
+  CategoriesPage,
 } from "./pages";
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
     <div className={classes.container}>
       <Header />
       <div className={classes.body}>
-        <Profile />
+        <CategoriesPage />
       </div>
       <Footer />
     </div>

@@ -6,3 +6,4 @@ export { default as EvolutionStep } from "./EvolutionStep/EvolutionStep";
 export { default as AccountReport } from "./AccountReport/AccountReport";
 export { default as EditProfile } from "./EditProfile/EditProfile";
 export { default as Profile } from "./Profile/Profile";
+export { default as CategoriesPage } from "./CategoriesPage/CategoriesPage";

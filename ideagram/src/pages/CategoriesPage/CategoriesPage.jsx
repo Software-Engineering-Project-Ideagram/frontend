@@ -1,9 +1,10 @@
 import React from "react";
-import classes from "./MainPage.module.scss";
+import classes from "./CategoriesPage.module.scss";
 import { Idea } from "../../components";
 import { useState } from "react";
+import IdeaImage from "../../images/idea.jpg";
 
-const MainPage = () => {
+const CategoriesPage = () => {
   const [seeAll, setSeeAll] = useState(false);
 
   return (
@@ -20,6 +21,18 @@ const MainPage = () => {
       </div>
 
       <div className={classes.body}>
+        {!seeAll && (
+          <div className={classes.selectedIdea}>
+            <h1>About Art</h1>
+            <img src={IdeaImage} alt="Idea_Image" />
+            <p>
+              There’s an art to writing compelling exhibition and artwork
+              descriptions. Read on to find out tried and true tips for
+              successfully introducing your exhibition, artworks and objects to
+              your visitors.
+            </p>
+          </div>
+        )}
         <button
           className={`${classes.seeAllIdeas} ${
             seeAll && classes.disableButton
@@ -57,8 +70,6 @@ const MainPage = () => {
             <>
               <Idea />
               <Idea />
-              <Idea />
-              <Idea />
             </>
           )}
         </div>
@@ -67,4 +78,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default CategoriesPage;

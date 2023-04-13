@@ -30,6 +30,23 @@
     height: 100%;
     text-align: right;
 
+    .selectedIdea {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 3rem;
+      font-family: Inter, sans-serif;
+      padding: 0 1rem;
+      border: 2px solid #303030;
+
+      p {
+        display: block;
+        margin: auto;
+        max-width: 30rem;
+        text-align: justify;
+      }
+    }
+
     .seeAllIdeas {
       background-color: #4ad295;
       color: white;
@@ -88,4 +105,9 @@
 @font-face {
   font-family: Verdana;
   src: url("../../fonts/Verdana.ttf");
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("../../fonts/Inter-VariableFont_slnt\,wght.ttf");
 }
