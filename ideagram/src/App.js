@@ -7,6 +7,8 @@ import {
   EvolutionStep,
   ForgotPassword,
   EditProfile,
+  ShowProfile,
+  Profile,
 } from "./pages";
 
 function App() {
@@ -14,7 +16,7 @@ function App() {
     <div className={classes.container}>
       <Header />
       <div className={classes.body}>
-        <EditProfile />
+        <Profile />
       </div>
       <Footer />
     </div>
