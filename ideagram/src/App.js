@@ -10,6 +10,7 @@ import {
   ShowProfile,
   Profile,
   CategoriesPage,
+  SavedIdeas,
 } from "./pages";
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
     <div className={classes.container}>
       <Header />
       <div className={classes.body}>
-        <AccountReport />
+        <SavedIdeas />
       </div>
       <Footer />
     </div>

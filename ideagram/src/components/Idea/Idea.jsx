@@ -8,9 +8,10 @@ import {
   Message,
 } from "@mui/icons-material";
 import Eye from "../../images/Eye.png";
+import Delete from "../../images/delete.png";
 import { useState } from "react";
 
-const Idea = () => {
+const Idea = ({ type }) => {
   const [isSave, setIsSave] = useState(false);
 
   const manageSave = () => {
@@ -22,10 +23,16 @@ const Idea = () => {
       <div className={classes.ideaInfo}>
         <div className={classes.ideaTitle}>
           <h1 className={classes.title}>Idea Title</h1>
-          <button className={classes.saveIdea} onClick={manageSave}>
-            {isSave ? <BookmarkBorder /> : <Bookmark />}
-            Save
-          </button>
+          {type !== "SavedIdeas" ? (
+            <button className={classes.saveIdea} onClick={manageSave}>
+              {isSave ? <BookmarkBorder /> : <Bookmark />}Save
+            </button>
+          ) : (
+            <button className={classes.deleteIdea}>
+              <img src={Delete} alt="Delete_Idea" />
+              Delete
+            </button>
+          )}
         </div>
         <div className={classes.ideaGoal}>
           <p>Idea Goal</p>

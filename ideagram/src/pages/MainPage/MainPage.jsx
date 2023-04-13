@@ -33,32 +33,32 @@ const MainPage = () => {
         <div className={`${classes.ideas} ${seeAll && classes.scrollable}`}>
           {seeAll ? (
             <>
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
             </>
           ) : (
             <>
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
             </>
           )}
         </div>

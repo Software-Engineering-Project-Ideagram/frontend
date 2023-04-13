@@ -46,30 +46,30 @@ const CategoriesPage = () => {
         <div className={`${classes.ideas} ${seeAll && classes.scrollable}`}>
           {seeAll ? (
             <>
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
-              <Idea />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
             </>
           ) : (
             <>
-              <Idea />
-              <Idea />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
             </>
           )}
         </div>

@@ -74,14 +74,14 @@ const ShowProfile = () => {
         </button>
       </div>
       <div className={classes.userIdeas}>
-        <Idea />
-        <Idea />
-        <Idea />
-        <Idea />
-        <Idea />
-        <Idea />
-        <Idea />
-        <Idea />
+        <Idea type="ShowProfile" />
+        <Idea type="ShowProfile" />
+        <Idea type="ShowProfile" />
+        <Idea type="ShowProfile" />
+        <Idea type="ShowProfile" />
+        <Idea type="ShowProfile" />
+        <Idea type="ShowProfile" />
+        <Idea type="ShowProfile" />
       </div>
     </div>
   );

@@ -7,6 +7,7 @@
   justify-content: center;
   border: 2px solid #303030;
   border-radius: 0.5rem;
+  margin: 0.5rem;
 
   .ideaInfo {
     height: 100%;
@@ -22,18 +23,25 @@
         font-size: 1rem;
       }
 
-      .saveIdea {
+      button {
         border: none;
         outline: none;
-        background-color: #2a5c9f;
-        padding: 0.2rem;
-        font-size: 0.5rem;
+        padding: 0.2rem 0.5rem;
+        font-size: 0.6rem;
         color: #ffffff;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 0.3rem;
         cursor: pointer;
+
+        &.saveIdea {
+          background-color: #2a5c9f;
+        }
+
+        &.deleteIdea {
+          background-color: #cd0404;
+        }
       }
     }
 

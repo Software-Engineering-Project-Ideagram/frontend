@@ -77,15 +77,14 @@
       grid-template-columns: auto auto;
       justify-items: center;
       align-items: center;
-      gap: 1rem;
-      max-height: 17rem;
+      max-height: 19rem;
       overflow: hidden;
       text-align: left;
-      margin: 1rem 0;
+      margin: 0.5rem 0;
 
       &.scrollable {
         overflow-y: scroll;
-        padding: 2rem 0;
+        padding: 1rem 0;
       }
 
       &::-webkit-scrollbar {
