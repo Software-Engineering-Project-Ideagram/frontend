@@ -10,3 +10,4 @@ export { default as MyIdeas } from "./MyIdeas/MyIdeas";
 export { default as EditProfile } from "./EditProfile/EditProfile";
 export { default as Followings } from "./Followings/Followings";
 export { default as Profile } from "./Profile/Profile";
+export { default as CreateIdea } from "./CreateIdea/CreateIdea";

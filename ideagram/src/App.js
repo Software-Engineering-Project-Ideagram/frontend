@@ -1,4 +1,4 @@
-import { Header, Footer } from "./components";
+import { Header, Footer, SavedIdeas } from "./components";
 import classes from "./App.module.scss";
 import {
   MainPage,
@@ -8,6 +8,7 @@ import {
   ShowProfile,
   CategoriesPage,
   ProfileStructure,
+  IdeaStructure,
 } from "./pages";
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
     <div className={classes.container}>
       <Header />
       <div className={classes.body}>
-        <ProfileStructure />
+        <IdeaStructure />
       </div>
       <Footer />
     </div>
