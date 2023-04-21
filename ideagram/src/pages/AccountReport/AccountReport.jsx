@@ -1,30 +1,17 @@
 import React from "react";
-import { Report, UserAccount } from "../../components";
+import { EditDeleteElement, UserAccount } from "../../components";
 import classes from "./AccountReport.module.scss";
 import Add from "../../images/add.png";
 import Apply from "../../images/apply.png";
 import Cancel from "../../images/cross.png";
-import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
-import { reportActions } from "../../store/report.js";
 
 const AccountReport = () => {
-  const dispatch = useDispatch();
-  const reports = useSelector((state) => state.report.reports);
-  const reportsNum = useSelector((state) => state.report.reportsNum);
-
   const title = useRef();
   const details = useRef();
 
   const addReportHandler = () => {
     if (title.current.value !== "" && details.current.value !== "") {
-      dispatch(
-        reportActions.addReport({
-          id: title.current.value.replaceAll(/\s/g, ""),
-          title: title.current.value,
-          details: details.current.value,
-        })
-      );
     }
   };
 
@@ -54,7 +41,7 @@ const AccountReport = () => {
         <div className={classes.reportsContainer}>
           <h1>Report Table</h1>
           <div className={classes.reports}>
-            {reportsNum !== 0 ? (
+            {/* {reportsNum !== 0 ? (
               reports.map((item, index) => (
                 <Report
                   key={item.id}
@@ -65,7 +52,10 @@ const AccountReport = () => {
               ))
             ) : (
               <p className={classes.noReport}>No Report Here</p>
-            )}
+            )} */}
+            <EditDeleteElement key={1} id={1} amount={1} title="one" />
+            <EditDeleteElement key={2} id={2} amount={2} title="two" />
+            <EditDeleteElement key={3} id={3} amount={3} title="three" />
           </div>
           <div className={classes.options}>
             <button className={classes.apply}>

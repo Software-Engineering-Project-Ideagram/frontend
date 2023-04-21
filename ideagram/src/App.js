@@ -1,4 +1,4 @@
-import { Header, Footer, SavedIdeas } from "./components";
+import { Header, Footer, SavedIdeas, Idea } from "./components";
 import classes from "./App.module.scss";
 import {
   MainPage,
