@@ -6,7 +6,11 @@ import Evolution_Step from "../../images/evolution_step.png";
 import Financial_Step from "../../images/evolution_step.png";
 import Official_Information from "../../images/official_information.png";
 import { Routes, Route } from "react-router-dom";
-import { CreateIdea, CollaborationRequest } from "../../components";
+import {
+  CreateIdea,
+  CollaborationRequest,
+  OfficialInformation,
+} from "../../components";
 
 const IdeaStructure = () => {
   return (
@@ -36,6 +40,10 @@ const IdeaStructure = () => {
           <Route
             path="/collaborationRequest"
             element={<CollaborationRequest />}
+          />
+          <Route
+            path="/officialInformation"
+            element={<OfficialInformation />}
           />
         </Routes>
       </div>

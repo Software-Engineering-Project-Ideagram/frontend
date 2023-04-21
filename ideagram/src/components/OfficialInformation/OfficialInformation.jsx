@@ -1,43 +1,27 @@
 import React from "react";
-import classes from "./CollaborationRequest.module.scss";
+import classes from "./OfficialInformation.module.scss";
 import Add from "../../images/add.png";
 import Apply from "../../images/apply.png";
 import EditDeleteElement from "../EditDeleteElement/EditDeleteElement";
 
-const CollaborationRequest = () => {
+const OfficialInformation = () => {
   return (
     <div className={classes.container}>
       <div className={classes.body}>
         <h2>
-          Collaboration <br /> Request
+          Official <br /> Information
         </h2>
-        <div className={classes.collaborationInfo}>
-          <div className={classes.collaborationDetails}>
-            <h3>Collaborator Information</h3>
+        <div className={classes.officialInfo}>
+          <div className={classes.officialDetails}>
+            <h3>Official Information</h3>
             <div className={classes.details}>
               <div>
-                <label>Job Title</label>
+                <label>Organization</label>
                 <input type="text" />
               </div>
               <div>
-                <label>Skills</label>
+                <label>Register No.</label>
                 <input type="text" />
-              </div>
-              <div>
-                <label>Education</label>
-                <input type="text" />
-              </div>
-              <div>
-                <label>Age</label>
-                <input type="text" className={classes.short} />
-              </div>
-              <div>
-                <label>Salary</label>
-                <input type="text" className={classes.short} />
-              </div>
-              <div>
-                <label>Status</label>
-                <input type="text" className={classes.short} />
               </div>
               <div>
                 <label>Description</label>
@@ -49,10 +33,10 @@ const CollaborationRequest = () => {
               </button>
             </div>
           </div>
-          <div className={classes.collaborations}>
-            <h3>Collaborators Table</h3>
-            <div className={classes.collaborationData}>
-              <div className={classes.collaborationsList}>
+          <div className={classes.officialTable}>
+            <h3>Office Table</h3>
+            <div className={classes.officialData}>
+              <div className={classes.officialDataList}>
                 <EditDeleteElement key={1} id={1} amount={1} title="one" />
                 <EditDeleteElement key={2} id={2} amount={2} title="two" />
                 <EditDeleteElement key={3} id={3} amount={3} title="three" />
@@ -69,4 +53,4 @@ const CollaborationRequest = () => {
   );
 };
 
-export default CollaborationRequest;
+export default OfficialInformation;
