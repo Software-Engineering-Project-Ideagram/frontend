@@ -1,13 +1,13 @@
 import React from "react";
-import classes from "./CreateAccount.module.scss";
+import classes from "./Login.module.scss";
 import ForgotPasswordIMG from "../../images/advertisment.png";
-import SignUp from "../../images/SignUp.png";
+import Next from "../../images/next.png";
 
-const CreateAccount = () => {
+const Login = () => {
   return (
     <div className={classes.container}>
       <div className={classes.stepperContainer}>
-        <h1 className={classes.title}>Create Account</h1>
+        <h1 className={classes.title}>Login</h1>
       </div>
       <div className={classes.changePassword}>
         <img src={ForgotPasswordIMG} alt="Forgot_Password_IMG" />
@@ -18,16 +18,17 @@ const CreateAccount = () => {
               <input type="text" />
             </div>
             <div>
-              <label>Email</label>
-              <input type="email" />
-            </div>
-            <div>
               <label>Password</label>
               <input type="password" />
             </div>
+            <label for="RememberMe" className={classes.filter}>
+              Remember Me
+              <input type="checkbox" value="1" id="RememberMe" />
+              <span className={classes.custom}></span>
+            </label>
             <button className={classes.option}>
-              <img src={SignUp} alt="sign_up" />
-              Sign Up
+              <img src={Next} alt="login" />
+              Login
             </button>
           </div>
         </div>
@@ -36,4 +37,4 @@ const CreateAccount = () => {
   );
 };
 
-export default CreateAccount;
+export default Login;

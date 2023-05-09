@@ -10,6 +10,7 @@ import {
   ProfileStructure,
   IdeaStructure,
   CreateAccount,
+  Login,
 } from "./pages";
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
     <div className={classes.container}>
       <Header />
       <div className={classes.body}>
-        <CreateAccount />
+        <Login />
       </div>
       <Footer />
     </div>
