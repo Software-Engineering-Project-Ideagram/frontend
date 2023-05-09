@@ -9,6 +9,7 @@ import {
   CategoriesPage,
   ProfileStructure,
   IdeaStructure,
+  CreateAccount,
 } from "./pages";
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
     <div className={classes.container}>
       <Header />
       <div className={classes.body}>
-        <IdeaStructure />
+        <CreateAccount />
       </div>
       <Footer />
     </div>
