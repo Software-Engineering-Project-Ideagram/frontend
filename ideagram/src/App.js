@@ -11,6 +11,7 @@ import {
   IdeaStructure,
   CreateAccount,
   Login,
+  IdeaReport,
 } from "./pages";
 
 function App() {
