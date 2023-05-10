@@ -7,7 +7,7 @@ import Follower from "../../images/Follower.png";
 import Following from "../../images/Following.png";
 import Edit_Profile from "../../images/EditProfile.png";
 import User_Guid from "../../images/UserGuid.png";
-import { Routes, Route } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import {
   EditProfile,
   Followings,
@@ -17,39 +17,58 @@ import {
 } from "../../components";
 
 const ProfileStructure = () => {
+  const location = useLocation();
+  console.log(location.pathname);
+  const url =
+    location.pathname.split("/")[location.pathname.split("/").length - 1];
+
   return (
     <div className={classes.container}>
       <div className={classes.sidebar}>
-        <button>
+        <Link className={classes.sidebarOptions} to="/profileStructure/profile">
           <img src={MyProfile} alt="Profile" /> Profile
-        </button>
-        <button>
+        </Link>
+        <Link className={classes.sidebarOptions} to="/profileStructure/myIdeas">
           <img src={My_Idea} alt="My_Idea" /> My Idea
-        </button>
-        <button>
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to="/profileStructure/savedIdeas"
+        >
           <img src={Saved_Ideas} alt="Saved_Ideas" /> Saved Ideas
-        </button>
-        <button>
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to="/profileStructure/followers"
+        >
           <img src={Follower} alt="Follower" /> Follower
-        </button>
-        <button>
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to="/profileStructure/followings"
+        >
           <img src={Following} alt="Following" /> Following
-        </button>
-        <button>
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to="/profileStructure/editProfile"
+        >
           <img src={Edit_Profile} alt="Edit_Profile" /> Edit Profile
-        </button>
-        <button>
+        </Link>
+        <Link className={classes.sidebarOptions}>
           <img src={User_Guid} alt="User_Guid" /> User Guid
-        </button>
+        </Link>
       </div>
       <div className={classes.main}>
-        <Routes>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/myIdeas" element={<MyIdeas />} />
-          <Route path="/savedIdeas" element={<SavedIdeas />} />
-          <Route path="/followings" element={<Followings />} />
-          <Route path="/editProfile" element={<EditProfile />} />
-        </Routes>
+        {
+          {
+            profile: <Profile />,
+            myIdeas: <MyIdeas />,
+            savedIdeas: <SavedIdeas />,
+            followings: <Followings />,
+            editProfile: <EditProfile />,
+          }[url]
+        }
       </div>
     </div>
   );

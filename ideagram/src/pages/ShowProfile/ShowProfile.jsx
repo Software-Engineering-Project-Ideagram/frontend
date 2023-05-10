@@ -3,7 +3,7 @@ import classes from "./ShowProfile.module.scss";
 import ProfileIMG from "../../images/profile.jpg";
 import FollowersIcon from "../../images/Multiple users silhouette.png";
 import FollowingsIcon from "../../images/Subscriber.png";
-import IdeaIcon from "../../images/Idea.png";
+import IdeaIcon from "../../images/IdeaIcon.png";
 import FollowIcon from "../../images/Follow.png";
 import ReportIcon from "../../images/Report.png";
 import FollowersWhiteIcon from "../../images/FollowersWhite.png";

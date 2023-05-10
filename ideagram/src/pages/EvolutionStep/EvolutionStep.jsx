@@ -22,17 +22,17 @@ const stepsInfo = [
   {
     title: "2.UI/UX",
     finishDate: "8-6-2023",
-    desc: "By the date menteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeioned, all endpoints of the site must be designed using the Django framework.",
+    desc: "User experience design is the process of defining the experience a user would go through when interacting with a company, its services, and its products.",
   },
   {
     title: "3.Front-End Development",
     finishDate: "5-6-2025",
-    desc: "By the date mentioned, all endpoints of the site must be yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyydesigned using the Django framework.",
+    desc: "Front-end web development is the development of the graphical user interface of a website, through the use of HTML, CSS, and JavaScript, so that users can view and interact with that website.",
   },
   {
     title: "4.Deploy",
     finishDate: "5-8-2023",
-    desc: "By the date mentioned, all endpoints of the site mummmmmmmmmmmmmmmmmmmmmmmmst be designed using the Django framework.",
+    desc: "Software deployment is all of the activities that make a software system available for use.",
   },
 ];
 

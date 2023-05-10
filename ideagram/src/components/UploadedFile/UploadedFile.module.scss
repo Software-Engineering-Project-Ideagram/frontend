@@ -1,0 +1,51 @@
+.container {
+  background-color: #eeeeee;
+  border: 1px solid #303030;
+  border-radius: 0.2rem;
+  padding: 0.5rem 1rem;
+
+  .delete {
+    display: flex;
+    justify-content: end;
+
+    button {
+      background-color: #cd0404;
+      padding: 0.2rem 0.3rem;
+      border-radius: 0.2rem;
+
+      img {
+        width: 0.5rem;
+        height: 0.5rem;
+      }
+    }
+  }
+
+  .uploadedFile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+      width: 2rem;
+    }
+
+    h3 {
+      font-family: Montserrat, sans-serif;
+    }
+  }
+}
+
+@font-face {
+  font-family: Rubik;
+  src: url("../../fonts/Rubik-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url("../../fonts/Montserrat-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: Verdana;
+  src: url("../../fonts/Verdana.ttf");
+}

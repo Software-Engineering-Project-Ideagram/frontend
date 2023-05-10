@@ -25,9 +25,6 @@ const Footer = () => {
             <button>Instagram</button>
           </li>
           <li>
-            <button>Whats app</button>
-          </li>
-          <li>
             <button>Telegram</button>
           </li>
           <li>
@@ -44,7 +41,7 @@ const Footer = () => {
         </ul>
       </div>
       <div className={classes.content}>
-        <h3 className={classes.title}>Ideagram</h3>
+        <h3 className={`${classes.title} ${classes.smallTitle}`}>Ideagram</h3>
         <ul className={classes.options}>
           <li>All Rights Reserved.</li>
           <li>2023</li>

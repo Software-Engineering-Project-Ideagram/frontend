@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Idea.module.scss";
-import IdeaIMG from "../../images/idea.jpg";
+import IdeaIMG from "../../images/idea.png";
 import {
   Bookmark,
   BookmarkBorder,
@@ -23,12 +23,17 @@ const Idea = ({ type }) => {
     <div className={classes.container}>
       <div className={classes.ideaInfo}>
         <div className={classes.ideaTitle}>
-          <h1 className={classes.title}>Idea Title</h1>
+          <h1 className={classes.title}>what doesn't kill you</h1>
           {(type === "ShowProfiles" ||
             type === "MainPage" ||
             type === "CategoriesPage") && (
             <button className={classes.saveIdea} onClick={manageSave}>
-              {isSave ? <BookmarkBorder /> : <Bookmark />}Save
+              {isSave ? (
+                <BookmarkBorder className={classes.saveIdeaButton} />
+              ) : (
+                <Bookmark className={classes.saveIdeaButton} />
+              )}
+              Save
             </button>
           )}
           {type === "SavedIdeas" && (
@@ -45,7 +50,7 @@ const Idea = ({ type }) => {
           )}
         </div>
         <div className={classes.ideaGoal}>
-          <p>Idea Goal</p>
+          <p>Release of music</p>
           {type === "MyIdeas" && (
             <button className={classes.deleteIdea}>
               <img src={Delete} alt="Delete_Idea" />
@@ -55,7 +60,8 @@ const Idea = ({ type }) => {
         </div>
         <div>
           <p className={classes.ideaDesc}>
-            ideaDesc_ideaDesc_ideaDesc_ideaDesc_ideaDesc_ideaDesc_ideaDesc_ideaDesc_ideaDesc_ideaDesc
+            The piece of music composed and sung by Kelly Clarkson is ready to
+            be recorded in the studio and released.
           </p>
         </div>
         <div className={classes.feedback}>

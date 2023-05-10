@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./CategoriesPage.module.scss";
 import { Idea } from "../../components";
 import { useState } from "react";
-import IdeaImage from "../../images/idea.jpg";
+import IdeaImage from "../../images/idea.png";
 
 const CategoriesPage = () => {
   const [seeAll, setSeeAll] = useState(false);
@@ -68,6 +68,7 @@ const CategoriesPage = () => {
             </>
           ) : (
             <>
+              <Idea type="CategoriesPage" />
               <Idea type="CategoriesPage" />
               <Idea type="CategoriesPage" />
             </>

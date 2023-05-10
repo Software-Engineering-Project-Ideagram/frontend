@@ -11,6 +11,7 @@
     font-family: Verdana, sans-serif;
 
     button {
+      width: 10rem;
       color: white;
       background-color: #e14d2a;
       border: none;
@@ -22,28 +23,49 @@
       justify-content: center;
       gap: 1rem;
       cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #e57d64;
+      }
     }
   }
 
   .body {
     width: 100%;
     height: 100%;
-    text-align: right;
 
-    .seeAllIdeas {
-      background-color: #4ad295;
-      color: white;
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
-      border-radius: 0.2rem;
-      margin: 1rem;
-      cursor: pointer;
+    .seeAllContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1.2rem;
 
-      &.disableButton {
-        opacity: 0.5;
-        cursor: none;
+      h1 {
+        font-family: Rubik, sans-serif;
+        font-weight: 500;
+        font-size: 1.5rem;
+      }
+
+      .seeAllIdeas {
+        background-color: #4ad295;
+        color: white;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        padding: 0.4rem 1.2rem;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &.disableButton {
+          opacity: 0.5;
+          cursor: none;
+        }
+
+        &:hover {
+          background-color: #158854;
+        }
       }
     }
 
@@ -51,13 +73,12 @@
       width: 100%;
       height: 100%;
       display: grid;
-      grid-template-columns: auto auto;
+      grid-template-columns: auto auto auto;
       justify-items: center;
       align-items: center;
-      max-height: 18rem;
+      max-height: 55vh;
       overflow: hidden;
       text-align: left;
-      margin: 0.5rem 0;
 
       &.scrollable {
         overflow-y: scroll;
@@ -87,4 +108,9 @@
 @font-face {
   font-family: Verdana;
   src: url("../../fonts/Verdana.ttf");
+}
+
+@font-face {
+  font-family: Rubik;
+  src: url("../../fonts/Rubik-VariableFont_wght.ttf");
 }

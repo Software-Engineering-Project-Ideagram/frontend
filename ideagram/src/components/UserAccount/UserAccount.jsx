@@ -4,7 +4,7 @@ import Delete from "../../images/delete.png";
 import Profile from "../../images/profile.jpg";
 import Followers from "../../images/Multiple users silhouette.png";
 import Followings from "../../images/Subscriber.png";
-import Ideas from "../../images/Idea.png";
+import Ideas from "../../images/IdeaIcon.png";
 
 const UserAccount = ({ type }) => {
   return (
@@ -20,7 +20,7 @@ const UserAccount = ({ type }) => {
       <div className={classes.userInfo}>
         <img src={Profile} alt="profile" />
 
-        <p>Username</p>
+        <p>Robert Forster</p>
       </div>
       <div className={classes.userFeedback}>
         <div>

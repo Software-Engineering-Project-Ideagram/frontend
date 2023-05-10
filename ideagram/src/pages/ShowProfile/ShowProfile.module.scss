@@ -19,6 +19,7 @@
       gap: 1rem;
 
       .userInfo {
+        width: 30vw;
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
@@ -110,13 +111,22 @@
         width: 6rem;
         height: 2rem;
         cursor: pointer;
+        transition: all 0.3s ease-in-out;
 
         &.followUserOption {
           background-color: #4ad295;
+
+          &:hover {
+            background-color: #158854;
+          }
         }
 
         &.reportUserOption {
           background-color: #cd0404;
+
+          &:hover {
+            background-color: #990808;
+          }
         }
       }
     }
@@ -141,6 +151,11 @@
       justify-content: center;
       gap: 1rem;
       cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #e57d64;
+      }
 
       &:nth-child(1) {
         border-right: 1px solid white;
@@ -168,14 +183,14 @@
 
   .userIdeas {
     width: 100%;
-    height: fit-content;
+    height: 40vh;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     justify-items: center;
     align-items: center;
     gap: 1rem;
     padding: 1rem 1.5rem;
-    max-height: 13rem;
+    max-height: 40vh;
     overflow: hidden;
     overflow-y: scroll;
 

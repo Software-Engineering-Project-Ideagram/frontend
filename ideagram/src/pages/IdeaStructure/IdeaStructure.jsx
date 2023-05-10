@@ -5,7 +5,7 @@ import Collaboration_Request from "../../images/collaboration_request.png";
 import Evolution_Step from "../../images/evolution_step.png";
 import Financial_Step from "../../images/evolution_step.png";
 import Official_Information from "../../images/official_information.png";
-import { Routes, Route } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   CreateIdea,
   CollaborationRequest,
@@ -13,6 +13,11 @@ import {
 } from "../../components";
 
 const IdeaStructure = () => {
+  const location = useLocation();
+  console.log(location.pathname);
+  const url =
+    location.pathname.split("/")[location.pathname.split("/").length - 1];
+
   return (
     <div className={classes.container}>
       <div className={classes.sidebar}>
@@ -35,17 +40,13 @@ const IdeaStructure = () => {
         </button>
       </div>
       <div className={classes.main}>
-        <Routes>
-          <Route path="/createIdea" element={<CreateIdea />} />
-          <Route
-            path="/collaborationRequest"
-            element={<CollaborationRequest />}
-          />
-          <Route
-            path="/officialInformation"
-            element={<OfficialInformation />}
-          />
-        </Routes>
+        {
+          {
+            createIdea: <CreateIdea />,
+            collaborationRequest: <CollaborationRequest />,
+            officialInformation: <OfficialInformation />,
+          }[url]
+        }
       </div>
     </div>
   );

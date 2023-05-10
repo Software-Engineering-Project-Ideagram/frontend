@@ -8,7 +8,7 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { useState } from "react";
-import { Link } from "../../components";
+import { EditDeleteElement } from "../../components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -162,13 +162,21 @@ const EditProfile = () => {
               <div className={classes.linksContainer}>
                 <h3>Links</h3>
                 <div className={classes.links}>
-                  <Link linkNum="1" title="title" />
-                  <Link
-                    linkNum="2"
-                    title="titrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrle"
-                  />
-                  <Link linkNum="3" title="titvvvvvvvvvle" />
-                  <Link linkNum="4" title="titrrffffffffffffffffle" />
+                  {/* {reportsNum !== 0 ? (
+              reports.map((item, index) => (
+                <Report
+                  key={item.id}
+                  id={item.id}
+                  reportNum={index + 1}
+                  title={item.title}
+                />
+              ))
+            ) : (
+              <p className={classes.noLink}>No Report Here</p>
+            )} */}
+                  <EditDeleteElement key={1} id={1} amount={1} title="one" />
+                  <EditDeleteElement key={2} id={2} amount={2} title="two" />
+                  <EditDeleteElement key={3} id={3} amount={3} title="three" />
                 </div>
               </div>
               <div className={classes.options}>

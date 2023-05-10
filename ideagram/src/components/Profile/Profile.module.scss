@@ -9,6 +9,7 @@
   }
 
   .profileInfo {
+    width: 90%;
     font-family: Montserrat, sans-serif;
 
     .firstPageInfo {
@@ -96,12 +97,18 @@
           outline: none;
           border-radius: 0.2rem;
           cursor: pointer;
+          transition: all 0.3s ease-in-out;
+
+          &:hover {
+            background-color: #158854;
+          }
         }
       }
     }
 
     .secPageInfo {
       margin: 1rem 1.5rem;
+      width: 90%;
 
       .bio {
         display: flex;
@@ -116,7 +123,7 @@
         }
 
         p {
-          width: 20rem;
+          width: 80%;
           height: 6rem;
           background-color: #ffffff;
           border: 1px solid #303030;
@@ -143,7 +150,7 @@
           }
 
           p {
-            width: 20rem;
+            width: 80%;
             background-color: #ffffff;
             border: 1px solid #303030;
             border-radius: 0.2rem;
@@ -167,7 +174,7 @@
         }
 
         .links {
-          width: 20rem;
+          width: 60%;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -200,6 +207,11 @@
           outline: none;
           border-radius: 0.2rem;
           cursor: pointer;
+          transition: all 0.3s ease-in-out;
+
+          &:hover {
+            background-color: #158854;
+          }
         }
       }
     }

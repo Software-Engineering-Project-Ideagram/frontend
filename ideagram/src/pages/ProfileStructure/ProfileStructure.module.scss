@@ -13,13 +13,11 @@
     flex-direction: column;
     font-family: Verdana, sans-serif;
 
-    button {
+    .sidebarOptions {
       flex: 1;
       width: 100%;
       color: white;
       background-color: #e14d2a;
-      border: none;
-      outline: none;
       font-size: 1rem;
       padding: 0.8rem 1rem;
       display: flex;
@@ -28,6 +26,17 @@
       gap: 1rem;
       cursor: pointer;
       border: 1px solid #ffffff;
+      transition: all 0.3s ease-in-out;
+      text-decoration: none;
+      font-family: Verdana, sans-serif;
+
+      &:hover {
+        background-color: #e57d64;
+      }
+
+      &:focus {
+        background-color: #e57d64;
+      }
 
       img {
         width: 2rem;

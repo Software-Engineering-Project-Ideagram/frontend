@@ -20,15 +20,19 @@ const MainPage = () => {
       </div>
 
       <div className={classes.body}>
-        <button
-          className={`${classes.seeAllIdeas} ${
-            seeAll && classes.disableButton
-          }`}
-          onClick={() => setSeeAll(true)}
-          disabled={seeAll}
-        >
-          See All
-        </button>
+        <div className={classes.seeAllContainer}>
+          <h1>Ideas</h1>
+
+          <button
+            className={`${classes.seeAllIdeas} ${
+              seeAll && classes.disableButton
+            }`}
+            onClick={() => setSeeAll(true)}
+            disabled={seeAll}
+          >
+            See All
+          </button>
+        </div>
 
         <div className={`${classes.ideas} ${seeAll && classes.scrollable}`}>
           {seeAll ? (
@@ -55,6 +59,8 @@ const MainPage = () => {
             </>
           ) : (
             <>
+              <Idea type="MainPage" />
+              <Idea type="MainPage" />
               <Idea type="MainPage" />
               <Idea type="MainPage" />
               <Idea type="MainPage" />

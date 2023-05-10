@@ -15,7 +15,12 @@ import MusicLabel from "../../images/MusicLabel.png";
 import PublishingLabel from "../../images/PublishingLabel.png";
 import ScienceLabel from "../../images/ScienceLabel.png";
 import Next from "../../images/next.png";
+import Apply from "../../images/apply.png";
 import Previous from "../../images/prev.png";
+import AttachFile from "../../images/attachFile.png";
+import BlackPrev from "../../images/blackPrev.png";
+import BlackNext from "../../images/blackNext.png";
+import { UploadedFile } from "../../components";
 
 const steps = ["1.primary Information", "2.Description", "3.Attached Files"];
 
@@ -30,10 +35,8 @@ const CreateIdea = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleLabelSelection = (event) => {
-    console.log("click");
-    console.log(event.currentTarget);
-    event.currentTarget.classList.style.backgroundColor = "#4ad295";
+  const handleUploadedFile = (e) => {
+    console.log(e.target.files[0].type.split("/")[1]);
   };
 
   return (
@@ -218,6 +221,58 @@ const CreateIdea = () => {
               <button onClick={handleNext}>
                 <img src={Next} alt="next" />
                 Next
+              </button>
+            </div>
+          </div>
+        )}
+
+        {activeStep === 2 && (
+          <div className={classes.uploadedFilesContainer}>
+            <div className={classes.uploadedFiles}>
+              <h3>
+                Attach
+                <br />
+                Files
+              </h3>
+              <div className={classes.manageUploadedFiles}>
+                <div className={classes.attachFile}>
+                  <button>
+                    <img src={AttachFile} alt="attach_files" />
+                    <label for="AttachFile">Attach</label>
+                    <input
+                      type="file"
+                      id="AttachFile"
+                      onChange={handleUploadedFile}
+                    />
+                  </button>
+                </div>
+                <div className={classes.uploadedFilesListContainer}>
+                  <button>
+                    <img src={BlackPrev} alt="prev_uploaded_file" />
+                  </button>
+                  <div className={classes.uploadedFilesList}>
+                    <UploadedFile type="doc" fileName="first" />
+                    <UploadedFile type="pdf" fileName="sec" />
+                    <UploadedFile type="png" fileName="third" />
+                    <UploadedFile type="jpg" fileName="fourth" />
+                    <UploadedFile type="pptx" fileName="fifth" />
+                    <UploadedFile type="pdf" fileName="sixth" />
+                  </div>
+                  <button>
+                    <img src={BlackNext} alt="next_uploaded_file" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className={classes.uploadedFilesOptions}>
+              <button onClick={handleBack}>
+                <img src={Previous} alt="previous" />
+                Previous
+              </button>
+              <button>
+                <img src={Apply} alt="apply" />
+                Apply
               </button>
             </div>
           </div>
