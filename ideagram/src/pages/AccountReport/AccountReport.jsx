@@ -53,9 +53,30 @@ const AccountReport = () => {
             ) : (
               <p className={classes.noReport}>No Report Here</p>
             )} */}
-            <EditDeleteElement key={1} id={1} amount={1} title="one" />
-            <EditDeleteElement key={2} id={2} amount={2} title="two" />
-            <EditDeleteElement key={3} id={3} amount={3} title="three" />
+            <EditDeleteElement
+              key={1}
+              id={1}
+              amount={1}
+              title="Wrong Information "
+            />
+            <EditDeleteElement
+              key={2}
+              id={2}
+              amount={2}
+              title="Misuse of information"
+            />
+            <EditDeleteElement
+              key={3}
+              id={3}
+              amount={3}
+              title="Insulting comments"
+            />
+            <EditDeleteElement
+              key={4}
+              id={4}
+              amount={4}
+              title="Financial transaction and donation "
+            />
           </div>
           <div className={classes.options}>
             <button className={classes.apply}>

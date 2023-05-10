@@ -43,6 +43,10 @@ function App() {
             element={<ProfileStructure />}
           />
           <Route
+            path="/profileStructure/followers"
+            element={<ProfileStructure />}
+          />
+          <Route
             path="/profileStructure/editProfile"
             element={<ProfileStructure />}
           />

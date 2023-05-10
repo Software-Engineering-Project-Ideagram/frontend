@@ -11,6 +11,7 @@ import { useLocation, Link } from "react-router-dom";
 import {
   EditProfile,
   Followings,
+  Followers,
   MyIdeas,
   Profile,
   SavedIdeas,
@@ -29,7 +30,7 @@ const ProfileStructure = () => {
           <img src={MyProfile} alt="Profile" /> Profile
         </Link>
         <Link className={classes.sidebarOptions} to="/profileStructure/myIdeas">
-          <img src={My_Idea} alt="My_Idea" /> My Idea
+          <img src={My_Idea} alt="My_Ideas" /> My Ideas
         </Link>
         <Link
           className={classes.sidebarOptions}
@@ -41,13 +42,13 @@ const ProfileStructure = () => {
           className={classes.sidebarOptions}
           to="/profileStructure/followers"
         >
-          <img src={Follower} alt="Follower" /> Follower
+          <img src={Follower} alt="Follower" /> Followers
         </Link>
         <Link
           className={classes.sidebarOptions}
           to="/profileStructure/followings"
         >
-          <img src={Following} alt="Following" /> Following
+          <img src={Following} alt="Following" /> Followings
         </Link>
         <Link
           className={classes.sidebarOptions}
@@ -56,7 +57,7 @@ const ProfileStructure = () => {
           <img src={Edit_Profile} alt="Edit_Profile" /> Edit Profile
         </Link>
         <Link className={classes.sidebarOptions}>
-          <img src={User_Guid} alt="User_Guid" /> User Guid
+          <img src={User_Guid} alt="User_Guid" /> User Guide
         </Link>
       </div>
       <div className={classes.main}>
@@ -65,6 +66,7 @@ const ProfileStructure = () => {
             profile: <Profile />,
             myIdeas: <MyIdeas />,
             savedIdeas: <SavedIdeas />,
+            followers: <Followers />,
             followings: <Followings />,
             editProfile: <EditProfile />,
           }[url]

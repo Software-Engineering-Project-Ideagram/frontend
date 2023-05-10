@@ -36,29 +36,29 @@ const Profile = () => {
               <div className={classes.userPersonalInfo}>
                 <div className={classes.enterInfo}>
                   <label>First Name</label>
-                  <p>First Name</p>
+                  <p>Zahra</p>
                 </div>
                 <div className={classes.enterInfo}>
                   <label>Last Name</label>
-                  <p>Last Name</p>
+                  <p>Amirinezhad</p>
                 </div>
                 <div className={classes.sideBySide}>
                   <div className={classes.enterGender}>
                     <label>Gender</label>
-                    <p>Gender</p>
+                    <p>Female</p>
                   </div>
                   <div className={classes.enterBirthDate}>
                     <label>Birth Date</label>
-                    <p>Birth Date</p>
+                    <p>2002-05-06</p>
                   </div>
                 </div>
                 <div className={classes.enterInfo}>
                   <label>Address</label>
-                  <p>Address</p>
+                  <p>Hezar Jarib</p>
                 </div>
                 <div className={classes.enterInfo}>
                   <label>Username</label>
-                  <p>Username</p>
+                  <p>ZahraAmirinezhad</p>
                 </div>
               </div>
             </div>
@@ -74,20 +74,20 @@ const Profile = () => {
           <div className={classes.secPageInfo}>
             <div className={classes.bio}>
               <label>Bio</label>
-              <p></p>
+              <p>Front-End Developer</p>
             </div>
             <div className={classes.info}>
               <div>
                 <label>Profile Status</label>
-                <p></p>
+                <p>Private</p>
               </div>
               <div>
                 <label>Activation Status</label>
-                <p></p>
+                <p>Activated</p>
               </div>
               <div>
                 <label>Ban Status</label>
-                <p></p>
+                <p>No</p>
               </div>
             </div>
             <div className={classes.linksContainer}>

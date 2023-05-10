@@ -19,6 +19,8 @@
     max-width: 18rem;
     overflow: hidden;
     overflow-x: scroll;
+    white-space: nowrap;
+    text-overflow: clip;
     padding: 0 0.5rem;
 
     &::-webkit-scrollbar {
