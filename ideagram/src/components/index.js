@@ -15,3 +15,4 @@ export { default as CreateIdea } from "./CreateIdea/CreateIdea";
 export { default as CollaborationRequest } from "./CollaborationRequest/CollaborationRequest";
 export { default as OfficialInformation } from "./OfficialInformation/OfficialInformation";
 export { default as UploadedFile } from "./UploadedFile/UploadedFile";
+export { default as Skeleton } from "./Skeleton/Skeleton";

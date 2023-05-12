@@ -1,10 +1,11 @@
 import React from "react";
 import classes from "./MainPage.module.scss";
-import { Idea } from "../../components";
+import { Idea, Skeleton } from "../../components";
 import { useState } from "react";
 
 const MainPage = () => {
   const [seeAll, setSeeAll] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div className={classes.container}>
@@ -35,36 +36,42 @@ const MainPage = () => {
         </div>
 
         <div className={`${classes.ideas} ${seeAll && classes.scrollable}`}>
-          {seeAll ? (
-            <>
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-            </>
+          {isLoading ? (
+            <Skeleton type="Idea" />
           ) : (
             <>
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
-              <Idea type="MainPage" />
+              {seeAll ? (
+                <>
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                </>
+              ) : (
+                <>
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                  <Idea type="MainPage" />
+                </>
+              )}
             </>
           )}
         </div>
