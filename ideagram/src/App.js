@@ -30,14 +30,14 @@ function App() {
             path="/profileStructure/profile"
             element={<ProfileStructure />}
           />
-          <Route
+          {/* <Route
             path="/profileStructure/myIdeas"
             element={<ProfileStructure />}
-          />
-          <Route
+          /> */}
+          {/* <Route
             path="/profileStructure/savedIdeas"
             element={<ProfileStructure />}
-          />
+          /> */}
           <Route
             path="/profileStructure/followings"
             element={<ProfileStructure />}
@@ -46,16 +46,20 @@ function App() {
             path="/profileStructure/followers"
             element={<ProfileStructure />}
           />
-          <Route
+          {/* <Route
             path="/profileStructure/editProfile"
             element={<ProfileStructure />}
-          />
+          /> */}
           <Route path="/createAccount" element={<CreateAccount />} />
           <Route path="/login" element={<Login />} />
-          {/* <Route
+          <Route
             path="/ideaStructure/collaborationRequest"
             element={<IdeaStructure />}
-          /> */}
+          />
+          <Route
+            path="/ideaStructure/financialStep"
+            element={<IdeaStructure />}
+          />
           <Route
             path="/ideaStructure/officialInformation"
             element={<IdeaStructure />}

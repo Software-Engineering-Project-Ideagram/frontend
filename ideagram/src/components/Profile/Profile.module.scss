@@ -3,6 +3,10 @@
   height: 100%;
   display: flex;
 
+  @media (max-width: 1199.98px) {
+    flex-direction: column;
+  }
+
   h2 {
     font-family: Rubik, sans-serif;
     margin: 1rem 1.5rem;
@@ -11,6 +15,10 @@
   .profileInfo {
     width: 90%;
     font-family: Montserrat, sans-serif;
+
+    @media (max-width: 1199.98px) {
+      width: 100%;
+    }
 
     .firstPageInfo {
       margin: 1rem 1.5rem;
@@ -24,17 +32,41 @@
         border-radius: 0.2rem;
         padding: 1rem 1.5rem;
 
+        @media (max-width: 859.99px) {
+          flex-direction: column;
+        }
+
         .profileImage {
           width: 7rem;
           height: 7rem;
           border-radius: 50%;
+
+          @media (max-width: 575.98px) {
+            margin: auto;
+          }
         }
 
         .userPersonalInfo {
+          @media (max-width: 859.99px) {
+            width: 100%;
+          }
+
           .enterInfo {
             display: flex;
             align-items: center;
             margin: 0.5rem 0;
+            // gap: 1rem;
+
+            @media (max-width: 859.99px) {
+              width: 100%;
+            }
+
+            @media (max-width: 575.98px) {
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: center;
+              gap: 0.5rem;
+            }
 
             label {
               width: 6rem;
@@ -47,6 +79,18 @@
               border-radius: 0.2rem;
               outline: none;
               padding: 0.2rem 0.5rem;
+
+              @media (max-width: 1199.98px) {
+                width: 28rem;
+              }
+
+              @media (max-width: 859.99px) {
+                width: 80%;
+              }
+
+              @media (max-width: 575.98px) {
+                width: 100%;
+              }
             }
           }
 
@@ -55,8 +99,30 @@
             align-items: center;
             justify-content: space-between;
 
+            @media (max-width: 859.99px) {
+              width: 100%;
+              gap: 1rem;
+            }
+
+            @media (max-width: 575.98px) {
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: center;
+            }
+
             div {
               display: flex;
+
+              @media (max-width: 859.99px) {
+                width: 100%;
+              }
+
+              @media (max-width: 575.98px) {
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                gap: 0.5rem;
+              }
 
               label {
                 width: 6rem;
@@ -69,6 +135,14 @@
                 border-radius: 0.2rem;
                 outline: none;
                 padding: 0.2rem 0.5rem;
+
+                @media (max-width: 859.99px) {
+                  width: 59%;
+                }
+
+                @media (max-width: 575.98px) {
+                  width: 100%;
+                }
               }
             }
           }
@@ -98,6 +172,10 @@
           border-radius: 0.2rem;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
+
+          @media (max-width: 859.99px) {
+            width: 100%;
+          }
 
           &:hover {
             background-color: #158854;

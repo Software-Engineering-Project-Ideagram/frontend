@@ -10,6 +10,10 @@
     justify-content: space-between;
     font-family: Verdana, sans-serif;
 
+    @media (max-width: 991.98px) {
+      display: none;
+    }
+
     button {
       color: white;
       background-color: #e14d2a;
@@ -55,12 +59,24 @@
 
       .stepper {
         margin: 1rem;
+
+        @media (max-width: 991.98px) {
+          flex-direction: column;
+          align-items: baseline;
+          gap: 1rem;
+          margin: 1rem 0;
+        }
       }
     }
 
     .stepsInfo {
       flex: 5;
       padding: 0.5rem 1rem;
+
+      @media (max-width: 767.98px) {
+        width: 100%;
+        margin: 1rem 0;
+      }
 
       h4 {
         font-family: Verdana, sans-serif;

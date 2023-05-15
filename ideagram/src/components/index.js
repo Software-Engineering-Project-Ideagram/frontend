@@ -16,3 +16,10 @@ export { default as CollaborationRequest } from "./CollaborationRequest/Collabor
 export { default as OfficialInformation } from "./OfficialInformation/OfficialInformation";
 export { default as UploadedFile } from "./UploadedFile/UploadedFile";
 export { default as Skeleton } from "./Skeleton/Skeleton";
+export { default as MainPageSmallMenu } from "./MainPageSmallMenu/MainPageSmallMenu";
+export { default as SmallOptionsMenu } from "./SmallOptionsMenu/SmallOptionsMenu";
+export { default as IdeaDevelopmentMenu } from "./IdeaDevelopmentMenu/IdeaDevelopmentMenu";
+export { default as UserFeedbackSmallMenu } from "./UserFeedbackSmallMenu/UserFeedbackSmallMenu";
+export { default as ProfileStructureSmallMenu } from "./ProfileStructureSmallMenu/ProfileStructureSmallMenu";
+export { default as IdeaStructureSmallMenu } from "./IdeaStructureSmallMenu/IdeaStructureSmallMenu";
+export { default as FinancialStep } from "./FinancialStep/FinancialStep";

@@ -6,7 +6,7 @@ import SignUp from "../../images/SignUp.png";
 const CreateAccount = () => {
   return (
     <div className={classes.container}>
-      <div className={classes.stepperContainer}>
+      <div className={classes.titleContainer}>
         <h1 className={classes.title}>Create Account</h1>
       </div>
       <div className={classes.changePassword}>

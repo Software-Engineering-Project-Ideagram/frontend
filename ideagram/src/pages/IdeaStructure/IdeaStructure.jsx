@@ -10,6 +10,7 @@ import {
   CreateIdea,
   CollaborationRequest,
   OfficialInformation,
+  FinancialStep,
 } from "../../components";
 
 const IdeaStructure = () => {
@@ -44,6 +45,7 @@ const IdeaStructure = () => {
           {
             createIdea: <CreateIdea />,
             collaborationRequest: <CollaborationRequest />,
+            financialStep: <FinancialStep />,
             officialInformation: <OfficialInformation />,
           }[url]
         }

@@ -33,9 +33,11 @@ const AccountReport = () => {
               <label>Description</label>
               <textarea cols={4} rows={3} ref={details} />
             </div>
-            <button className={classes.add} onClick={addReportHandler}>
-              <img src={Add} alt="Add_Report" /> Add
-            </button>
+            <div className={classes.addContainer}>
+              <button className={classes.add} onClick={addReportHandler}>
+                <img src={Add} alt="Add_Report" /> Add
+              </button>
+            </div>
           </div>
         </div>
         <div className={classes.reportsContainer}>

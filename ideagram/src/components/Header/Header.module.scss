@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  height: 10vh;
+  // height: 10vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,16 +8,68 @@
   background-color: #041562;
 
   div {
-    &.options {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
 
+    &.options {
       div {
-        &.account {
-          font-family: Verdana, sans-serif;
-          color: white;
+        button {
+          border: none;
+          outline: none;
+          background-color: transparent;
+        }
+
+        @media (max-width: 991.98px) {
+          display: none;
+        }
+      }
+
+      .smallOptionsMenu {
+        position: relative;
+        display: none;
+
+        @media (max-width: 991.98px) {
+          display: block;
+        }
+
+        .showOptionsMenuBTN {
+          border: none;
+          outline: none;
+          background: transparent;
+        }
+      }
+    }
+
+    &.userInfo {
+      .account {
+        font-family: Verdana, sans-serif;
+        color: white;
+
+        @media (max-width: 991.98px) {
+          display: none;
+        }
+      }
+
+      .profile {
+        @media (max-width: 991.98px) {
+          display: none;
+        }
+      }
+
+      .smallMenu {
+        position: relative;
+        display: none;
+
+        @media (max-width: 991.98px) {
+          display: block;
+        }
+
+        .showMenuBTN {
+          border: none;
+          outline: none;
+          background: transparent;
         }
       }
     }

@@ -7,20 +7,29 @@
     gap: 1rem;
     margin: 0.5rem 0;
 
+    @media (max-width: 767.98px) {
+      flex-direction: column;
+    }
+
     label {
       width: 8rem;
     }
 
     p {
       width: 35rem;
+      max-width: 35rem;
       background-color: #ffffff;
       color: black;
       padding: 0.5rem 1rem;
       border: 1px solid black;
       border-radius: 0.2rem;
 
+      @media (max-width: 767.98px) {
+        width: 100%;
+        max-width: 100%;
+      }
+
       &.shortText {
-        max-width: 35rem;
         overflow: hidden;
         overflow-x: scroll;
       }

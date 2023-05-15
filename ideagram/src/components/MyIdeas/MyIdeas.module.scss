@@ -49,6 +49,7 @@
       .ideas {
         display: grid;
         grid-template-columns: auto auto;
+        gap: 1rem;
         padding: 0.5rem 1rem;
         border: 2px solid #303030;
         border-radius: 0.5rem;

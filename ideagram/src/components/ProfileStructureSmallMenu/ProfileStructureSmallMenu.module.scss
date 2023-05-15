@@ -1,21 +1,26 @@
-.container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  background-color: #eeeeee;
+.menu {
+  position: absolute;
+  top: 3rem;
+  list-style-type: none;
+  width: 10rem;
+  z-index: 10;
 
-  .sidebar {
-    flex: 1;
-    background-color: #e14d2a;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    font-family: Verdana, sans-serif;
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-7rem);
+    transition: 1s ease-in;
+  }
 
-    @media (max-width: 991.98px) {
-      display: none;
-    }
+  &.invisible {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(3rem);
+    transition: 1s ease-out;
+  }
+
+  li {
+    border-bottom: 0.1px solid #eeeeee;
 
     .sidebarOptions {
       flex: 1;
@@ -48,16 +53,11 @@
       }
     }
   }
-
-  .main {
-    flex: 6;
-    background-color: #eeeeee;
-  }
 }
 
 @font-face {
-  font-family: Montserrat;
-  src: url("../../fonts/Montserrat-VariableFont_wght.ttf");
+  font-family: Pacifico_Regular;
+  src: url("../../fonts/Pacifico-Regular.ttf");
 }
 
 @font-face {

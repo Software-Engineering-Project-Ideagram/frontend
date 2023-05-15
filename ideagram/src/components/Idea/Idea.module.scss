@@ -1,16 +1,21 @@
 .container {
-  // width: 25rem;
-  // height: 10rem;
-  width: 31vw;
-  height: 25vh;
+  width: 100%;
+  height: 100%;
   font-family: Rubik, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 2px solid #303030;
   border-radius: 0.5rem;
-  margin: 0.5rem;
   background-color: #eeeeee;
+
+  // @media (max-width: 767.98px) {
+  //   width: 75%;
+  // }
+
+  @media (max-width: 575.98px) {
+    flex-direction: column-reverse;
+  }
 
   .ideaInfo {
     height: 100%;
@@ -122,7 +127,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: 2px solid #8f8f8f;
+      border-top: 1px solid #8f8f8f;
       padding: 0.5rem;
 
       div {
@@ -143,11 +148,20 @@
   }
 
   .ideaImage {
-    width: 12vw;
-    height: 25vh;
+    width: 26%;
+    height: 103%;
     border-radius: 0 0.5rem 0.5rem 0;
     border-bottom: 2px solid #303030;
     border-top: 2px solid #303030;
+
+    @media (max-width: 575.98px) {
+      width: 100%;
+      height: 10rem;
+      border-radius: 0.5rem 0.5rem 0 0;
+      border: none;
+      border-right: 2px solid #303030;
+      border-top: 2px solid #303030;
+    }
   }
 }
 
