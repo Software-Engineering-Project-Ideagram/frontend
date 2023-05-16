@@ -3,7 +3,6 @@ import classes from "./App.module.scss";
 import {
   MainPage,
   AccountReport,
-  EvolutionStep,
   ForgotPassword,
   ShowProfile,
   CategoriesPage,
@@ -11,6 +10,7 @@ import {
   IdeaStructure,
   CreateAccount,
   Login,
+  StepsStructure,
 } from "./pages";
 import { Routes, Route } from "react-router-dom";
 
@@ -22,7 +22,6 @@ function App() {
         <Routes>
           <Route path="/mainPage" element={<MainPage />} />
           <Route path="/accountReport" element={<AccountReport />} />
-          <Route path="/evolutionStep" element={<EvolutionStep />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/showProfile" element={<ShowProfile />} />
           {/* <Route path="/categoriesPage" element={<CategoriesPage />} /> */}
@@ -53,7 +52,19 @@ function App() {
           <Route path="/createAccount" element={<CreateAccount />} />
           <Route path="/login" element={<Login />} />
           <Route
+            path="/stepsStructure/collaborationRequestShow"
+            element={<StepsStructure />}
+          />
+          <Route
+            path="/stepsStructure/evolutionStepShow"
+            element={<StepsStructure />}
+          />
+          <Route
             path="/ideaStructure/collaborationRequest"
+            element={<IdeaStructure />}
+          />
+          <Route
+            path="/ideaStructure/evolutionStep"
             element={<IdeaStructure />}
           />
           <Route

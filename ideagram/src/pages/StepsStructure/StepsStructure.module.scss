@@ -1,0 +1,46 @@
+.container {
+  width: 100%;
+  height: 100%;
+
+  .toolbar {
+    width: 100%;
+    background-color: #e14d2a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Verdana, sans-serif;
+
+    @media (max-width: 991.98px) {
+      display: none;
+    }
+
+    button {
+      color: white;
+      background-color: #e14d2a;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #e57d64;
+      }
+    }
+  }
+}
+
+@font-face {
+  font-family: Verdana;
+  src: url("../../fonts/Verdana.ttf");
+}
+
+@font-face {
+  font-family: Rubik;
+  src: url("../../fonts/Rubik-VariableFont_wght.ttf");
+}

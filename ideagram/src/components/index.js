@@ -23,3 +23,8 @@ export { default as UserFeedbackSmallMenu } from "./UserFeedbackSmallMenu/UserFe
 export { default as ProfileStructureSmallMenu } from "./ProfileStructureSmallMenu/ProfileStructureSmallMenu";
 export { default as IdeaStructureSmallMenu } from "./IdeaStructureSmallMenu/IdeaStructureSmallMenu";
 export { default as FinancialStep } from "./FinancialStep/FinancialStep";
+export { default as EvolutionStep } from "./EvolutionStep/EvolutionStep";
+export { default as EvolutionStepShow } from "./EvolutionStepShow/EvolutionStepShow";
+export { default as CollaborationRequestShow } from "./CollaborationRequestShow/CollaborationRequestShow";
+export { default as SelectableItemToShow } from "./SelectableItemToShow/SelectableItemToShow";
+export { default as LargeStepInfo } from "./LargeStepInfo/LargeStepInfo";

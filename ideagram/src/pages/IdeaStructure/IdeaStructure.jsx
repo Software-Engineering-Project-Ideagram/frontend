@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import {
   CreateIdea,
   CollaborationRequest,
+  EvolutionStep,
   OfficialInformation,
   FinancialStep,
 } from "../../components";
@@ -45,6 +46,7 @@ const IdeaStructure = () => {
           {
             createIdea: <CreateIdea />,
             collaborationRequest: <CollaborationRequest />,
+            evolutionStep: <EvolutionStep />,
             financialStep: <FinancialStep />,
             officialInformation: <OfficialInformation />,
           }[url]

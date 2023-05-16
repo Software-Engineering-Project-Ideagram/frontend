@@ -30,9 +30,15 @@
         max-width: 100%;
       }
 
+      &.text {
+        overflow: hidden;
+        overflow-x: scroll;
+      }
+
       &.shortText {
         overflow: hidden;
         overflow-x: scroll;
+        width: 15rem;
       }
 
       &.longText {
