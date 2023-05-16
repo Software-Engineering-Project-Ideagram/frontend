@@ -29,3 +29,4 @@ export { default as CollaborationRequestShow } from "./CollaborationRequestShow/
 export { default as SelectableItemToShow } from "./SelectableItemToShow/SelectableItemToShow";
 export { default as LargeStepInfo } from "./LargeStepInfo/LargeStepInfo";
 export { default as FinancialStepShow } from "./FinancialStepShow/FinancialStepShow";
+export { default as OfficialInformationShow } from "./OfficialInformationShow/OfficialInformationShow";

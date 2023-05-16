@@ -64,6 +64,10 @@ function App() {
             element={<StepsStructure />}
           />
           <Route
+            path="/stepsStructure/officialInformationShow"
+            element={<StepsStructure />}
+          />
+          <Route
             path="/ideaStructure/collaborationRequest"
             element={<IdeaStructure />}
           />

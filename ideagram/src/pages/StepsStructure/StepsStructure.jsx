@@ -4,6 +4,7 @@ import {
   EvolutionStepShow,
   CollaborationRequestShow,
   FinancialStepShow,
+  OfficialInformationShow,
 } from "../../components";
 import { useLocation } from "react-router-dom";
 
@@ -28,6 +29,7 @@ const EvolutionStep = () => {
           collaborationRequestShow: <CollaborationRequestShow />,
           evolutionStepShow: <EvolutionStepShow />,
           financialStepShow: <FinancialStepShow />,
+          officialInformationShow: <OfficialInformationShow />,
         }[url]
       }
     </div>
