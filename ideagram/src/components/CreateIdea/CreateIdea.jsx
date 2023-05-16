@@ -39,6 +39,10 @@ const CreateIdea = () => {
     console.log(e.target.files[0].type.split("/")[1]);
   };
 
+  const showNextFiles = (e) => {
+    console.log(e.target);
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.body}>
@@ -247,9 +251,9 @@ const CreateIdea = () => {
                   </button>
                 </div>
                 <div className={classes.uploadedFilesListContainer}>
-                  <button>
+                  {/* <button className={classes.attach}>
                     <img src={BlackPrev} alt="prev_uploaded_file" />
-                  </button>
+                  </button> */}
                   <div className={classes.uploadedFilesList}>
                     <UploadedFile type="doc" fileName="first" />
                     <UploadedFile type="pdf" fileName="sec" />
@@ -258,9 +262,9 @@ const CreateIdea = () => {
                     <UploadedFile type="pptx" fileName="fifth" />
                     <UploadedFile type="pdf" fileName="sixth" />
                   </div>
-                  <button>
+                  {/* <button onClick={showNextFiles}>
                     <img src={BlackNext} alt="next_uploaded_file" />
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

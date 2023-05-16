@@ -13,10 +13,11 @@ import {
   OfficialInformation,
   FinancialStep,
 } from "../../components";
+import { useEffect, useState } from "react";
 
 const IdeaStructure = () => {
   const location = useLocation();
-  console.log(location.pathname);
+  // console.log(location.pathname);
   const url =
     location.pathname.split("/")[location.pathname.split("/").length - 1];
 

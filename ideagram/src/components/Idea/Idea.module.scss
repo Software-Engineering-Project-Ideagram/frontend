@@ -57,6 +57,7 @@
         cursor: pointer;
         width: 4rem;
         gap: 0.3rem;
+        transition: all 0.3s ease-in-out;
 
         &.saveIdea {
           background-color: #2a5c9f;
@@ -68,6 +69,10 @@
 
         &.deleteIdea {
           background-color: #cd0404;
+
+          &:hover {
+            background-color: #990808;
+          }
         }
 
         &.editIdea {
@@ -97,9 +102,14 @@
         cursor: pointer;
         width: 4rem;
         gap: 0.3rem;
+        transition: all 0.3s ease-in-out;
 
         &.deleteIdea {
           background-color: #cd0404;
+
+          &:hover {
+            background-color: #990808;
+          }
         }
       }
     }

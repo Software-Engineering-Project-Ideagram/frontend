@@ -83,7 +83,7 @@ function App() {
             path="/ideaStructure/officialInformation"
             element={<IdeaStructure />}
           />
-          {/* <Route path="/ideaStructure/createIdea" element={<IdeaStructure />} /> */}
+          <Route path="/ideaStructure/createIdea" element={<IdeaStructure />} />
         </Routes>
       </div>
       <Footer />

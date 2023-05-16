@@ -1,4 +1,6 @@
 .container {
+  width: 20rem;
+  height: 8rem;
   background-color: #eeeeee;
   border: 1px solid #303030;
   border-radius: 0.2rem;
@@ -9,13 +11,22 @@
     justify-content: end;
 
     button {
+      border: none;
+      outline: none;
+      cursor: pointer;
       background-color: #cd0404;
-      padding: 0.2rem 0.3rem;
+      padding: 0.5rem;
       border-radius: 0.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      color: white;
+      font-size: 0.9rem;
+      transition: all 0.3s ease-in-out;
 
-      img {
-        width: 0.5rem;
-        height: 0.5rem;
+      &:hover {
+        background-color: #990808;
       }
     }
   }
@@ -24,10 +35,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    img {
-      width: 2rem;
-    }
 
     h3 {
       font-family: Montserrat, sans-serif;
