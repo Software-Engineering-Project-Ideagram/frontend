@@ -52,6 +52,10 @@ function App() {
           <Route path="/createAccount" element={<CreateAccount />} />
           <Route path="/login" element={<Login />} />
           <Route
+            path="/stepsStructure/financialStepShow"
+            element={<StepsStructure />}
+          />
+          <Route
             path="/stepsStructure/collaborationRequestShow"
             element={<StepsStructure />}
           />

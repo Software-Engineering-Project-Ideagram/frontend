@@ -1,6 +1,10 @@
 import React from "react";
 import classes from "./StepsStructure.module.scss";
-import { EvolutionStepShow, CollaborationRequestShow } from "../../components";
+import {
+  EvolutionStepShow,
+  CollaborationRequestShow,
+  FinancialStepShow,
+} from "../../components";
 import { useLocation } from "react-router-dom";
 
 const EvolutionStep = () => {
@@ -23,6 +27,7 @@ const EvolutionStep = () => {
         {
           collaborationRequestShow: <CollaborationRequestShow />,
           evolutionStepShow: <EvolutionStepShow />,
+          financialStepShow: <FinancialStepShow />,
         }[url]
       }
     </div>

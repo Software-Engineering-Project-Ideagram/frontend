@@ -28,3 +28,4 @@ export { default as EvolutionStepShow } from "./EvolutionStepShow/EvolutionStepS
 export { default as CollaborationRequestShow } from "./CollaborationRequestShow/CollaborationRequestShow";
 export { default as SelectableItemToShow } from "./SelectableItemToShow/SelectableItemToShow";
 export { default as LargeStepInfo } from "./LargeStepInfo/LargeStepInfo";
+export { default as FinancialStepShow } from "./FinancialStepShow/FinancialStepShow";

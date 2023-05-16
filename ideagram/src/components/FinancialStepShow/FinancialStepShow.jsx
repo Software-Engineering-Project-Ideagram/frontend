@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./EvolutionStepShow.module.scss";
+import classes from "./FinancialStepShow.module.scss";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
@@ -36,7 +36,7 @@ const stepsInfo = [
   },
 ];
 
-const EvolutionStepShow = () => {
+const FinancialStepShow = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [stepInfo, setStepInfo] = useState(stepsInfo[0]);
 
@@ -47,7 +47,7 @@ const EvolutionStepShow = () => {
 
   return (
     <div className={classes.body}>
-      <h2>Evolution Step</h2>
+      <h2>Financial Step</h2>
       <div className={classes.steps}>
         <h4>Steps</h4>
         <Stepper className={classes.stepper} activeStep={activeStep}>
@@ -76,7 +76,7 @@ const EvolutionStepShow = () => {
         <div className={classes.stepInfo}>
           <StepInfo
             firstTitle="Step"
-            secTitle="Finish Data"
+            secTitle="Cost"
             thirdTitle="Description"
             stepName={stepInfo.title}
             finishDate={stepInfo.finishDate}
@@ -88,4 +88,4 @@ const EvolutionStepShow = () => {
   );
 };
 
-export default EvolutionStepShow;
+export default FinancialStepShow;

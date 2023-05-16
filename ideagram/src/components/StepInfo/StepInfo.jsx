@@ -1,19 +1,26 @@
 import React from "react";
 import classes from "./StepInfo.module.scss";
 
-const StepInfo = ({ stepName, finishDate, description }) => {
+const StepInfo = ({
+  firstTitle,
+  secTitle,
+  thirdTitle,
+  stepName,
+  finishDate,
+  description,
+}) => {
   return (
     <div className={classes.container}>
       <div>
-        <label>Step</label>
+        <label>{firstTitle}</label>
         <p className={classes.shortText}>{stepName}</p>
       </div>
       <div>
-        <label>Finish Data</label>
+        <label>{secTitle}</label>
         <p className={classes.shortText}>{finishDate}</p>
       </div>
       <div>
-        <label>Description</label>
+        <label>{thirdTitle}</label>
         <p className={classes.longText}>{description}</p>
       </div>
     </div>
