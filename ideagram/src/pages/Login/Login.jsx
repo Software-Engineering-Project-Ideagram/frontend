@@ -1,26 +1,44 @@
-import { React, useRef } from "react";
+import { React, useRef, useContext } from "react";
 import classes from "./Login.module.scss";
 import ForgotPasswordIMG from "../../images/advertisment.png";
 import Next from "../../images/next.png";
-import axios from "axios";
+import AuthContext from "../../api/AuthContext";
 
 const Login = () => {
-  const userNameData = useRef();
-  const passwordData = useRef();
+  const { login } = useContext(AuthContext);
+
+  const userNameData = useRef("");
+  const passwordData = useRef("");
+
+  // const manageLogin = async () => {
+  //   try {
+  //     const username = userNameData.current.value;
+  //     const password = passwordData.current.value;
+  //     console.log(username);
+  //     console.log(password);
+  //     const res = await axios.post(
+  //       "http://api.iwantnet.space:8001/api/auth/jwt/login/",
+  //       {
+  //         username,
+  //         password,
+  //       }
+  //     );
+
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const manageLogin = async () => {
-    try {
-      const username = userNameData.current.value;
-      const password = passwordData.current.value;
-      console.log(username);
-      console.log(password);
-      await axios.post("api.iwantnet.space:8001/api/auth/jwt/login/", {
-        username,
-        password,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    const username = userNameData.current.value;
+    const password = passwordData.current.value;
+
+    console.log(username, password);
+    await login({
+      username,
+      password,
+    });
   };
 
   return (

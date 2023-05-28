@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useContext, useEffect } from "react";
 import classes from "./Profile.module.scss";
 import UserProfile from "../../images/profile.jpg";
 import Next from "../../images/next.png";
@@ -9,8 +9,12 @@ import Instagram from "../../images/Instagram.png";
 import Link from "../../images/Link.png";
 import Previous from "../../images/prev.png";
 import { useState } from "react";
+import AuthContext from "../../api/AuthContext";
+import axios from "axios";
 
 const Profile = () => {
+  const token = useContext(AuthContext).getAccessToken();
+  console.log(token);
   const [nextPage, setNextPage] = useState("first");
 
   const handleNext = () => {
@@ -20,6 +24,25 @@ const Profile = () => {
   const handlePrev = () => {
     setNextPage("first");
   };
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const res = await axios.get(
+          "http://api.iwantnet.space:8001/api/user/profile/",
+          {
+            headers: {
+              token: token,
+            },
+          }
+        );
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUserData();
+  }, []);
 
   return (
     <div className={classes.body}>
