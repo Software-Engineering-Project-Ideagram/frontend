@@ -24,19 +24,19 @@ function App() {
           <Route path="/accountReport" element={<AccountReport />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/showProfile" element={<ShowProfile />} />
-          {/* <Route path="/categoriesPage" element={<CategoriesPage />} /> */}
+          <Route path="/categoriesPage" element={<CategoriesPage />} />
           <Route
             path="/profileStructure/profile"
             element={<ProfileStructure />}
           />
-          {/* <Route
+          <Route
             path="/profileStructure/myIdeas"
             element={<ProfileStructure />}
-          /> */}
-          {/* <Route
+          />
+          <Route
             path="/profileStructure/savedIdeas"
             element={<ProfileStructure />}
-          /> */}
+          />
           <Route
             path="/profileStructure/followings"
             element={<ProfileStructure />}
@@ -45,12 +45,13 @@ function App() {
             path="/profileStructure/followers"
             element={<ProfileStructure />}
           />
-          {/* <Route
+          <Route
             path="/profileStructure/editProfile"
             element={<ProfileStructure />}
-          /> */}
+          />
           <Route path="/createAccount" element={<CreateAccount />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/stepsStructure/ideaShow" element={<StepsStructure />} />
           <Route
             path="/stepsStructure/financialStepShow"
             element={<StepsStructure />}
@@ -84,6 +85,7 @@ function App() {
             element={<IdeaStructure />}
           />
           <Route path="/ideaStructure/createIdea" element={<IdeaStructure />} />
+          <Route path="/ideaStructure/editIdea" element={<IdeaStructure />} />
         </Routes>
       </div>
       <Footer />

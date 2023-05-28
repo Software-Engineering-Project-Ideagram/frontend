@@ -12,6 +12,7 @@ import {
   EvolutionStep,
   OfficialInformation,
   FinancialStep,
+  EditIdea,
 } from "../../components";
 import { useEffect, useState } from "react";
 
@@ -46,6 +47,7 @@ const IdeaStructure = () => {
         {
           {
             createIdea: <CreateIdea />,
+            editIdea: <EditIdea />,
             collaborationRequest: <CollaborationRequest />,
             evolutionStep: <EvolutionStep />,
             financialStep: <FinancialStep />,

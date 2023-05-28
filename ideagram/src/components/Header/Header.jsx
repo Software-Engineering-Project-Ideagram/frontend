@@ -8,15 +8,16 @@ import OptionsMenu from "../../images/userIcon.png";
 import Menu from "../../images/burger-menu.png";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Skeleton } from "../";
 import {
-  Skeleton,
   MainPageSmallMenu,
   SmallOptionsMenu,
   IdeaDevelopmentMenu,
   UserFeedbackSmallMenu,
   ProfileStructureSmallMenu,
   IdeaStructureSmallMenu,
-} from "../";
+  StepsStructureSmallMenu,
+} from "../SmallMenus";
 
 const Header = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -116,6 +117,13 @@ const Header = () => {
 
             {url === "ideaStructure" && (
               <IdeaStructureSmallMenu
+                showMenuHandler={showMenuHandler}
+                isShowMenu={isShowMenu}
+              />
+            )}
+
+            {url === "stepsStructure" && (
+              <StepsStructureSmallMenu
                 showMenuHandler={showMenuHandler}
                 isShowMenu={isShowMenu}
               />

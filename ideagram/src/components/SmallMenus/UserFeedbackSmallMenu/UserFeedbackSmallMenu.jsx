@@ -1,8 +1,8 @@
 import React from "react";
 import classes from "./UserFeedbackSmallMenu.module.scss";
-import FollowersWhiteIcon from "../../images/FollowersWhite.png";
-import FollowingsWhiteIcon from "../../images/FollowingsWhite.png";
-import IdeaWhiteIcon from "../../images/IdeaWhite.png";
+import FollowersWhiteIcon from "../../../images/FollowersWhite.png";
+import FollowingsWhiteIcon from "../../../images/FollowingsWhite.png";
+import IdeaWhiteIcon from "../../../images/IdeaWhite.png";
 
 const UserFeedbackSmallMenu = ({ showMenuHandler, isShowMenu }) => {
   return (

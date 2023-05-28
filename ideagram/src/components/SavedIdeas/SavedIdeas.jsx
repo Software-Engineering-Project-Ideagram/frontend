@@ -1,11 +1,34 @@
 import React from "react";
 import classes from "./SavedIdeas.module.scss";
 import { Idea } from "../../components";
+import IdeaFilter from "../../images/filter.png";
+import { IdeaFilterSmallMenu } from "../SmallMenus";
+import { useState } from "react";
 
 const SavedIdeas = () => {
+  const [isShowMenu, setIsShowMenu] = useState(false);
+
+  const showMenuHandler = () => {
+    setIsShowMenu(!isShowMenu);
+  };
+
   return (
     <div className={classes.body}>
-      <h2>Saved Ideas</h2>
+      <div className={classes.titleContainer}>
+        <h2>Saved Ideas</h2>
+        <div className={classes.smallIdeaFilterMenu}>
+          <button
+            className={classes.smallIdeaFilterMenuBTN}
+            onClick={showMenuHandler}
+          >
+            <img src={IdeaFilter} alt="IdeaFilter" />
+          </button>
+          <IdeaFilterSmallMenu
+            showMenuHandler={showMenuHandler}
+            isShowMenu={isShowMenu}
+          />
+        </div>
+      </div>
       <div className={classes.main}>
         <div className={classes.ideasContainer}>
           <Idea type="SavedIdeas" />

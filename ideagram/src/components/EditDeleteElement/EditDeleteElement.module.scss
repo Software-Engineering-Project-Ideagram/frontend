@@ -27,6 +27,21 @@
     text-overflow: clip;
     padding: 0 0.5rem;
 
+    @media (max-width: 575.98px) {
+      width: 15rem;
+      max-width: 15rem;
+    }
+
+    @media (max-width: 454.98px) {
+      width: 10rem;
+      max-width: 10rem;
+    }
+
+    @media (max-width: 369.98px) {
+      width: 7rem;
+      max-width: 7rem;
+    }
+
     &::-webkit-scrollbar {
       display: none;
     }

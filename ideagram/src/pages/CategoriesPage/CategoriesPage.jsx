@@ -71,6 +71,9 @@ const CategoriesPage = () => {
               <Idea type="CategoriesPage" />
               <Idea type="CategoriesPage" />
               <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
+              <Idea type="CategoriesPage" />
             </>
           )}
         </div>

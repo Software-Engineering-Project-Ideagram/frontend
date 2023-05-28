@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./CreateIdea.module.scss";
+import classes from "./EditIdea.module.scss";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
@@ -42,7 +42,7 @@ const CreateIdea = () => {
   return (
     <div className={classes.container}>
       <div className={classes.body}>
-        <h2>Create Idea</h2>
+        <h2>Edit Idea</h2>
         <div className={classes.steps}>
           <Stepper className={classes.stepper} activeStep={activeStep}>
             {steps.map((label, index) => {

@@ -5,15 +5,24 @@ import jpgFile from "../../images/jpgFile.png";
 import pptxFile from "../../images/pptxFile.png";
 import docFile from "../../images/docFile.png";
 import deleteFile from "../../images/delete.png";
+import downloadFile from "../../images/downloadIcon.png";
 
-const UploadedFile = ({ type, fileName }) => {
+const UploadedFile = ({ type, fileName, downloadOrDelete }) => {
   return (
     <div className={classes.container}>
-      <div className={classes.delete}>
-        <button>
-          <img src={deleteFile} alt="delete_file" />
-          Delete
-        </button>
+      <div className={classes.deleteDownloadFile}>
+        {downloadOrDelete === "download" && (
+          <button className={classes.download}>
+            <img src={downloadFile} alt="download_file" />
+            Download
+          </button>
+        )}
+        {downloadOrDelete === "delete" && (
+          <button className={classes.delete}>
+            <img src={deleteFile} alt="delete_file" />
+            Delete
+          </button>
+        )}
       </div>
       <div className={classes.uploadedFile}>
         {

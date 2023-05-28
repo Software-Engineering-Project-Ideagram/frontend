@@ -175,7 +175,12 @@ const EditProfile = () => {
               <p className={classes.noLink}>No Report Here</p>
             )} */}
                   <EditDeleteElement key={1} id={1} amount={1} title="one" />
-                  <EditDeleteElement key={2} id={2} amount={2} title="two" />
+                  <EditDeleteElement
+                    key={2}
+                    id={2}
+                    amount={2}
+                    title="twwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwo"
+                  />
                   <EditDeleteElement key={3} id={3} amount={3} title="three" />
                 </div>
               </div>

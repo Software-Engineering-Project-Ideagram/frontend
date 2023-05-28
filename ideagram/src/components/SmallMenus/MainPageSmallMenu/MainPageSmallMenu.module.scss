@@ -21,6 +21,8 @@
 
   li {
     border-bottom: 0.1px solid #eeeeee;
+    font-family: Verdana, sans-serif;
+
     button {
       width: 10rem;
       color: white;
@@ -39,11 +41,6 @@
 }
 
 @font-face {
-  font-family: Pacifico_Regular;
-  src: url("../../fonts/Pacifico-Regular.ttf");
-}
-
-@font-face {
   font-family: Verdana;
-  src: url("../../fonts/Verdana.ttf");
+  src: url("../../../fonts/Verdana.ttf");
 }

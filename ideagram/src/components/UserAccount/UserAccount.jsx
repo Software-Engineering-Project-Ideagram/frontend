@@ -6,7 +6,7 @@ import Followers from "../../images/Multiple users silhouette.png";
 import Followings from "../../images/Subscriber.png";
 import Ideas from "../../images/IdeaIcon.png";
 
-const UserAccount = ({ type }) => {
+const UserAccount = ({ type = "" }) => {
   return (
     <div className={classes.container}>
       {type !== "AccountReport" && (

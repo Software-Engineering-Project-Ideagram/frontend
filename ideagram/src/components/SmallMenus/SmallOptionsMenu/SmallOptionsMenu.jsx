@@ -1,9 +1,9 @@
 import React from "react";
 import classes from "./SmallOptionsMenu.module.scss";
-import User from "../../images/user.png";
-import Login from "../../images/login.png";
-import Search from "../../images/search.png";
-import Home from "../../images/home.png";
+import User from "../../../images/user.png";
+import Login from "../../../images/login.png";
+import Search from "../../../images/search.png";
+import Home from "../../../images/home.png";
 
 const SmallOptionsMenu = ({ showOptionsMenuHandler, isShowOptionsMenu }) => {
   return (

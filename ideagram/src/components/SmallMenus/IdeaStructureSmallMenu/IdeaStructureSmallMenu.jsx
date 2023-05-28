@@ -1,10 +1,10 @@
 import React from "react";
 import classes from "./IdeaStructureSmallMenu.module.scss";
-import Edit_Idea from "../../images/edit_idea.png";
-import Collaboration_Request from "../../images/collaboration_request.png";
-import Evolution_Step from "../../images/evolution_step.png";
-import Financial_Step from "../../images/evolution_step.png";
-import Official_Information from "../../images/official_information.png";
+import Edit_Idea from "../../../images/edit_idea.png";
+import Collaboration_Request from "../../../images/collaboration_request.png";
+import Evolution_Step from "../../../images/evolution_step.png";
+import Financial_Step from "../../../images/evolution_step.png";
+import Official_Information from "../../../images/official_information.png";
 import { Link } from "react-router-dom";
 
 const IdeaStructureSmallMenu = ({ showMenuHandler, isShowMenu }) => {
