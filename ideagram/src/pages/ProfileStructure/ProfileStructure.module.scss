@@ -5,6 +5,8 @@
   background-color: #eeeeee;
 
   .sidebar {
+    // height: calc(100vh - 50px);
+    height: calc(100vh - 50px);
     flex: 1;
     background-color: #e14d2a;
     display: flex;

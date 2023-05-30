@@ -1,29 +1,40 @@
-import { React, useRef, useContext } from "react";
+import { React, useContext, useState } from "react";
 import classes from "./CreateAccount.module.scss";
 import ForgotPasswordIMG from "../../images/advertisment.png";
 import SignUp from "../../images/SignUp.png";
 import AuthContext from "../../api/AuthContext";
+import PasswordChecklist from "react-password-checklist";
 
 const CreateAccount = () => {
   const { register } = useContext(AuthContext);
 
-  const userNameData = useRef("");
-  const passwordData = useRef("");
-  const emailData = useRef("");
+  const [userNameData, setUserNameData] = useState("");
+  const [passwordData, setPasswordData] = useState("");
+  const [emailData, setEmailData] = useState("");
 
   const manageRegister = async () => {
-    const email = emailData.current.value;
-    const username = userNameData.current.value;
-    const password = passwordData.current.value;
+    if (password_validate(passwordData)) {
+      await register({
+        email: emailData,
+        username: userNameData,
+        password: passwordData,
+      });
+    }
+  };
 
-    const payload = {
-      email: email,
-      username: username,
-      password: password,
+  const password_validate = (password) => {
+    var re = {
+      small: /(?=.*[a-z])/,
+      length: /(?=.{8}$)/,
+      specialChar: /[ -\/:-@\[-\`{-~]/,
+      digit: /(?=.*[0-9])/,
     };
-
-    console.log(payload);
-    await register(payload);
+    return (
+      re.small.test(password) &&
+      re.length.test(password) &&
+      re.specialChar.test(password) &&
+      re.digit.test(password)
+    );
   };
 
   return (
@@ -37,15 +48,44 @@ const CreateAccount = () => {
           <div className={classes.step1}>
             <div>
               <label>Username</label>
-              <input type="text" ref={userNameData} />
+              <input
+                type="text"
+                onChange={(value) => {
+                  setUserNameData(value.target.value);
+                }}
+              />
             </div>
             <div>
               <label>Email</label>
-              <input type="email" ref={emailData} />
+              <input
+                type="email"
+                onChange={(value) => {
+                  setEmailData(value.target.value);
+                }}
+              />
             </div>
             <div>
               <label>Password</label>
-              <input type="password" ref={passwordData} />
+              <input
+                type="password"
+                onChange={(value) => {
+                  setPasswordData(value.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <PasswordChecklist
+                rules={["minLength", "specialChar", "number"]}
+                minLength={8}
+                value={passwordData}
+                onChange={(isValid) => {}}
+                messages={{
+                  minLength:
+                    "The minimum length of the password must be eight.",
+                  specialChar: "The password must have special characters.",
+                  number: "The password must have a number.",
+                }}
+              />
             </div>
             <button className={classes.option} onClick={manageRegister}>
               <img src={SignUp} alt="sign_up" />

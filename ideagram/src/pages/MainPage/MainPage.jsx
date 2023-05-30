@@ -11,7 +11,7 @@ const MainPage = () => {
     <div className={classes.container}>
       <div className={classes.toolbar}>
         <button>Arts</button>
-        <button>Design & Tech</button>
+        <button>Tech</button>
         <button>Food</button>
         <button>Games</button>
         <button>Films</button>

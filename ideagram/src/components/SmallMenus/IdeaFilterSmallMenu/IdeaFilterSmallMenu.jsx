@@ -17,7 +17,7 @@ const IdeaFilterSmallMenu = ({ isShowMenu }) => {
       </label>
 
       <label for="DesignTech" className={classes.filter}>
-        Design & Tech
+        Tech
         <input type="checkbox" value="1" id="DesignTech" />
         <span className={classes.custom}></span>
       </label>

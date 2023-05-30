@@ -12,7 +12,7 @@ const MainPageSmallMenu = ({ showMenuHandler, isShowMenu }) => {
         <button>Arts</button>
       </li>
       <li onClick={showMenuHandler}>
-        <button>Design & Tech</button>
+        <button>Tech</button>
       </li>
       <li onClick={showMenuHandler}>
         <button>Food</button>

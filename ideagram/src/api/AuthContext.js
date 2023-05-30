@@ -25,26 +25,29 @@ export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const login = async (payload) => {
+    console.log(payload);
     const apiResponse = await axios.post(
       "http://api.iwantnet.space:8001/api/auth/jwt/login/",
       payload
     );
-    console.log(apiResponse.data);
+    console.log(apiResponse);
     localStorage.setItem("tokens", JSON.stringify(apiResponse.data));
     setUser(jwt_decode(apiResponse.data.access));
     navigate("/mainPage");
   };
 
   const register = async (payload) => {
+    console.log(payload);
     const apiResponse = await axios.post(
       "http://api.iwantnet.space:8001/api/user/register/",
       payload
     );
-    console.log(apiResponse.data);
-    localStorage.setItem("tokens", JSON.stringify(apiResponse.data));
-    setUser(jwt_decode(apiResponse.data.access));
+    console.log(apiResponse.data.token);
+    localStorage.setItem("tokens", JSON.stringify(apiResponse.data.token));
+    setUser(jwt_decode(apiResponse.data.token.access));
     navigate("/mainPage");
   };
+
   return (
     <AuthContext.Provider value={{ user, getAccessToken, login, register }}>
       {children}

@@ -37,7 +37,7 @@ const UploadedFile = ({ type, fileName, downloadOrDelete }) => {
             doc: <img src={docFile} alt="docFile" />,
           }[type]
         }
-        <h3>{fileName}</h3>
+        <h3>{`${fileName}.${type}`}</h3>
       </div>
     </div>
   );

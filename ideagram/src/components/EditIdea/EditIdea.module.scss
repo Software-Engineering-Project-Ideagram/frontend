@@ -181,7 +181,6 @@
               font-family: Montserrat, sans-serif;
               cursor: pointer;
               font-size: 0.9rem;
-              font-weight: 600;
 
               img {
                 width: 1.8rem;
@@ -213,14 +212,14 @@
 
         .feedbacks {
           font-family: Montserrat, sans-serif;
-          width: 70%;
+          width: 60%;
           font-size: 1rem;
           display: flex;
           flex-direction: column;
           gap: 1rem;
 
           @media (max-width: 767.98px) {
-            width: 100%;
+            width: 80%;
           }
 
           div {

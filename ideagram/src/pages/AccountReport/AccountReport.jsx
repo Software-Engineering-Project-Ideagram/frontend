@@ -5,8 +5,13 @@ import Add from "../../images/add.png";
 import Apply from "../../images/apply.png";
 import Cancel from "../../images/cross.png";
 import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { reportsActions } from "../../store/report";
 
 const AccountReport = () => {
+  // const dispatch = useDispatch();
+  // const reports = useSelector((state) => state.task.tasks);
+
   const title = useRef();
   const details = useRef();
 
@@ -59,7 +64,7 @@ const AccountReport = () => {
               key={1}
               id={1}
               amount={1}
-              title="Wrong Information "
+              title="Wrong Information"
             />
             <EditDeleteElement
               key={2}
@@ -77,6 +82,24 @@ const AccountReport = () => {
               key={4}
               id={4}
               amount={4}
+              title="Financial transaction and donation "
+            />
+            <EditDeleteElement
+              key={5}
+              id={5}
+              amount={5}
+              title="Misuse of information"
+            />
+            <EditDeleteElement
+              key={6}
+              id={6}
+              amount={6}
+              title="Insulting comments"
+            />
+            <EditDeleteElement
+              key={7}
+              id={7}
+              amount={7}
               title="Financial transaction and donation "
             />
           </div>

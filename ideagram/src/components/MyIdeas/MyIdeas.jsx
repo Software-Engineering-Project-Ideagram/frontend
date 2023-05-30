@@ -16,7 +16,7 @@ const MyIdeas = () => {
   return (
     <div className={classes.body}>
       <div className={classes.titleContainer}>
-        <h2>Saved Ideas</h2>
+        <h2>My Ideas</h2>
         <div className={classes.smallIdeaFilterMenu}>
           <button
             className={classes.smallIdeaFilterMenuBTN}
@@ -61,7 +61,7 @@ const MyIdeas = () => {
           </label>
 
           <label for="DesignTech" className={classes.filter}>
-            Design & Tech
+            Tech
             <input type="checkbox" value="1" id="DesignTech" />
             <span className={classes.custom}></span>
           </label>

@@ -1,4 +1,4 @@
-import { React, useRef, useContext } from "react";
+import { React, useState, useContext } from "react";
 import classes from "./Login.module.scss";
 import ForgotPasswordIMG from "../../images/advertisment.png";
 import Next from "../../images/next.png";
@@ -7,37 +7,13 @@ import AuthContext from "../../api/AuthContext";
 const Login = () => {
   const { login } = useContext(AuthContext);
 
-  const userNameData = useRef("");
-  const passwordData = useRef("");
-
-  // const manageLogin = async () => {
-  //   try {
-  //     const username = userNameData.current.value;
-  //     const password = passwordData.current.value;
-  //     console.log(username);
-  //     console.log(password);
-  //     const res = await axios.post(
-  //       "http://api.iwantnet.space:8001/api/auth/jwt/login/",
-  //       {
-  //         username,
-  //         password,
-  //       }
-  //     );
-
-  //     console.log(res);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const [userNameData, setUserNameData] = useState("");
+  const [passwordData, setPasswordData] = useState("");
 
   const manageLogin = async () => {
-    const username = userNameData.current.value;
-    const password = passwordData.current.value;
-
-    console.log(username, password);
     await login({
-      username,
-      password,
+      username: userNameData,
+      password: passwordData,
     });
   };
 
@@ -52,11 +28,21 @@ const Login = () => {
           <div className={classes.step1}>
             <div>
               <label>Username</label>
-              <input type="text" ref={userNameData} />
+              <input
+                type="text"
+                onChange={(value) => {
+                  setUserNameData(value.target.value);
+                }}
+              />
             </div>
             <div>
               <label>Password</label>
-              <input type="password" ref={passwordData} />
+              <input
+                type="password"
+                onChange={(value) => {
+                  setPasswordData(value.target.value);
+                }}
+              />
             </div>
             <label for="RememberMe" className={classes.filter}>
               Remember Me

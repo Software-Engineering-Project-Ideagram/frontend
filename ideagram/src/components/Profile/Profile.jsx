@@ -16,6 +16,7 @@ const Profile = () => {
   const token = useContext(AuthContext).getAccessToken();
   console.log(token);
   const [nextPage, setNextPage] = useState("first");
+  const [userData, setUserData] = useState({});
 
   const handleNext = () => {
     setNextPage("sec");
@@ -32,11 +33,12 @@ const Profile = () => {
           "http://api.iwantnet.space:8001/api/user/profile/",
           {
             headers: {
-              token: token,
+              Authorization: "Bearer " + token,
             },
           }
         );
         console.log(res);
+        setUserData(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -52,36 +54,40 @@ const Profile = () => {
           <div className={classes.firstPageInfo}>
             <div className={classes.info}>
               <img
-                src={UserProfile}
+                src={
+                  userData.profile_image == null
+                    ? UserProfile
+                    : userData.profile_image
+                }
                 alt="User_Profile"
                 className={classes.profileImage}
               />
               <div className={classes.userPersonalInfo}>
                 <div className={classes.enterInfo}>
                   <label>First Name</label>
-                  <p>Zahra</p>
+                  <p>{userData.first_name}</p>
                 </div>
                 <div className={classes.enterInfo}>
                   <label>Last Name</label>
-                  <p>Amirinezhad</p>
+                  <p>{userData.last_name}</p>
                 </div>
                 <div className={classes.sideBySide}>
                   <div className={classes.enterGender}>
                     <label>Gender</label>
-                    <p>Female</p>
+                    <p>{userData.gender}</p>
                   </div>
                   <div className={classes.enterBirthDate}>
                     <label>Birth Date</label>
-                    <p>2002-05-06</p>
+                    <p>{userData.birth_date}</p>
                   </div>
                 </div>
                 <div className={classes.enterInfo}>
                   <label>Address</label>
-                  <p>Hezar Jarib</p>
+                  <p>{userData.address}</p>
                 </div>
                 <div className={classes.enterInfo}>
                   <label>Username</label>
-                  <p>ZahraAmirinezhad</p>
+                  <p>{userData.userName}</p>
                 </div>
               </div>
             </div>
@@ -97,20 +103,20 @@ const Profile = () => {
           <div className={classes.secPageInfo}>
             <div className={classes.bio}>
               <label>Bio</label>
-              <p>Front-End Developer</p>
+              <p>{userData.bio}</p>
             </div>
             <div className={classes.info}>
               <div>
                 <label>Profile Status</label>
-                <p>Private</p>
+                <p>{userData.is_public ? "Public" : "Private"}</p>
               </div>
               <div>
                 <label>Activation Status</label>
-                <p>Activated</p>
+                <p>{userData.is_active ? "Active" : "Inactive"}</p>
               </div>
               <div>
                 <label>Ban Status</label>
-                <p>No</p>
+                <p>{userData.is_banned ? "Banned" : "Not Banned"}</p>
               </div>
             </div>
             <div className={classes.linksContainer}>

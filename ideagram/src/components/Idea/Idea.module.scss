@@ -19,7 +19,7 @@
 
   .ideaInfo {
     height: 100%;
-    padding: 0.4rem 0.5rem;
+    padding: 0.2rem 0.5rem 0.4rem 0.5rem;
     display: flex;
     flex-direction: column;
 
@@ -29,6 +29,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      @media (max-width: 575.98px) {
+        margin-top: 0.5rem;
+      }
 
       .title {
         font-size: 1rem;
@@ -48,7 +52,6 @@
         border: none;
         outline: none;
         padding: 0.2rem 0.5rem;
-        font-size: 0.6rem;
         color: #ffffff;
         display: flex;
         align-items: center;
@@ -58,10 +61,11 @@
         width: 4rem;
         gap: 0.3rem;
         transition: all 0.3s ease-in-out;
+        font-size: 0.7rem;
 
         &.saveIdea {
           background-color: #2a5c9f;
-
+          padding: 0 0.5rem;
           .saveIdeaButton {
             width: 1rem;
           }
@@ -70,6 +74,12 @@
         &.deleteIdea {
           background-color: #cd0404;
 
+          @media (max-width: 767.98px) {
+            width: 5rem;
+            height: 1.5rem;
+            font-size: 0.8rem;
+          }
+
           &:hover {
             background-color: #990808;
           }
@@ -77,6 +87,15 @@
 
         &.editIdea {
           background-color: #e14d2a;
+
+          @media (max-width: 767.98px) {
+            width: 4rem;
+            height: 1.4rem;
+          }
+
+          &:hover {
+            background-color: #c50d0d;
+          }
         }
       }
     }
@@ -87,13 +106,25 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 0.5rem 0;
+      margin: 0.3rem 0 0.8rem 0;
+
+      @media (max-width: 767.98px) {
+        margin: 0;
+        margin-bottom: 1.5rem;
+      }
+
+      @media (max-width: 689.98px) {
+        margin-bottom: 0.5rem;
+      }
+
+      @media (max-width: 575.98px) {
+        margin: 0.9rem 0;
+      }
 
       button {
         border: none;
         outline: none;
         padding: 0.2rem 0.5rem;
-        font-size: 0.6rem;
         color: #ffffff;
         display: flex;
         align-items: center;
@@ -106,6 +137,12 @@
 
         &.deleteIdea {
           background-color: #cd0404;
+          font-size: 0.65rem;
+
+          @media (max-width: 767.98px) {
+            width: 4rem;
+            height: 1.4rem;
+          }
 
           &:hover {
             background-color: #990808;
@@ -127,6 +164,16 @@
       font-size: 0.7rem;
       text-justify: auto;
 
+      @media (max-width: 767.98px) {
+        margin: 0;
+        margin-bottom: 1.5rem;
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 689.98px) {
+        margin-bottom: 0.5rem;
+      }
+
       &::-webkit-scrollbar {
         display: none;
       }
@@ -138,7 +185,7 @@
       align-items: center;
       justify-content: space-between;
       border-top: 1px solid #8f8f8f;
-      padding: 0.5rem;
+      padding: 0.5rem 0.5rem 0.1rem 0.5rem;
 
       div {
         flex: 1;
