@@ -16,6 +16,17 @@ const collaborationRequestsSlice = createSlice({
         (item) => item.uuid === newItem.uuid
       );
     },
+    editCollaborationRequest(state, action) {
+      const newItem = action.payload;
+      const existingItem = state.collaborationRequests.find(
+        (item) => item.uuid === newItem.uuid
+      );
+
+      if (existingItem) {
+        state.collaborationRequests.push(newItem);
+      }
+    },
+  },
   },
 });
 
