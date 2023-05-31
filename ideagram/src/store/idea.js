@@ -23,6 +23,30 @@ const ideasSlice = createSlice({
         });
       }
     },
+    deleteIdea(state, action) {
+      const newItem = action.payload;
+      const existingItem = state.ideas.find(
+        (item) => item.uuid === newItem.uuid
+      );
+
+      if (existingItem) {
+        state.ideasNum--;
+        state.ideas = state.ideas.filter((task) => task.uuid !== newItem.uuid);
+      }
+    },
+    editIdea(state, action) {
+      const newItem = action.payload;
+      const existingItem = state.ideas.find(
+        (item) => item.title === newItem.title
+      );
+
+      if (existingItem) {
+        state.ideas = state.ideas.filter(
+          (task) => task.title !== newItem.title
+        );
+        state.ideas.push(newItem);
+      }
+    },
   },
 });
 
