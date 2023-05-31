@@ -9,6 +9,15 @@ const reportsSlice = createSlice({
       const existingItem = state.reports.find(
         (item) => item.title === newItem.title
       );
+
+      if (!existingItem) {
+        state.reportsNum++;
+        state.reports.push({
+          id: newItem.id,
+          title: newItem.title,
+          details: newItem.details,
+        });
+      }
     },
     deleteReport(state, action) {
       const newItem = action.payload;
