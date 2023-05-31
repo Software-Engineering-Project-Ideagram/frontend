@@ -25,6 +25,15 @@ const reportsSlice = createSlice({
         (item) => item.title === newItem.title
       );
       
+
+      if (existingItem) {
+        state.reportsNum--;
+        state.reports = state.reports.filter(
+          (task) => task.title !== newItem.title
+        );
+      }
+    },
+    
     editReport(state, action) {
         const newItem = action.payload;
         const existingItem = state.reports.find(
