@@ -33,12 +33,21 @@ const reportsSlice = createSlice({
         );
       }
     },
-    
+
     editReport(state, action) {
         const newItem = action.payload;
         const existingItem = state.reports.find(
           (item) => item.title === newItem.title
         );
+
+      if (existingItem) {
+        state.reports = state.reports.filter(
+          (task) => task.title !== newItem.title
+        );
+        state.reports.push(newItem);
+      }
+    },
+  },
 });
 
 export const reportsActions = reportsSlice.actions;
