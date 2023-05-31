@@ -10,6 +10,11 @@ const reportsSlice = createSlice({
         (item) => item.title === newItem.title
       );
     },
+    deleteReport(state, action) {
+      const newItem = action.payload;
+      const existingItem = state.reports.find(
+        (item) => item.title === newItem.title
+      );
 });
 
 export const reportsActions = reportsSlice.actions;
