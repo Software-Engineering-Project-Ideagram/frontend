@@ -15,6 +15,12 @@ const reportsSlice = createSlice({
       const existingItem = state.reports.find(
         (item) => item.title === newItem.title
       );
+      
+    editReport(state, action) {
+        const newItem = action.payload;
+        const existingItem = state.reports.find(
+          (item) => item.title === newItem.title
+        );
 });
 
 export const reportsActions = reportsSlice.actions;
