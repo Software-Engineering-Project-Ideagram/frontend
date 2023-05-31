@@ -33,6 +33,11 @@ const reportsSlice = createSlice({
         );
       }
     },
+    
+    deleteAllReports(state, action) {
+        state.reports = [];
+        state.reportsNum = 0;
+      },
 
     editReport(state, action) {
         const newItem = action.payload;
