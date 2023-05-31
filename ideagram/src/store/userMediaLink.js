@@ -21,6 +21,20 @@ const userMediaLinksSlice = createSlice({
         });
       }
     },
+    deleteUserMediaLink(state, action) {
+      const newItem = action.payload;
+      const existingItem = state.userMediaLinks.find(
+        (item) => item.title === newItem.title
+      );
+
+      if (existingItem) {
+        state.userMediaLinksNum--;
+        state.userMediaLinks = state.userMediaLinks.filter(
+          (task) => task.title !== newItem.title
+        );
+      }
+    },
+  },
   },
 });
 
