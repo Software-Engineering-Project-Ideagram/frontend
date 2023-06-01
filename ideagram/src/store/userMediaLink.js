@@ -10,9 +10,9 @@ const userMediaLinksSlice = createSlice({
         (item) => item.title === newItem.title
       );
 
-      if (
+      if ( (state.userMediaLinksNum === 0 || !existingItem) &&
         (newItem.details.startsWith("https://") ||
-          newItem.details.startsWith("http://")) {
+          newItem.details.startsWith("http://"))) {
         state.userMediaLinksNum++;
         state.userMediaLinks.push({
           uuid: newItem.uuid,
