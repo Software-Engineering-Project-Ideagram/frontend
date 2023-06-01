@@ -1,0 +1,52 @@
+.ideaAttachedFiles {
+    padding: 10px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 10px;
+
+    .containerFirst{
+        border: 2px solid black;
+        padding: 10px;
+        background-color: #ffff;
+        width: 100%;
+    }
+
+    .attached {
+        display: flex;
+        justify-content: center;
+        column-gap: 60px;
+        
+        .eachAttached {
+            background-color: #dddada;
+            width: 150px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 6px;
+    
+            div:nth-child(1) {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                padding: 4px;
+                button {
+                    background-color: green;
+                    color: #ffff;
+                    border: none;
+                    outline: none;
+                    font-size: 12px;
+                }
+            }
+    
+            div:nth-child(2) {  
+                width: 100%;
+            }
+        }
+    }
+
+
+}

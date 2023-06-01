@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 
 const IdeaAttachedFiles = () => {
   return (
-    <div className="IdeaAttachedFiles">
+    <div className="ideaAttachedFiles">
       <div className="containerFirst">
         <h5>Description</h5>
         <div>
