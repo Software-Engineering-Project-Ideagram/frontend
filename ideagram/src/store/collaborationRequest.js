@@ -9,12 +9,33 @@ const collaborationRequestsSlice = createSlice({
       const existingItem = state.collaborationRequests.find(
         (item) => item.uuid === newItem.uuid
       );
+
+      if (!existingItem) {
+        state.collaborationRequestsNum++;
+        state.collaborationRequests.push({
+          uuid: newItem.uuid,
+          jobTitle: newItem.jobTitle,
+          skills: newItem.skills,
+          education: newItem.education,
+          age: newItem.age,
+          salary: newItem.salary,
+          status: newItem.status,
+          description: newItem.description,
+        });
+      }
     },
     deleteCollaborationRequest(state, action) {
       const newItem = action.payload;
       const existingItem = state.collaborationRequests.find(
         (item) => item.uuid === newItem.uuid
       );
+
+      if (existingItem) {
+        state.collaborationRequestsNum--;
+        state.collaborationRequests = state.collaborationRequests.filter(
+          (task) => task.title !== newItem.title
+        );
+      }
     },
     editCollaborationRequest(state, action) {
       const newItem = action.payload;
