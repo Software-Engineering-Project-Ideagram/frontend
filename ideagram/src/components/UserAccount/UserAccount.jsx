@@ -1,12 +1,19 @@
 import React from "react";
 import classes from "./UserAccount.module.scss";
 import Delete from "../../images/delete.png";
-import Profile from "../../images/profile.jpg";
+import Profile from "../../images/user (2).png";
 import Followers from "../../images/Multiple users silhouette.png";
 import Followings from "../../images/Subscriber.png";
 import Ideas from "../../images/IdeaIcon.png";
 
-const UserAccount = ({ type = "" }) => {
+const UserAccount = ({
+  type = "",
+  profileImage,
+  name,
+  followers,
+  followings,
+  ideas,
+}) => {
   return (
     <div className={classes.container}>
       {type !== "AccountReport" && (
@@ -18,22 +25,25 @@ const UserAccount = ({ type = "" }) => {
         </div>
       )}
       <div className={classes.userInfo}>
-        <img src={Profile} alt="profile" />
+        <img
+          src={profileImage === null ? Profile : profileImage}
+          alt="profile"
+        />
 
-        <p>Robert Forster</p>
+        <p>{name}</p>
       </div>
       <div className={classes.userFeedback}>
         <div>
           <img className={classes.icon} src={Followers} alt="Followers" />
-          50
+          {followers}
         </div>
         <div>
           <img className={classes.icon} src={Followings} alt="Followings" />
-          60
+          {followings}
         </div>
         <div>
           <img className={classes.icon} src={Ideas} alt="Ideas" />
-          70
+          {ideas}
         </div>
       </div>
     </div>

@@ -1,22 +1,33 @@
 import { React, useContext, useEffect } from "react";
 import classes from "./Profile.module.scss";
-import UserProfile from "../../images/profile.jpg";
+import UserProfile from "../../images/user (2).png";
 import Next from "../../images/next.png";
-import Telegram from "../../images/Telegram.png";
-import Linkedin from "../../images/Linkedin.png";
-import Github from "../../images/Github.png";
-import Instagram from "../../images/Instagram.png";
-import Link from "../../images/Link.png";
 import Previous from "../../images/prev.png";
 import { useState } from "react";
 import AuthContext from "../../api/AuthContext";
 import axios from "axios";
+import UserSocialMediaLink from "../UserSocialMediaLink/UserScocialMediaLink";
 
 const Profile = () => {
   const token = useContext(AuthContext).getAccessToken();
   console.log(token);
+
   const [nextPage, setNextPage] = useState("first");
-  const [userData, setUserData] = useState({});
+  const [userProfile, setUserProfile] = useState(null);
+  const [userFirstName, setUserFirstName] = useState(null);
+  const [userLastName, setUserLastName] = useState(null);
+  const [userGender, setUserGender] = useState(null);
+  const [userBirthDate, setUserBirthDate] = useState(null);
+  const [userCountry, setUserCountry] = useState(null);
+  const [userState, setUserState] = useState(null);
+  const [userCity, setUserCity] = useState(null);
+  const [userAddress, setUserAddress] = useState(null);
+  const [userUserName, setUserUserName] = useState(null);
+  const [userBio, setUserBio] = useState(null);
+  const [userIsPublic, setUserIsPublic] = useState(false);
+  const [userIsBanned, setUserIsBanned] = useState(false);
+  const [userIsActive, setUserIsActive] = useState(false);
+  const [userLinksList, setUserLinksList] = useState([]);
 
   const handleNext = () => {
     setNextPage("sec");
@@ -38,7 +49,41 @@ const Profile = () => {
           }
         );
         console.log(res);
-        setUserData(res.data);
+        setUserProfile(res.data.profile_image);
+        setUserFirstName(res.data.first_name);
+        setUserLastName(res.data.last_name);
+        setUserGender(res.data.gender);
+        setUserBio(res.data.bio);
+        setUserBirthDate(res.data.birth_date);
+        setUserCountry(res.data.address.country);
+        setUserState(res.data.address.state);
+        setUserCity(res.data.address.city);
+        setUserAddress(res.data.address.address);
+        setUserUserName(res.data.username);
+        setUserIsPublic(res.data.is_public);
+        setUserIsActive(res.data.is_active);
+        setUserIsBanned(res.data.is_banned);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUserData();
+  }, []);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const res = await axios.get(
+          "http://api.iwantnet.space:8001/api/user/social-media/",
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        console.log(res);
+        setUserLinksList(res.data);
+        console.log(userLinksList);
       } catch (err) {
         console.log(err);
       }
@@ -55,9 +100,9 @@ const Profile = () => {
             <div className={classes.info}>
               <img
                 src={
-                  userData.profile_image == null
+                  userProfile == null
                     ? UserProfile
-                    : userData.profile_image
+                    : `http://api.iwantnet.space:8001${userProfile}`
                 }
                 alt="User_Profile"
                 className={classes.profileImage}
@@ -65,29 +110,29 @@ const Profile = () => {
               <div className={classes.userPersonalInfo}>
                 <div className={classes.enterInfo}>
                   <label>First Name</label>
-                  <p>{userData.first_name}</p>
+                  <p>{userFirstName}</p>
                 </div>
                 <div className={classes.enterInfo}>
                   <label>Last Name</label>
-                  <p>{userData.last_name}</p>
+                  <p>{userLastName}</p>
                 </div>
                 <div className={classes.sideBySide}>
                   <div className={classes.enterGender}>
                     <label>Gender</label>
-                    <p>{userData.gender}</p>
+                    <p>{userGender}</p>
                   </div>
                   <div className={classes.enterBirthDate}>
                     <label>Birth Date</label>
-                    <p>{userData.birth_date}</p>
+                    <p>{userBirthDate}</p>
                   </div>
                 </div>
                 <div className={classes.enterInfo}>
                   <label>Address</label>
-                  <p>{userData.address}</p>
+                  <p>{`${userCountry}-${userState}-${userCity}-${userAddress}`}</p>
                 </div>
                 <div className={classes.enterInfo}>
                   <label>Username</label>
-                  <p>{userData.userName}</p>
+                  <p>{userUserName}</p>
                 </div>
               </div>
             </div>
@@ -103,30 +148,28 @@ const Profile = () => {
           <div className={classes.secPageInfo}>
             <div className={classes.bio}>
               <label>Bio</label>
-              <p>{userData.bio}</p>
+              <p>{userBio}</p>
             </div>
             <div className={classes.info}>
               <div>
                 <label>Profile Status</label>
-                <p>{userData.is_public ? "Public" : "Private"}</p>
+                <p>{userIsPublic ? "Public" : "Private"}</p>
               </div>
               <div>
                 <label>Activation Status</label>
-                <p>{userData.is_active ? "Active" : "Inactive"}</p>
+                <p>{userIsActive ? "Active" : "Inactive"}</p>
               </div>
               <div>
                 <label>Ban Status</label>
-                <p>{userData.is_banned ? "Banned" : "Not Banned"}</p>
+                <p>{userIsBanned ? "Banned" : "Not Banned"}</p>
               </div>
             </div>
             <div className={classes.linksContainer}>
               <label>Links</label>
               <div className={classes.links}>
-                <img src={Telegram} alt="telegram" />
-                <img src={Github} alt="github" />
-                <img src={Instagram} alt="instagram" />
-                <img src={Linkedin} alt="linkedin" />
-                <img src={Link} alt="link" />
+                {userLinksList.map((item) => (
+                  <UserSocialMediaLink type={item.type} link={item.link} />
+                ))}
               </div>
             </div>
             <div className={classes.options}>

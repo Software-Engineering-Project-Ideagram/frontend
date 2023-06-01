@@ -335,9 +335,14 @@
           outline: none;
           border-radius: 0.2rem;
           cursor: pointer;
+          transition: all 0.3s ease-in-out;
 
           @media (max-width: 575.98px) {
             width: 100%;
+          }
+
+          &:hover {
+            background-color: #158854;
           }
         }
       }
@@ -411,9 +416,14 @@
           outline: none;
           border-radius: 0.2rem;
           cursor: pointer;
+          transition: all 0.3s ease-in-out;
 
           @media (max-width: 767.98px) {
             width: 100%;
+          }
+
+          &:hover {
+            background-color: #158854;
           }
         }
       }
@@ -559,9 +569,14 @@
           outline: none;
           border-radius: 0.2rem;
           cursor: pointer;
+          transition: all 0.3s ease-in-out;
 
           @media (max-width: 767.98px) {
             width: 100%;
+          }
+
+          &:hover {
+            background-color: #158854;
           }
         }
       }

@@ -66,14 +66,18 @@ const CreateIdea = () => {
   const createNewIdea = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    // formData.append("classification", "Arts");
-    // formData.append("classification", "Games");
+    isScience && formData.append("classification", "science");
+    isPublishing && formData.append("classification", "publishing");
+    isMusics && formData.append("classification", "music");
+    isGames && formData.append("classification", "games");
+    isFoodCraft && formData.append("classification", "food-craft");
+    isDesignTech && formData.append("classification", "tech");
+    isArts && formData.append("classification", "art");
     formData.append("title", ideaTitle);
     formData.append("goal", ideaGoal);
     formData.append("abstract", ideaAbstraction);
     formData.append("description", ideaDescription);
-    formData.append("image", ideaImage);
-    formData.append("max_donation", 1234);
+    ideaImage !== null && formData.append("image", ideaImage);
     formData.append("show_likes", showLikes);
     formData.append("show_views", showViews);
     formData.append("show_comments", showComments);

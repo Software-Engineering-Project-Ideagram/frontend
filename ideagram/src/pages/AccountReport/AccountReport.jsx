@@ -1,23 +1,39 @@
 import React from "react";
-import { EditDeleteElement, UserAccount } from "../../components";
+import { UserAccount } from "../../components";
+import { ReportElement } from "../../components/Elements";
 import classes from "./AccountReport.module.scss";
 import Add from "../../images/add.png";
 import Apply from "../../images/apply.png";
 import Cancel from "../../images/cross.png";
-import { useRef } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { reportsActions } from "../../store/report";
 
 const AccountReport = () => {
-  // const dispatch = useDispatch();
-  // const reports = useSelector((state) => state.task.tasks);
+  const dispatch = useDispatch();
+  const reports = useSelector((state) => state.report.reports);
+  const reportsNum = useSelector((state) => state.report.reportsNum);
 
-  const title = useRef();
-  const details = useRef();
+  const [titleData, setTitleData] = useState("");
+  const [detailsData, setDetailsData] = useState("");
 
   const addReportHandler = () => {
-    if (title.current.value !== "" && details.current.value !== "") {
+    if (titleData !== "" && detailsData !== "") {
+      dispatch(
+        reportsActions.addReport({
+          id: titleData.replaceAll(/\s/g, ""),
+          title: titleData,
+          details: detailsData,
+        })
+      );
+
+      setTitleData("");
+      setDetailsData("");
     }
+  };
+
+  const cancelAllReports = () => {
+    dispatch(reportsActions.deleteAllReports());
   };
 
   return (
@@ -32,11 +48,24 @@ const AccountReport = () => {
           <div className={classes.report}>
             <div>
               <label>Finish Data</label>
-              <input type="text" ref={title} />
+              <input
+                value={titleData}
+                type="text"
+                onChange={(e) => {
+                  setTitleData(e.target.value);
+                }}
+              />
             </div>
             <div>
               <label>Description</label>
-              <textarea cols={4} rows={3} ref={details} />
+              <textarea
+                value={detailsData}
+                cols={4}
+                rows={3}
+                onChange={(e) => {
+                  setDetailsData(e.target.value);
+                }}
+              />
             </div>
             <div className={classes.addContainer}>
               <button className={classes.add} onClick={addReportHandler}>
@@ -48,67 +77,31 @@ const AccountReport = () => {
         <div className={classes.reportsContainer}>
           <h1>Report Table</h1>
           <div className={classes.reports}>
-            {/* {reportsNum !== 0 ? (
+            {reportsNum !== 0 ? (
               reports.map((item, index) => (
-                <Report
+                <ReportElement
+                  onClick={(e) => {
+                    console.log(e);
+                  }}
                   key={item.id}
                   id={item.id}
-                  reportNum={index + 1}
+                  amount={index + 1}
                   title={item.title}
+                  details={item.details}
+                  manageTitle={setTitleData}
+                  manageDetails={setDetailsData}
                 />
               ))
             ) : (
               <p className={classes.noReport}>No Report Here</p>
-            )} */}
-            <EditDeleteElement
-              key={1}
-              id={1}
-              amount={1}
-              title="Wrong Information"
-            />
-            <EditDeleteElement
-              key={2}
-              id={2}
-              amount={2}
-              title="Misuse of information"
-            />
-            <EditDeleteElement
-              key={3}
-              id={3}
-              amount={3}
-              title="Insulting comments"
-            />
-            <EditDeleteElement
-              key={4}
-              id={4}
-              amount={4}
-              title="Financial transaction and donation "
-            />
-            <EditDeleteElement
-              key={5}
-              id={5}
-              amount={5}
-              title="Misuse of information"
-            />
-            <EditDeleteElement
-              key={6}
-              id={6}
-              amount={6}
-              title="Insulting comments"
-            />
-            <EditDeleteElement
-              key={7}
-              id={7}
-              amount={7}
-              title="Financial transaction and donation "
-            />
+            )}
           </div>
           <div className={classes.options}>
             <button className={classes.apply}>
               <img src={Apply} alt="apply" />
               Apply
             </button>
-            <button className={classes.cancel}>
+            <button className={classes.cancel} onClick={cancelAllReports}>
               <img src={Cancel} alt="cancel" />
               Cancel
             </button>

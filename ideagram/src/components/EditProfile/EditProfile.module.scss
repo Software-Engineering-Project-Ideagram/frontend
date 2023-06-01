@@ -352,50 +352,42 @@
         }
       }
 
-      .userPasswordInfo {
+      .userBioInfo {
         margin: 1rem 1.5rem;
 
-        .userPassword {
+        .bio {
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
           border: 1px solid #303030;
           border-radius: 0.2rem;
-          padding: 1rem 1.5rem;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 0.5rem;
+          padding: 1rem;
 
-          .enterInfo {
-            display: flex;
-            align-items: center;
-            margin: 0.5rem 0;
+          @media (max-width: 767.98px) {
+            flex-direction: column;
+            gap: 1rem;
+          }
 
-            @media (max-width: 991.98px) {
-              flex-direction: column;
-              align-items: flex-start;
-              gap: 0.5rem;
+          label {
+            width: 5rem;
+          }
+
+          textarea {
+            width: 100%;
+            height: 15rem;
+            background-color: #ffffff;
+            border: 1px solid #303030;
+            border-radius: 0.2rem;
+            outline: none;
+            padding: 0.2rem 0.5rem;
+
+            @media (max-width: 767.98px) {
               width: 100%;
             }
 
-            label {
-              width: 12rem;
-            }
-
-            input {
-              width: 30rem;
+            &::focus {
               border: 1px solid #303030;
-              border-radius: 0.2rem;
               outline: none;
-              padding: 0.5rem;
-
-              @media (max-width: 991.98px) {
-                width: 100%;
-              }
-
-              &:focus {
-                border: 1px solid #303030;
-                outline: none;
-              }
             }
           }
         }
@@ -605,17 +597,16 @@
           display: flex;
           align-items: center;
           justify-content: flex-start;
-          gap: 2rem;
           margin-top: 1rem;
 
-          @media (max-width: 767.98px) {
-            justify-content: space-between;
-          }
+          // @media (max-width: 767.98px) {
+          //   justify-content: space-between;
+          // }
 
-          @media (max-width: 575.98px) {
-            flex-direction: column;
-            gap: 0.5rem;
-          }
+          // @media (max-width: 575.98px) {
+          //   flex-direction: column;
+          //   gap: 0.5rem;
+          // }
 
           button {
             width: 15rem;

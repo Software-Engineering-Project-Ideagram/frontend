@@ -1,4 +1,4 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const reportsSlice = createSlice({
   name: "report",
@@ -15,6 +15,7 @@ const reportsSlice = createSlice({
         state.reports.push({
           id: newItem.id,
           title: newItem.title,
+          details: newItem.details,
         });
       }
     },
@@ -30,6 +31,10 @@ const reportsSlice = createSlice({
           (task) => task.title !== newItem.title
         );
       }
+    },
+    deleteAllReports(state, action) {
+      state.reports = [];
+      state.reportsNum = 0;
     },
     editReport(state, action) {
       const newItem = action.payload;
@@ -49,8 +54,4 @@ const reportsSlice = createSlice({
 
 export const reportsActions = reportsSlice.actions;
 
-const store = configureStore({
-  reducer: { reports: reportsSlice.reducer },
-});
-
-export default store;
+export const reportsReducer = reportsSlice.reducer;

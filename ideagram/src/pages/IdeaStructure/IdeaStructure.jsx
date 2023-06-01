@@ -1,11 +1,12 @@
 import React from "react";
 import classes from "./IdeaStructure.module.scss";
+import Create_Idea from "../../images/CreateIdea.png";
 import Edit_Idea from "../../images/edit_idea.png";
 import Collaboration_Request from "../../images/collaboration_request.png";
 import Evolution_Step from "../../images/evolution_step.png";
 import Financial_Step from "../../images/evolution_step.png";
 import Official_Information from "../../images/official_information.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import {
   CreateIdea,
   CollaborationRequest,
@@ -14,7 +15,6 @@ import {
   FinancialStep,
   EditIdea,
 } from "../../components";
-import { useEffect, useState } from "react";
 
 const IdeaStructure = () => {
   const location = useLocation();
@@ -25,23 +25,38 @@ const IdeaStructure = () => {
   return (
     <div className={classes.container}>
       <div className={classes.sidebar}>
-        <button>
+        <Link className={classes.sidebarOptions} to="/ideaStructure/createIdea">
+          <img src={Create_Idea} alt="Create_Idea" /> Create Idea
+        </Link>
+        <Link className={classes.sidebarOptions} to="/ideaStructure/editIdea">
           <img src={Edit_Idea} alt="Edit_Idea" /> Edit Idea
-        </button>
-        <button>
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to="/ideaStructure/collaborationRequest"
+        >
           <img src={Collaboration_Request} alt="Collaboration_Request" />{" "}
           Collaboration Request
-        </button>
-        <button>
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to="/ideaStructure/evolutionStep"
+        >
           <img src={Evolution_Step} alt="Evolution_Step" /> Evolution_Step
-        </button>
-        <button>
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to="/ideaStructure/financialStep"
+        >
           <img src={Financial_Step} alt="Financial_Step" /> Financial Step
-        </button>
-        <button>
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to="/ideaStructure/officialInformation"
+        >
           <img src={Official_Information} alt="Official_Information" /> Official
           Information
-        </button>
+        </Link>
       </div>
       <div className={classes.main}>
         {

@@ -141,6 +141,7 @@
                 border-radius: 0.2rem;
                 outline: none;
                 padding: 0.2rem 0.5rem;
+                font-size: 0.9rem;
 
                 @media (max-width: 1199.98px) {
                   width: 6rem;
@@ -187,7 +188,7 @@
           cursor: pointer;
           transition: all 0.3s ease-in-out;
 
-          @media (max-width: 859.99px) {
+          @media (max-width: 575.98px) {
             width: 100%;
           }
 
@@ -226,6 +227,12 @@
           border-radius: 0.2rem;
           outline: none;
           padding: 0.2rem 0.5rem;
+          overflow: hidden;
+          overflow-y: scroll;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
 
           @media (max-width: 767.98px) {
             width: 100%;
@@ -293,15 +300,10 @@
           width: 60%;
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: space-evenly;
 
           @media (max-width: 767.98px) {
             width: 100%;
-          }
-
-          img {
-            width: 1.5rem;
-            cursor: pointer;
           }
         }
       }
@@ -329,6 +331,10 @@
           border-radius: 0.2rem;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
+
+          @media (max-width: 575.98px) {
+            width: 100%;
+          }
 
           &:hover {
             background-color: #158854;

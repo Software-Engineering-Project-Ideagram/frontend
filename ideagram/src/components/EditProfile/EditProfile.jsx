@@ -7,11 +7,13 @@ import Previous from "../../images/prev.png";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import { EditDeleteElement } from "../../components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import AuthContext from "../../api/AuthContext";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { userMediaLinksActions } from "../../store/userMediaLink";
+import { UserMediaLinkElement } from "../Elements";
 
 const steps = ["1.Personal Information", "2.Change Password", "3.Manage Links"];
 
@@ -19,6 +21,7 @@ const EditProfile = () => {
   const token = useContext(AuthContext).getAccessToken();
   console.log(token);
 
+  const [mainUserName, setMainUserName] = useState("");
   const [selectedProfile, setUserSelectedProfile] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
   const [userFirstName, setUserFirstName] = useState(null);
@@ -30,6 +33,16 @@ const EditProfile = () => {
   const [userCity, setUserCity] = useState(null);
   const [userAddress, setUserAddress] = useState(null);
   const [userUserName, setUserUserName] = useState(null);
+  const [userBio, setUserBio] = useState(null);
+
+  const dispatch = useDispatch();
+  const userLinks = useSelector((state) => state.userMediaLink.userMediaLinks);
+  const userLinksNum = useSelector(
+    (state) => state.userMediaLink.userMediaLinksNum
+  );
+
+  const [userMediaLinkTitle, setUserMediaLinkTitle] = useState("github");
+  const [userMediaLinkDetails, setUserMediaLinkDetails] = useState("");
 
   const [activeStep, setActiveStep] = useState(0);
 
@@ -57,12 +70,14 @@ const EditProfile = () => {
         setUserFirstName(res.data.first_name);
         setUserLastName(res.data.last_name);
         setUserGender(res.data.gender);
+        setUserBio(res.data.bio);
         setUserBirthDate(res.data.birth_date);
         setUserCountry(res.data.address.country);
         setUserState(res.data.address.state);
         setUserCity(res.data.address.city);
         setUserAddress(res.data.address.address);
         setUserUserName(res.data.username);
+        setMainUserName(res.data.username);
       } catch (err) {
         console.log(err);
       }
@@ -70,20 +85,66 @@ const EditProfile = () => {
     getUserData();
   }, []);
 
-  const changeUserInfo = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    const getUserSocialMediaLinks = async () => {
+      try {
+        const res = await axios.get(
+          "http://api.iwantnet.space:8001/api/user/social-media/",
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        console.log(res);
+        const links = res.data;
+        for (const item of links) {
+          dispatch(
+            userMediaLinksActions.addUserMediaLink({
+              uuid: item.uuid,
+              title: item.type,
+              details: item.link,
+            })
+          );
+        }
+        console.log(userLinks);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUserSocialMediaLinks();
+  }, []);
+
+  const changeUserInfo = async () => {
     const formData = new FormData();
-    formData.append("username", userUserName);
+    if (userUserName !== mainUserName) {
+      formData.append("username", userUserName);
+    }
     formData.append("first_name", userLastName);
     formData.append("last_name", userLastName);
     formData.append("birth_date", userBirthDate);
     formData.append("gender", userGender);
-    // formData.append("bio", userBio);
-    // formData.append("address", showLikes);
+    const userFullAddress = {
+      country: userCountry,
+      state: userState,
+      city: userCity,
+      address: userAddress,
+    };
+    formData.append("address", userFullAddress);
     if (selectedProfile !== null) {
       formData.append("profile_image", selectedProfile);
     }
-    // formData.append("show_comments", showComments);
+
+    for (const value of formData.values()) {
+      console.log(value);
+    }
+
+    await uploadNewUserData(formData);
+  };
+
+  const changeBioInfo = async () => {
+    const formData = new FormData();
+    formData.append("bio", userBio);
 
     for (const value of formData.values()) {
       console.log(value);
@@ -110,10 +171,47 @@ const EditProfile = () => {
     }
   };
 
+  const addUserSocialLinks = async () => {
+    try {
+      const res = await axios.post(
+        "http://api.iwantnet.space:8001/api/user/social-media/",
+        {
+          type: userMediaLinkTitle,
+          link: userMediaLinkDetails,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(res);
+      dispatch(
+        userMediaLinksActions.addUserMediaLink({
+          uuid: res.data.uuid,
+          title: res.data.type,
+          details: res.data.link,
+        })
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleUploadedImage = (e) => {
     console.log(e.target.files[0]);
     setUserSelectedProfile(e.target.files[0]);
     setUserProfile(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const addMediaLinkHandler = async () => {
+    if (userMediaLinkTitle !== "" && userMediaLinkDetails !== "") {
+      await addUserSocialLinks();
+
+      setUserMediaLinkTitle("github");
+      setUserMediaLinkDetails("");
+    }
   };
 
   return (
@@ -149,7 +247,11 @@ const EditProfile = () => {
                   />
                   <label for="selectProfileImage">
                     <img
-                      src={userProfile == null ? UserProfile : userProfile}
+                      src={
+                        userProfile == null
+                          ? UserProfile
+                          : `http://api.iwantnet.space:8001${userProfile}`
+                      }
                       alt="User_Profile"
                     />
                   </label>
@@ -178,7 +280,12 @@ const EditProfile = () => {
                   <div className={classes.sideBySide}>
                     <div className={classes.enterGender}>
                       <label>Gender</label>
-                      <select name="gender">
+                      <select
+                        name="gender"
+                        onChange={(e) => {
+                          setUserGender(e.target.value);
+                        }}
+                      >
                         {userGender === "male" && (
                           <>
                             <option value="male" selected>
@@ -201,7 +308,13 @@ const EditProfile = () => {
                       <label>Birth Date</label>
                       <DatePicker
                         selected={new Date(userBirthDate)}
-                        onChange={(date) => setUserBirthDate(date)}
+                        onChange={(date) =>
+                          setUserBirthDate(
+                            `${date.getFullYear()}-${
+                              date.getMonth() + 1
+                            }-${date.getDate()}`
+                          )
+                        }
                         minDate={new Date("1923-01-01")}
                         maxDate={new Date()}
                         dateFormat="yyyy-MM-dd"
@@ -246,7 +359,7 @@ const EditProfile = () => {
                       type="text"
                       value={userAddress}
                       onChange={(e) => {
-                        userAddress(e.target.value);
+                        setUserAddress(e.target.value);
                       }}
                     />
                   </div>
@@ -256,7 +369,7 @@ const EditProfile = () => {
                       type="text"
                       value={userUserName}
                       onChange={(e) => {
-                        userUserName(e.target.value);
+                        setUserUserName(e.target.value);
                       }}
                     />
                   </div>
@@ -264,7 +377,7 @@ const EditProfile = () => {
               </div>
 
               <div className={classes.options}>
-                <button onChange={changeUserInfo}>
+                <button onClick={changeUserInfo}>
                   <img src={Apply} alt="apply" />
                   Apply
                 </button>
@@ -277,20 +390,16 @@ const EditProfile = () => {
           )}
 
           {activeStep === 1 && (
-            <div className={classes.userPasswordInfo}>
-              <div className={classes.userPassword}>
-                <div className={classes.enterInfo}>
-                  <label>Current Password</label>
-                  <input type="password" />
-                </div>
-                <div className={classes.enterInfo}>
-                  <label>New Password</label>
-                  <input type="password" />
-                </div>
-                <div className={classes.enterInfo}>
-                  <label>Repeat New Password</label>
-                  <input type="password" />
-                </div>
+            <div className={classes.userBioInfo}>
+              <div className={classes.bio}>
+                <label>Bio</label>
+                <textarea
+                  type="text"
+                  value={userBio}
+                  onChange={(e) => {
+                    setUserBio(e.target.value);
+                  }}
+                />
               </div>
 
               <div className={classes.options}>
@@ -298,7 +407,7 @@ const EditProfile = () => {
                   <img src={Previous} alt="previous" />
                   Previous
                 </button>
-                <button>
+                <button onClick={changeBioInfo}>
                   <img src={Apply} alt="apply" />
                   Apply
                 </button>
@@ -317,82 +426,59 @@ const EditProfile = () => {
                 <div className={classes.enterInfo}>
                   <div className={classes.enterSite}>
                     <label>Site</label>
-                    <select>
-                      <option value="one">One</option>
-                      <option value="two">Two</option>
+                    <select
+                      value={userMediaLinkTitle}
+                      onChange={(e) => {
+                        setUserMediaLinkTitle(e.target.value);
+                      }}
+                    >
+                      <option value="github">Github</option>
+                      <option value="gitlab">Gitlab</option>
+                      <option value="telegram">Telegram</option>
+                      <option value="linkedin">Linkedin</option>
+                      <option value="instagram">Instagram</option>
+                      <option value="facebook">Facebook</option>
+                      <option value="twitter">Twitter</option>
                     </select>
                   </div>
                   <div className={classes.enterLink}>
                     <label>Link</label>
-                    <input type="text" />
+                    <input
+                      type="text"
+                      value={userMediaLinkDetails}
+                      onChange={(e) => {
+                        setUserMediaLinkDetails(e.target.value);
+                      }}
+                    />
                   </div>
                   <div className={classes.options}>
-                    <button>Add</button>
+                    <button onClick={addMediaLinkHandler}>Add</button>
                   </div>
                 </div>
               </div>
               <div className={classes.linksContainer}>
                 <h3>Links</h3>
                 <div className={classes.links}>
-                  {/* {reportsNum !== 0 ? (
-              reports.map((item, index) => (
-                <Report
-                  key={item.id}
-                  id={item.id}
-                  reportNum={index + 1}
-                  title={item.title}
-                />
-              ))
-            ) : (
-              <p className={classes.noLink}>No Report Here</p>
-            )} */}
-                  <EditDeleteElement key={1} id={1} amount={1} title="one" />
-                  <EditDeleteElement
-                    key={2}
-                    id={2}
-                    amount={2}
-                    title="twwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwo"
-                  />
-                  <EditDeleteElement key={3} id={3} amount={3} title="three" />
-                  <EditDeleteElement key={4} id={4} amount={4} title="one" />
-                  <EditDeleteElement
-                    key={2}
-                    id={2}
-                    amount={2}
-                    title="twwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwo"
-                  />
-                  <EditDeleteElement key={5} id={5} amount={5} title="three" />
-                  <EditDeleteElement key={6} id={6} amount={6} title="one" />
-                  <EditDeleteElement
-                    key={7}
-                    id={7}
-                    amount={7}
-                    title="twwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwo"
-                  />
-                  <EditDeleteElement key={8} id={8} amount={8} title="three" />
-                  <EditDeleteElement key={9} id={9} amount={9} title="one" />
-                  <EditDeleteElement
-                    key={10}
-                    id={10}
-                    amount={10}
-                    title="twwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwo"
-                  />
-                  <EditDeleteElement
-                    key={11}
-                    id={11}
-                    amount={11}
-                    title="three"
-                  />
+                  {userLinksNum !== 0 ? (
+                    userLinks.map((item, index) => (
+                      <UserMediaLinkElement
+                        key={item.id}
+                        uuid={item.uuid}
+                        amount={index + 1}
+                        title={item.title}
+                        details={item.details}
+                        token={token}
+                      />
+                    ))
+                  ) : (
+                    <p className={classes.noReport}>No Links Here</p>
+                  )}
                 </div>
               </div>
               <div className={classes.options}>
                 <button onClick={handleBack}>
                   <img src={Previous} alt="previous" />
                   Previous
-                </button>
-                <button>
-                  <img src={Apply} alt="apply" />
-                  Apply
                 </button>
               </div>
             </div>
