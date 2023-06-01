@@ -39,12 +39,18 @@
   .main {
     height: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 1rem;
     margin: 1rem;
 
     .ideasContainer {
+      width: 80%;
+
+      @media (max-width: 1199.98px) {
+        width: 100%;
+      }
+
       .addIdea {
         border: none;
         outline: none;
@@ -78,7 +84,7 @@
         border-radius: 0.5rem;
         // height: 21rem;
         // max-height: 21rem;
-        height: 22rem;
+        height: fit-content;
         max-height: 22rem;
         display: grid;
         grid-template-columns: auto auto;
@@ -117,7 +123,7 @@
 
     .ideaFilter {
       height: 25rem;
-      width: 23.5rem;
+      width: 20%;
       display: flex;
       flex-direction: column;
       align-items: flex-start;

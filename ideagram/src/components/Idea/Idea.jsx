@@ -11,19 +11,25 @@ import Eye from "../../images/Eye.png";
 import Delete from "../../images/delete.png";
 import Edit from "../../images/edit2.png";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const Idea = ({ type }) => {
+const Idea = ({ type, uuid, title, goal, details, likes, views, comments }) => {
   const [isSave, setIsSave] = useState(false);
+  const navigate = useNavigate();
 
   const manageSave = () => {
     setIsSave(!isSave);
+  };
+
+  const goToEditIdea = () => {
+    navigate("/ideaStructure/editIdea", { state: { uuid: uuid } });
   };
 
   return (
     <div className={classes.container}>
       <div className={classes.ideaInfo}>
         <div className={classes.ideaTitle}>
-          <h1 className={classes.title}>what doesn't kill you</h1>
+          <h1 className={classes.title}>{title}</h1>
           {(type === "ShowProfiles" ||
             type === "MainPage" ||
             type === "CategoriesPage") && (
@@ -43,14 +49,14 @@ const Idea = ({ type }) => {
             </button>
           )}
           {type === "MyIdeas" && (
-            <button className={classes.editIdea}>
+            <button className={classes.editIdea} onClick={goToEditIdea}>
               <img src={Edit} alt="Edit_Idea" />
               Edit
             </button>
           )}
         </div>
         <div className={classes.ideaGoal}>
-          <p>Release of music</p>
+          <p>{goal}</p>
           {type === "MyIdeas" && (
             <button className={classes.deleteIdea}>
               <img src={Delete} alt="Delete_Idea" />
@@ -59,23 +65,20 @@ const Idea = ({ type }) => {
           )}
         </div>
         <div>
-          <p className={classes.ideaDesc}>
-            The piece of music composed and sung by Kelly Clarkson is ready to
-            be recorded in the studio and released.
-          </p>
+          <p className={classes.ideaDesc}>{details}</p>
         </div>
         <div className={classes.feedback}>
           <div>
             <ThumbUp className={classes.icon} />
-            50
+            {likes}
           </div>
           <div>
             <img className={classes.icon} src={Eye} alt="Views" />
-            60
+            {views}
           </div>
           <div>
             <Message className={classes.icon} />
-            70
+            {comments}
           </div>
         </div>
       </div>

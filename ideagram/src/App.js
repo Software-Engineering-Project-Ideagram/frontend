@@ -49,6 +49,10 @@ function App() {
             path="/profileStructure/editProfile"
             element={<ProfileStructure />}
           />
+          <Route
+            path="/profileStructure/createIdea"
+            element={<ProfileStructure />}
+          />
           <Route path="/createAccount" element={<CreateAccount />} />
           <Route path="/login" element={<Login />} />
           <Route path="/stepsStructure/ideaShow" element={<StepsStructure />} />
@@ -84,7 +88,6 @@ function App() {
             path="/ideaStructure/officialInformation"
             element={<IdeaStructure />}
           />
-          <Route path="/ideaStructure/createIdea" element={<IdeaStructure />} />
           <Route path="/ideaStructure/editIdea" element={<IdeaStructure />} />
         </Routes>
       </div>

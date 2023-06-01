@@ -171,35 +171,6 @@
               background: gray;
             }
           }
-
-          .add {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            color: white;
-            border: none;
-            outline: none;
-            padding: 0.3rem 0.5rem;
-            background-color: #4ad295;
-            width: 26rem;
-            border-radius: 0.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-
-            @media (max-width: 575.98px) {
-              width: 100%;
-            }
-
-            img {
-              width: 1rem;
-              height: 1rem;
-            }
-
-            &:hover {
-              background-color: #158854;
-            }
-          }
         }
       }
     }

@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./ProfileStructure.module.scss";
 import MyProfile from "../../images/MyProfile.png";
+import CreateIdeaIMG from "../../images/CreateIdea.png";
 import My_Idea from "../../images/MyIdea.png";
 import Saved_Ideas from "../../images/SavedIdeas.png";
 import Follower from "../../images/Follower.png";
@@ -15,6 +16,7 @@ import {
   MyIdeas,
   Profile,
   SavedIdeas,
+  CreateIdea,
 } from "../../components";
 
 const ProfileStructure = () => {
@@ -28,6 +30,18 @@ const ProfileStructure = () => {
       <div className={classes.sidebar}>
         <Link className={classes.sidebarOptions} to="/profileStructure/profile">
           <img src={MyProfile} alt="Profile" /> Profile
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to="/profileStructure/editProfile"
+        >
+          <img src={Edit_Profile} alt="Edit_Profile" /> Edit Profile
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to="/profileStructure/createIdea"
+        >
+          <img src={CreateIdeaIMG} alt="Create_Idea" /> Create Idea
         </Link>
         <Link className={classes.sidebarOptions} to="/profileStructure/myIdeas">
           <img src={My_Idea} alt="My_Ideas" /> My Ideas
@@ -50,12 +64,6 @@ const ProfileStructure = () => {
         >
           <img src={Following} alt="Following" /> Followings
         </Link>
-        <Link
-          className={classes.sidebarOptions}
-          to="/profileStructure/editProfile"
-        >
-          <img src={Edit_Profile} alt="Edit_Profile" /> Edit Profile
-        </Link>
         <Link className={classes.sidebarOptions}>
           <img src={User_Guid} alt="User_Guid" /> User Guide
         </Link>
@@ -64,6 +72,7 @@ const ProfileStructure = () => {
         {
           {
             profile: <Profile />,
+            createIdea: <CreateIdea />,
             myIdeas: <MyIdeas />,
             savedIdeas: <SavedIdeas />,
             followers: <Followers />,

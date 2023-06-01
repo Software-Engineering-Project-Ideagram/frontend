@@ -1,9 +1,8 @@
-import React from "react";
+import { React, useState, useEffect, useContext } from "react";
 import classes from "./EditIdea.module.scss";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import SelectImage from "../../images/selectImage.png";
 import ArtLabel from "../../images/ArtLabel.png";
@@ -18,14 +17,73 @@ import Next from "../../images/next.png";
 import Apply from "../../images/apply.png";
 import Previous from "../../images/prev.png";
 import AttachFile from "../../images/attachFile.png";
-import BlackPrev from "../../images/blackPrev.png";
-import BlackNext from "../../images/blackNext.png";
 import { UploadedFile } from "../../components";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../../api/AuthContext";
 
 const steps = ["1.primary Information", "2.Description", "3.Attached Files"];
 
 const CreateIdea = () => {
+  const token = useContext(AuthContext).getAccessToken();
+  console.log(token);
+
   const [activeStep, setActiveStep] = useState(0);
+  const location = useLocation();
+  console.log(location.state);
+
+  const [ideaImage, setIdeaImage] = useState(null);
+  const [ideaTitle, setIdeaTitle] = useState("");
+  const [ideaGoal, setIdeaGoal] = useState("");
+  const [ideaAbstraction, setIdeaAbstraction] = useState("");
+  const [isArts, setIsArts] = useState(false);
+  const [isGames, setIsGames] = useState(false);
+  const [isDesignTech, setIsDesignTech] = useState(false);
+  const [isFoodCraft, setIsFoodCraft] = useState(false);
+  const [isFilms, setIsFilms] = useState(false);
+  const [isMusics, setIsMusics] = useState(false);
+  const [isPublishing, setIsPublishing] = useState(false);
+  const [isScience, setIsScience] = useState(false);
+  const [showLikes, setShowLikes] = useState(false);
+  const [showViews, setShowViews] = useState(false);
+  const [showComments, setShowComments] = useState(false);
+  const [ideaDescription, setIdeaDescription] = useState("");
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const res = await axios.get(
+          `http://api.iwantnet.space:8001/api/idea/detail/${location.state.uuid}`,
+
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        console.log(res);
+        setIdeaImage(res.data.image);
+        setIdeaTitle(res.data.title);
+        setIdeaGoal(res.data.goal);
+        setIdeaAbstraction(res.data.abstract);
+        setIsArts(res.data.classification.includes("art"));
+        setIsGames(res.data.classification.includes("games"));
+        setIsScience(res.data.classification.includes("science"));
+        setIsPublishing(res.data.classification.includes("publishing"));
+        setIsFilms(res.data.classification.includes("films"));
+        setIsFoodCraft(res.data.classification.includes("food-craft"));
+        setIsDesignTech(res.data.classification.includes("tech"));
+        setIsMusics(res.data.classification.includes("music"));
+        setShowLikes(res.data.show_likes);
+        setShowViews(res.data.show_views);
+        setShowComments(res.data.show_comments);
+        setIdeaDescription(res.data.description);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUserData();
+  }, []);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -61,23 +119,50 @@ const CreateIdea = () => {
           <div className={classes.newIdeaInfo}>
             <div className={classes.ideaDetails}>
               <div className={classes.selectIdeaImage}>
-                <input id="selectIdeaImage" type="file" accept="image/*" />
+                <input
+                  id="selectIdeaImage"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    setIdeaImage(e.target.files[0]);
+                  }}
+                />
                 <label for="selectIdeaImage">
-                  <img src={SelectImage} alt="Select_Image" />
+                  <img
+                    src={ideaImage === null ? SelectImage : ideaImage}
+                    alt="Select_Image"
+                  />
                 </label>
               </div>
               <div className={classes.enterIdeaDetails}>
                 <div>
                   <label>Title</label>
-                  <input type="text" />
+                  <input
+                    type="text"
+                    value={ideaTitle}
+                    onChange={(e) => {
+                      setIdeaTitle(e.target.value);
+                    }}
+                  />
                 </div>
                 <div>
                   <label>Goals</label>
-                  <input type="text" />
+                  <input
+                    type="text"
+                    value={ideaGoal}
+                    onChange={(e) => {
+                      setIdeaGoal(e.target.value);
+                    }}
+                  />
                 </div>
                 <div>
                   <label>Abstract</label>
-                  <textarea />
+                  <textarea
+                    value={ideaAbstraction}
+                    onChange={(e) => {
+                      setIdeaAbstraction(e.target.value);
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -86,7 +171,7 @@ const CreateIdea = () => {
               <p>Labels</p>
               <div className={classes.labels}>
                 <div>
-                  <input id="artLabel" type="checkbox" />
+                  <input id="artLabel" type="checkbox" checked />
                   <label for="artLabel">
                     <img src={ArtLabel} alt="Art" />
                     Arts
@@ -242,75 +327,67 @@ const CreateIdea = () => {
                     />
                   </button>
                 </div>
-                <div className={classes.uploadedFilesListContainer}>
-                  {/* <button className={classes.attach}>
-                    <img src={BlackPrev} alt="prev_uploaded_file" />
-                  </button> */}
-                  <div className={classes.uploadedFilesList}>
-                    <UploadedFile
-                      type="doc"
-                      fileName="first"
-                      downloadOrDelete="delete"
-                    />
-                    <UploadedFile
-                      type="pdf"
-                      fileName="sec"
-                      downloadOrDelete="delete"
-                    />
-                    <UploadedFile
-                      type="png"
-                      fileName="third"
-                      downloadOrDelete="delete"
-                    />
-                    <UploadedFile
-                      type="jpg"
-                      fileName="fourth"
-                      downloadOrDelete="delete"
-                    />
-                    <UploadedFile
-                      type="pptx"
-                      fileName="fifth"
-                      downloadOrDelete="delete"
-                    />
-                    <UploadedFile
-                      type="pdf"
-                      fileName="sixth"
-                      downloadOrDelete="delete"
-                    />
-                    <UploadedFile
-                      type="doc"
-                      fileName="first"
-                      downloadOrDelete="delete"
-                    />
-                    <UploadedFile
-                      type="pdf"
-                      fileName="sec"
-                      downloadOrDelete="delete"
-                    />
-                    <UploadedFile
-                      type="png"
-                      fileName="third"
-                      downloadOrDelete="delete"
-                    />
-                    <UploadedFile
-                      type="jpg"
-                      fileName="fourth"
-                      downloadOrDelete="delete"
-                    />
-                    <UploadedFile
-                      type="pptx"
-                      fileName="fifth"
-                      downloadOrDelete="delete"
-                    />
-                    <UploadedFile
-                      type="pdf"
-                      fileName="sixth"
-                      downloadOrDelete="delete"
-                    />
-                  </div>
-                  {/* <button onClick={showNextFiles}>
-                    <img src={BlackNext} alt="next_uploaded_file" />
-                  </button> */}
+                <div className={classes.uploadedFilesList}>
+                  <UploadedFile
+                    type="doc"
+                    fileName="first"
+                    downloadOrDelete="delete"
+                  />
+                  <UploadedFile
+                    type="pdf"
+                    fileName="sec"
+                    downloadOrDelete="delete"
+                  />
+                  <UploadedFile
+                    type="png"
+                    fileName="third"
+                    downloadOrDelete="delete"
+                  />
+                  <UploadedFile
+                    type="jpg"
+                    fileName="fourth"
+                    downloadOrDelete="delete"
+                  />
+                  <UploadedFile
+                    type="pptx"
+                    fileName="fifth"
+                    downloadOrDelete="delete"
+                  />
+                  <UploadedFile
+                    type="pdf"
+                    fileName="sixth"
+                    downloadOrDelete="delete"
+                  />
+                  <UploadedFile
+                    type="doc"
+                    fileName="first"
+                    downloadOrDelete="delete"
+                  />
+                  <UploadedFile
+                    type="pdf"
+                    fileName="sec"
+                    downloadOrDelete="delete"
+                  />
+                  <UploadedFile
+                    type="png"
+                    fileName="third"
+                    downloadOrDelete="delete"
+                  />
+                  <UploadedFile
+                    type="jpg"
+                    fileName="fourth"
+                    downloadOrDelete="delete"
+                  />
+                  <UploadedFile
+                    type="pptx"
+                    fileName="fifth"
+                    downloadOrDelete="delete"
+                  />
+                  <UploadedFile
+                    type="pdf"
+                    fileName="sixth"
+                    downloadOrDelete="delete"
+                  />
                 </div>
               </div>
             </div>
