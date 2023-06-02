@@ -22,6 +22,19 @@ const financialStepsSlice = createSlice({
         console.log(state.financialSteps);
       }
     },
+    deleteFinancialStep(state, action) {
+      const newItem = action.payload;
+      const existingItem = state.financialSteps.find(
+        (item) => item.uuid === newItem.uuid
+      );
+
+      if (existingItem) {
+        state.financialStepsNum--;
+        state.financialSteps = state.financialSteps.filter(
+          (task) => task.uuid !== newItem.uuid
+        );
+      }
+    },
   },
 });
 
