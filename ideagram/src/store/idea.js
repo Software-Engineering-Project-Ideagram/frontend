@@ -34,6 +34,12 @@ const ideasSlice = createSlice({
         state.ideas = state.ideas.filter((task) => task.uuid !== newItem.uuid);
       }
     },
+    
+    deleteAllIdeas(state, action) {
+      state.ideas = [];
+      state.ideasNum = 0;
+    },
+    
     editIdea(state, action) {
       const newItem = action.payload;
       const existingItem = state.ideas.find(
