@@ -1,0 +1,27 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const attachedFilesSlice = createSlice({
+  name: "attachedFiles",
+  initialState: { attachedFiles: [], attachedFilesNum: 0 },
+  reducers: {
+    addAttachedFiles(state, action) {
+      const newItem = action.payload;
+      const existingItem = state.attachedFiles.find(
+        (item) => item.uuid === newItem.uuid
+      );
+
+      if (!existingItem) {
+        state.attachedFilesNum++;
+        state.attachedFiles.push({
+          uuid: newItem.uuid,
+          name: newItem.name,
+          type: newItem.type,
+        });
+      }
+    },
+  },
+});
+
+export const attachedFilesActions = attachedFilesSlice.actions;
+
+export const attachedFilesReducer = attachedFilesSlice.reducer;
