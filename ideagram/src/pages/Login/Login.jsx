@@ -3,6 +3,7 @@ import classes from "./Login.module.scss";
 import ForgotPasswordIMG from "../../images/advertisment.png";
 import Next from "../../images/next.png";
 import AuthContext from "../../api/AuthContext";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -26,7 +27,7 @@ const Login = () => {
         <img src={ForgotPasswordIMG} alt="Forgot_Password_IMG" />
         <div className={classes.steps}>
           <div className={classes.step1}>
-            <div>
+            <div className={classes.enterData}>
               <label>Username</label>
               <input
                 type="text"
@@ -35,7 +36,7 @@ const Login = () => {
                 }}
               />
             </div>
-            <div>
+            <div className={classes.enterData}>
               <label>Password</label>
               <input
                 type="password"
@@ -53,6 +54,12 @@ const Login = () => {
               <img src={Next} alt="login" />
               Login
             </button>
+            <div className={classes.goToCreateAccount}>
+              Don't have an account?
+              <Link to="/createAccount" className={classes.btn}>
+                Create Account
+              </Link>
+            </div>
           </div>
         </div>
       </div>

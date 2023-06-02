@@ -1,17 +1,13 @@
-import { React, useContext, useEffect } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import classes from "./Profile.module.scss";
 import UserProfile from "../../images/user (2).png";
 import Next from "../../images/next.png";
 import Previous from "../../images/prev.png";
-import { useState } from "react";
 import AuthContext from "../../api/AuthContext";
 import axios from "axios";
 import UserSocialMediaLink from "../UserSocialMediaLink/UserScocialMediaLink";
 
-const Profile = () => {
-  const token = useContext(AuthContext).getAccessToken();
-  console.log(token);
-
+const Profile = ({ token }) => {
   const [nextPage, setNextPage] = useState("first");
   const [userProfile, setUserProfile] = useState(null);
   const [userFirstName, setUserFirstName] = useState(null);

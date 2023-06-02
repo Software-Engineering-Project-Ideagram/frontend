@@ -4,6 +4,7 @@ import ForgotPasswordIMG from "../../images/advertisment.png";
 import SignUp from "../../images/SignUp.png";
 import AuthContext from "../../api/AuthContext";
 import PasswordChecklist from "react-password-checklist";
+import { Link } from "react-router-dom";
 
 const CreateAccount = () => {
   const { register } = useContext(AuthContext);
@@ -46,7 +47,7 @@ const CreateAccount = () => {
         <img src={ForgotPasswordIMG} alt="Forgot_Password_IMG" />
         <div className={classes.steps}>
           <div className={classes.step1}>
-            <div>
+            <div className={classes.enterData}>
               <label>Username</label>
               <input
                 type="text"
@@ -55,7 +56,7 @@ const CreateAccount = () => {
                 }}
               />
             </div>
-            <div>
+            <div className={classes.enterData}>
               <label>Email</label>
               <input
                 type="email"
@@ -64,7 +65,7 @@ const CreateAccount = () => {
                 }}
               />
             </div>
-            <div>
+            <div className={classes.enterData}>
               <label>Password</label>
               <input
                 type="password"
@@ -91,6 +92,12 @@ const CreateAccount = () => {
               <img src={SignUp} alt="sign_up" />
               Sign Up
             </button>
+            <div className={classes.goToLogin}>
+              Have an account?
+              <Link to="/login" className={classes.btn}>
+                Login
+              </Link>
+            </div>
           </div>
         </div>
       </div>

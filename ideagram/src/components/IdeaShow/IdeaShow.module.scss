@@ -30,8 +30,8 @@
           width: 30rem;
           height: 10rem;
           display: flex;
-          gap: 1rem;
-          justify-content: space-between;
+          gap: 3rem;
+          justify-content: flex-start;
           font-family: Rubik, sans-serif;
 
           @media (max-width: 575.98px) {
@@ -168,7 +168,7 @@
           gap: 0.5rem;
           color: black;
           font-family: Montserrat, sans-serif;
-          background-color: #4ad295;
+          background-color: #2a5c9f;
           padding: 0.5rem 1rem;
           border-radius: 0.3rem;
         }
@@ -239,7 +239,7 @@
 
           button {
             flex: 1;
-            background-color: #4ad295;
+            background-color: #2a5c9f;
             border: none;
             outline: none;
             padding: 0.2rem 1rem;
@@ -420,7 +420,7 @@
         border: none;
         outline: none;
         border-radius: 0.3rem;
-        background-color: #4ad295;
+        background-color: #2a5c9f;
         color: white;
         display: flex;
         align-items: center;

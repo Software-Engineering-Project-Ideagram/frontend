@@ -1,27 +1,61 @@
-import { React, useState, useContext } from "react";
+import { React, useState, useEffect } from "react";
 import classes from "./CollaborationRequest.module.scss";
 import Add from "../../images/add.png";
 import CollaborationRequestElement from "../Elements/CollaborationRequestElement/CollaborationRequestElement";
 import { useDispatch, useSelector } from "react-redux";
 import { collaborationRequestsActions } from "../../store/collaborationRequest";
 import axios from "axios";
-import AuthContext from "../../api/AuthContext";
 
-const CollaborationRequest = () => {
-  const token = useContext(AuthContext).getAccessToken();
-  console.log(token);
-
+const CollaborationRequest = ({ uuid, token }) => {
   const dispatch = useDispatch();
-  const requests = useSelector((state) => state.report.reports);
-  const requestsNum = useSelector((state) => state.report.reportsNum);
+  const requests = useSelector(
+    (state) => state.collaborationRequests.collaborationRequests
+  );
+  const requestsNum = useSelector(
+    (state) => state.collaborationRequests.collaborationRequestsNum
+  );
 
   const [jobTitle, setJobTitle] = useState("");
   const [skills, setSkills] = useState("");
   const [education, setEducation] = useState("");
   const [age, setAge] = useState("");
   const [salary, setSalary] = useState("");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("full_time");
   const [description, setDescription] = useState("");
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const res = await axios.get(
+          `http://api.iwantnet.space:8001/api/idea/collaboration/${uuid}`,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        console.log(res);
+        dispatch(collaborationRequestsActions.deleteAll());
+        for (const req of res.data) {
+          dispatch(
+            collaborationRequestsActions.addCollaborationRequest({
+              uuid: req.uuid,
+              jobTitle: req.title,
+              skills: req.skills,
+              education: req.education,
+              age: req.age,
+              salary: req.salary,
+              status: req.status,
+              description: req.description,
+            })
+          );
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUserData();
+  }, []);
 
   const addRequest = async () => {
     if (
@@ -35,30 +69,49 @@ const CollaborationRequest = () => {
       description !== ""
     ) {
       try {
-        // const res = await axios.post(
-        //   "http://api.iwantnet.space:8001/api/user/social-media/",
-        //   {
-        //     type: userMediaLinkTitle,
-        //     link: userMediaLinkDetails,
-        //   },
-        //   {
-        //     headers: {
-        //       Authorization: "Bearer " + token,
-        //       "Content-Type": "multipart/form-data",
-        //     },
-        //   }
-        // );
-        // console.log(res);
-        // dispatch(
-        //   userMediaLinksActions.addUserMediaLink({
-        //     uuid: res.data.uuid,
-        //     title: res.data.type,
-        //     details: res.data.link,
-        //   })
-        // );
+        const res = await axios.post(
+          `http://api.iwantnet.space:8001/api/idea/collaboration/${uuid}`,
+          {
+            title: jobTitle,
+            status: status,
+            skills: skills,
+            age: age,
+            education: education,
+            description: description,
+            salary: salary,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        console.log(res);
+        dispatch(
+          collaborationRequestsActions.addCollaborationRequest({
+            uuid: res.data.uuid,
+            jobTitle: res.data.title,
+            skills: res.data.skills,
+            education: res.data.education,
+            age: res.data.age,
+            salary: res.data.salary,
+            status: res.data.status,
+            description: res.data.description,
+          })
+        );
+        console.log(requests);
+        setJobTitle("");
+        setSkills("");
+        setEducation("");
+        setAge("");
+        setSalary("");
+        setStatus("full_time");
+        setDescription("");
       } catch (err) {
         console.log(err);
       }
+    } else {
+      alert("Please fill the fields properly");
     }
   };
 
@@ -105,7 +158,8 @@ const CollaborationRequest = () => {
               <div>
                 <label>Age</label>
                 <input
-                  type="text"
+                  type="number"
+                  min={0}
                   className={classes.short}
                   value={age}
                   onChange={(e) => {
@@ -116,7 +170,8 @@ const CollaborationRequest = () => {
               <div>
                 <label>Salary</label>
                 <input
-                  type="text"
+                  type="number"
+                  min={0}
                   className={classes.short}
                   value={salary}
                   onChange={(e) => {
@@ -126,14 +181,18 @@ const CollaborationRequest = () => {
               </div>
               <div>
                 <label>Status</label>
-                <input
-                  type="text"
-                  className={classes.short}
-                  value={status}
+                <select
+                  name="status"
                   onChange={(e) => {
                     setStatus(e.target.value);
                   }}
-                />
+                >
+                  <option value="full_time" selected>
+                    Full-Time
+                  </option>
+                  <option value="part_time">Part-Time</option>
+                  <option value="other">Other</option>
+                </select>
               </div>
               <div>
                 <label>Description</label>
@@ -150,21 +209,37 @@ const CollaborationRequest = () => {
               </button>
             </div>
           </div>
-          <div className={classes.collaborations}>
-            <h3>Collaborators Table</h3>
-            <div className={classes.collaborationData}>
-              <div className={classes.collaborationsList}>
-                {requests.map((item, index) => (
-                  <CollaborationRequestElement
-                    key={index}
-                    uuid={item.uuid}
-                    amount={1}
-                    title={item.jobTitle}
-                  />
-                ))}
+          {requestsNum !== 0 && (
+            <div className={classes.collaborations}>
+              <h3>Collaborators Table</h3>
+              <div className={classes.collaborationData}>
+                <div className={classes.collaborationsList}>
+                  {requests.map((item, index) => (
+                    <CollaborationRequestElement
+                      key={index}
+                      uuid={item.uuid}
+                      amount={index + 1}
+                      token={token}
+                      jobTitle={item.jobTitle}
+                      skills={item.skills}
+                      education={item.education}
+                      age={item.age}
+                      salary={item.salary}
+                      status={item.status}
+                      description={item.description}
+                      setJobTitle={setJobTitle}
+                      setSkills={setSkills}
+                      setEducation={setEducation}
+                      setAge={setAge}
+                      setSalary={setSalary}
+                      setStatus={setStatus}
+                      setDescription={setDescription}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useContext } from "react";
 import classes from "./ProfileStructure.module.scss";
 import MyProfile from "../../images/MyProfile.png";
 import CreateIdeaIMG from "../../images/CreateIdea.png";
@@ -18,8 +18,12 @@ import {
   SavedIdeas,
   CreateIdea,
 } from "../../components";
+import AuthContext from "../../api/AuthContext";
 
 const ProfileStructure = () => {
+  const token = useContext(AuthContext).getAccessToken();
+  console.log(token);
+
   const location = useLocation();
   console.log(location.pathname);
   const url =
@@ -71,13 +75,13 @@ const ProfileStructure = () => {
       <div className={classes.main}>
         {
           {
-            profile: <Profile />,
-            createIdea: <CreateIdea />,
-            myIdeas: <MyIdeas />,
-            savedIdeas: <SavedIdeas />,
-            followers: <Followers />,
-            followings: <Followings />,
-            editProfile: <EditProfile />,
+            profile: <Profile token={token} />,
+            createIdea: <CreateIdea token={token} />,
+            myIdeas: <MyIdeas token={token} />,
+            savedIdeas: <SavedIdeas token={token} />,
+            followers: <Followers token={token} />,
+            followings: <Followings token={token} />,
+            editProfile: <EditProfile token={token} />,
           }[url]
         }
       </div>

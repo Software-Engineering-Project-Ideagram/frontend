@@ -1,4 +1,4 @@
-import { React, useState, useContext } from "react";
+import { React, useState } from "react";
 import classes from "./CreateIdea.module.scss";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -17,17 +17,22 @@ import Next from "../../images/next.png";
 import Apply from "../../images/apply.png";
 import Previous from "../../images/prev.png";
 import AttachFile from "../../images/attachFile.png";
-import BlackPrev from "../../images/blackPrev.png";
-import BlackNext from "../../images/blackNext.png";
 import { UploadedFile } from "../../components";
 import axios from "axios";
-import AuthContext from "../../api/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { attachedFilesActions } from "../../store/attachedFilesForIdea";
+import { CircularProgress } from "@mui/material";
 
 const steps = ["1.primary Information", "2.Description", "3.Attached Files"];
 
-const CreateIdea = () => {
-  const token = useContext(AuthContext).getAccessToken();
-  console.log(token);
+const CreateIdea = ({ token }) => {
+  const dispatch = useDispatch();
+  const attachedFiles = useSelector(
+    (state) => state.attachedFiles.attachedFiles
+  );
+  const attachedFilesNum = useSelector(
+    (state) => state.attachedFiles.attachedFilesNum
+  );
 
   const [ideaImageDisplay, setIdeaImageDisplay] = useState(SelectImage);
   const [ideaImage, setIdeaImage] = useState(null);
@@ -46,6 +51,8 @@ const CreateIdea = () => {
   const [showViews, setShowViews] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [ideaDescription, setIdeaDescription] = useState("");
+  const [ideaUuid, setIdeaUuid] = useState("");
+  const [isFileUploaded, setIsFileUploaded] = useState(true);
 
   const [activeStep, setActiveStep] = useState(0);
 
@@ -63,9 +70,47 @@ const CreateIdea = () => {
     setIdeaImageDisplay(URL.createObjectURL(e.target.files[0]));
   };
 
-  const createNewIdea = async (e) => {
-    e.preventDefault();
+  const uploadAttachFile = async (e) => {
+    if (ideaUuid !== "") {
+      console.log(e.target.files[0]);
+      const selectedFile = e.target.files[0];
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+      try {
+        setIsFileUploaded(false);
+        console.log(ideaUuid);
+        const res = await axios.post(
+          `http://api.iwantnet.space:8001/api/idea/attachment/${ideaUuid}`,
+          formData,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log(res);
+        dispatch(
+          attachedFilesActions.addAttachedFiles({
+            uuid: res.data.uuid,
+            name: selectedFile.name,
+          })
+        );
+        setIsFileUploaded(true);
+      } catch (e) {
+        setIsFileUploaded(true);
+        alert("Couldn't upload file");
+        console.log(e);
+      }
+    } else {
+      alert("Please enter all information about idea");
+    }
+  };
+
+  const createNewIdea = async () => {
+    dispatch(attachedFilesActions.deleteAllAttachedFiles());
     const formData = new FormData();
+    isFilms && formData.append("classification", "films");
     isScience && formData.append("classification", "science");
     isPublishing && formData.append("classification", "publishing");
     isMusics && formData.append("classification", "music");
@@ -102,6 +147,7 @@ const CreateIdea = () => {
         }
       );
       console.log(res);
+      setIdeaUuid(res.data.uuid);
     } catch (err) {
       console.log(err);
     }
@@ -377,6 +423,10 @@ const CreateIdea = () => {
                 <img src={Previous} alt="previous" />
                 Previous
               </button>
+              <button onClick={createNewIdea}>
+                <img src={Apply} alt="apply" />
+                Apply
+              </button>
               <button onClick={handleNext}>
                 <img src={Next} alt="next" />
                 Next
@@ -391,97 +441,42 @@ const CreateIdea = () => {
               <h3>Attach Files</h3>
               <div className={classes.manageUploadedFiles}>
                 <div className={classes.attachFile}>
-                  <button>
-                    <img src={AttachFile} alt="attach_files" />
-                    <label for="AttachFile">Attach</label>
-                    <input
-                      type="file"
-                      id="AttachFile"
-                      onChange={handleUploadedFile}
-                    />
-                  </button>
+                  {isFileUploaded ? (
+                    <button>
+                      <img src={AttachFile} alt="attach_files" />
+                      <label for="AttachFile">Attach</label>
+                      <input
+                        type="file"
+                        id="AttachFile"
+                        onChange={uploadAttachFile}
+                      />
+                    </button>
+                  ) : (
+                    <CircularProgress />
+                  )}
                 </div>
-                {/* <div className={classes.uploadedFilesListContainer}> */}
-                {/* <button className={classes.attach}>
-                    <img src={BlackPrev} alt="prev_uploaded_file" />
-                  </button> */}
-                <div className={classes.uploadedFilesList}>
-                  <UploadedFile
-                    type="doc"
-                    fileName="first"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="pdf"
-                    fileName="sec"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="png"
-                    fileName="third"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="jpg"
-                    fileName="fourth"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="pptx"
-                    fileName="fifth"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="pdf"
-                    fileName="sixth"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="doc"
-                    fileName="first"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="pdf"
-                    fileName="sec"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="png"
-                    fileName="third"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="jpg"
-                    fileName="fourth"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="pptx"
-                    fileName="fifth"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="pdf"
-                    fileName="sixth"
-                    downloadOrDelete="delete"
-                  />
-                </div>
-                {/* <button onClick={showNextFiles}>
-                    <img src={BlackNext} alt="next_uploaded_file" />
-                  </button> */}
+
+                {attachedFilesNum !== 0 && (
+                  <div className={classes.uploadedFilesList}>
+                    {attachedFiles.map((item, index) => (
+                      <UploadedFile
+                        key={index}
+                        token={token}
+                        uuid={item.uuid}
+                        type={item.name.split(".")[1]}
+                        fileName={item.name}
+                        downloadOrDelete="delete"
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
-            {/* </div> */}
 
             <div className={classes.uploadedFilesOptions}>
               <button onClick={handleBack}>
                 <img src={Previous} alt="previous" />
                 Previous
-              </button>
-              <button onClick={createNewIdea}>
-                <img src={Apply} alt="apply" />
-                Apply
               </button>
             </div>
           </div>

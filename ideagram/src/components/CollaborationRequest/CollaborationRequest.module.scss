@@ -3,7 +3,7 @@
   height: 100%;
   display: flex;
   align-items: flex-start;
-  background-color: #eeeeee;
+  background-color: #d3d3d3;
 
   .body {
     flex: 5;
@@ -85,6 +85,24 @@
               }
             }
 
+            select {
+              width: 20%;
+              height: 2rem;
+              border: 1px solid #303030;
+              border-radius: 0.2rem;
+              outline: none;
+              padding: 0.2rem 0.5rem;
+
+              @media (max-width: 575.98px) {
+                width: 100%;
+              }
+
+              &:focus {
+                border: 1px solid #303030;
+                outline: none;
+              }
+            }
+
             textarea {
               height: 4rem;
             }
@@ -100,7 +118,7 @@
           border: none;
           outline: none;
           padding: 0.3rem 0.5rem;
-          background-color: #4ad295;
+          background-color: #2a5c9f;
           width: 70%;
           margin-left: 7rem;
           border-radius: 0.2rem;

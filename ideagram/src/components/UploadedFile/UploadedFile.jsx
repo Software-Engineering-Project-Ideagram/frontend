@@ -4,10 +4,37 @@ import pdfFile from "../../images/pdfFile.png";
 import jpgFile from "../../images/jpgFile.png";
 import pptxFile from "../../images/pptxFile.png";
 import docFile from "../../images/docFile.png";
-import deleteFile from "../../images/delete.png";
+import DeleteFile from "../../images/delete.png";
 import downloadFile from "../../images/downloadIcon.png";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { attachedFilesActions } from "../../store/attachedFilesForIdea";
 
-const UploadedFile = ({ type, fileName, downloadOrDelete }) => {
+const UploadedFile = ({ uuid, token, type, fileName, downloadOrDelete }) => {
+  const dispatch = useDispatch();
+
+  const deleteFile = async () => {
+    try {
+      const res = await axios.delete(
+        `http://api.iwantnet.space:8001/api/idea/attachment/detail/${uuid}`,
+
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      console.log(res);
+      dispatch(
+        attachedFilesActions.deleteAttachedFiles({
+          uuid: uuid,
+        })
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.deleteDownloadFile}>
@@ -18,8 +45,8 @@ const UploadedFile = ({ type, fileName, downloadOrDelete }) => {
           </button>
         )}
         {downloadOrDelete === "delete" && (
-          <button className={classes.delete}>
-            <img src={deleteFile} alt="delete_file" />
+          <button className={classes.delete} onClick={deleteFile}>
+            <img src={DeleteFile} alt="delete_file" />
             Delete
           </button>
         )}
@@ -37,7 +64,7 @@ const UploadedFile = ({ type, fileName, downloadOrDelete }) => {
             doc: <img src={docFile} alt="docFile" />,
           }[type]
         }
-        <h3>{`${fileName}.${type}`}</h3>
+        <h3>{fileName}</h3>
       </div>
     </div>
   );

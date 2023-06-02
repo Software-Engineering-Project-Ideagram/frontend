@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useContext, useEffect } from "react";
 import classes from "./Header.module.scss";
 import Login from "../../images/login.png";
 import Search from "../../images/search.png";
@@ -6,13 +6,13 @@ import Home from "../../images/home.png";
 import User from "../../images/user.png";
 import OptionsMenu from "../../images/userIcon.png";
 import Menu from "../../images/burger-menu.png";
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
+import AuthContext from "../../api/AuthContext";
+import axios from "axios";
 import { Skeleton } from "../";
 import {
   MainPageSmallMenu,
   SmallOptionsMenu,
-  IdeaDevelopmentMenu,
   UserFeedbackSmallMenu,
   ProfileStructureSmallMenu,
   IdeaStructureSmallMenu,
@@ -20,12 +20,39 @@ import {
 } from "../SmallMenus";
 
 const Header = () => {
+  const token = useContext(AuthContext).getAccessToken();
+  console.log(token);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [isShowOptionsMenu, setIsShowOptionsMenu] = useState(false);
 
   const location = useLocation();
   const url = location.pathname.split("/")[1];
+
+  const [userProfile, setUserProfile] = useState(null);
+  const [userName, setUserName] = useState(null);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const res = await axios.get(
+          "http://api.iwantnet.space:8001/api/user/profile/",
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        console.log(res);
+        setUserProfile(res.data.profile_image);
+        setUserName(res.data.username);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUserData();
+  }, []);
 
   const showMenuHandler = () => {
     setIsShowOptionsMenu(false);
@@ -53,19 +80,19 @@ const Header = () => {
           />
         </div>
         <div>
-          <button>
+          <Link className={classes.btn} to="/login">
             <img src={Login} alt="login" />
-          </button>
+          </Link>
         </div>
         <div>
-          <button>
+          <button className={classes.btn}>
             <img src={Search} alt="search" />
           </button>
         </div>
         <div>
-          <button>
+          <Link className={classes.btn} to="/mainPage">
             <img src={Home} alt="home" />
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -77,25 +104,25 @@ const Header = () => {
         <Skeleton type="Toolbar" />
       ) : (
         <div className={classes.userInfo}>
-          <div className={classes.account}>
-            <h4>Account</h4>
-          </div>
-          <div className={classes.profile}>
-            <img src={User} alt="user" />
-          </div>
+          <Link to="/profileStructure/profile" className={classes.account}>
+            <h4>{userName}</h4>
+          </Link>
+          <Link to="/profileStructure/profile" className={classes.profile}>
+            <img
+              src={
+                userProfile === null
+                  ? User
+                  : `http://api.iwantnet.space:8001${userProfile}`
+              }
+              alt="user"
+            />
+          </Link>
           <div className={classes.smallMenu}>
             <button className={classes.showMenuBTN} onClick={showMenuHandler}>
               <img src={Menu} alt="menu" />
             </button>
             {url === "mainPage" && (
               <MainPageSmallMenu
-                showMenuHandler={showMenuHandler}
-                isShowMenu={isShowMenu}
-              />
-            )}
-
-            {url === "evolutionStep" && (
-              <IdeaDevelopmentMenu
                 showMenuHandler={showMenuHandler}
                 isShowMenu={isShowMenu}
               />

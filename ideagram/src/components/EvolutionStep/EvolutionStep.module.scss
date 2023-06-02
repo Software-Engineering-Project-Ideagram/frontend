@@ -3,7 +3,7 @@
   height: 100%;
   display: flex;
   align-items: flex-start;
-  background-color: #eeeeee;
+  background-color: #d3d3d3;
 
   .body {
     flex: 5;
@@ -52,7 +52,7 @@
           gap: 0.5rem;
           width: 100%;
 
-          div {
+          .enterData {
             display: flex;
             align-items: flex-start;
             justify-content: start;
@@ -68,8 +68,21 @@
               width: 7rem;
             }
 
-            input,
-            textarea {
+            .step {
+              border: 1px solid #303030;
+              outline: none;
+              border-radius: 0.2rem;
+              width: 70%;
+              height: 2rem;
+              padding: 0.2rem 0.5rem;
+
+              @media (max-width: 575.98px) {
+                width: 100%;
+              }
+            }
+
+            .desc {
+              height: 4rem;
               border: 1px solid #303030;
               outline: none;
               border-radius: 0.2rem;
@@ -81,12 +94,43 @@
               }
             }
 
-            input.short {
-              width: 20%;
+            .finishDate {
+              width: 6rem;
+              height: 2rem;
+              border: 1px solid #303030;
+              border-radius: 0.2rem;
+              outline: none;
+              padding: 0.2rem 0;
+              text-align: center;
+              margin-left: 0.9rem;
+
+              @media (max-width: 575.98px) {
+                margin: 0;
+              }
+
+              &:focus {
+                border: 1px solid #303030;
+                outline: none;
+              }
             }
 
-            textarea {
-              height: 4rem;
+            .priority {
+              width: 6rem;
+              height: 2rem;
+              border: 1px solid #303030;
+              border-radius: 0.2rem;
+              outline: none;
+              padding: 0.2rem 0;
+              text-align: center;
+
+              @media (max-width: 575.98px) {
+                margin: 0;
+              }
+
+              &:focus {
+                border: 1px solid #303030;
+                outline: none;
+              }
             }
           }
         }
@@ -100,7 +144,7 @@
           border: none;
           outline: none;
           padding: 0.3rem 0.5rem;
-          background-color: #4ad295;
+          background-color: #2a5c9f;
           width: 70%;
           margin-left: 7rem;
           border-radius: 0.2rem;
@@ -149,8 +193,8 @@
 
           .collaborationsList {
             width: fit-content;
-            height: 7rem;
-            max-height: 7rem;
+            height: 10rem;
+            max-height: 10rem;
             overflow: hidden;
             overflow-y: scroll;
 
@@ -173,35 +217,6 @@
 
             &::-webkit-scrollbar-thumb:hover {
               background: gray;
-            }
-          }
-
-          .add {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            color: white;
-            border: none;
-            outline: none;
-            padding: 0.3rem 0.5rem;
-            background-color: #4ad295;
-            width: 26rem;
-            border-radius: 0.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-
-            @media (max-width: 575.98px) {
-              width: 100%;
-            }
-
-            img {
-              width: 1rem;
-              height: 1rem;
-            }
-
-            &:hover {
-              background-color: #158854;
             }
           }
         }

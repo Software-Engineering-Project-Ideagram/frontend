@@ -6,13 +6,30 @@ import { useDispatch } from "react-redux";
 import { collaborationRequestsActions } from "../../../store/collaborationRequest";
 import axios from "axios";
 
-const CollaborationRequestElement = ({ uuid, amount, title, token }) => {
+const CollaborationRequestElement = ({
+  uuid,
+  token,
+  amount,
+  jobTitle,
+  skills,
+  education,
+  age,
+  salary,
+  status,
+  description,
+  setJobTitle,
+  setSkills,
+  setEducation,
+  setAge,
+  setSalary,
+  setStatus,
+  setDescription,
+}) => {
   const dispatch = useDispatch();
 
   const deleteRequestHandler = async () => {
     await axios.delete(
       `http://api.iwantnet.space:8001/api/idea/collaboration/detail/${uuid}`,
-
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -27,11 +44,22 @@ const CollaborationRequestElement = ({ uuid, amount, title, token }) => {
     );
   };
 
+  const manageEdit = async () => {
+    await deleteRequestHandler();
+    setJobTitle(jobTitle);
+    setSkills(skills);
+    setEducation(education);
+    setAge(age);
+    setSalary(salary);
+    setStatus(status);
+    setDescription(description);
+  };
+
   return (
     <div className={classes.container}>
       <p>{amount}</p>
-      <h4>{title}</h4>
-      <button>
+      <h4>{jobTitle}</h4>
+      <button onClick={manageEdit}>
         <img src={Edit} alt="Edit" />
       </button>
       <button onClick={deleteRequestHandler}>

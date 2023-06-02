@@ -9,14 +9,17 @@
   justify-content: center;
   border: 2px solid #303030;
   border-radius: 0.5rem;
-  background-color: #eeeeee;
+  background-color: #d3d3d3;
   place-self: center;
+  text-decoration: none;
+  color: black;
 
   // @media (max-width: 767.98px) {
   //   width: 75%;
   // }
 
   @media (max-width: 575.98px) {
+    height: 20rem;
     flex-direction: column-reverse;
   }
 
@@ -26,6 +29,10 @@
     padding: 0.2rem 0.5rem 0.4rem 0.5rem;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 575.98px) {
+      width: 100%;
+    }
 
     .ideaTitle {
       flex: 1;
@@ -40,19 +47,19 @@
 
       .title {
         font-size: 1rem;
-        // max-width: 10.5rem;
+        max-width: 10.5rem;
         width: 10.5rem;
         white-space: nowrap;
         text-overflow: clip;
-        // overflow: hidden;
-        // overflow-x: scroll;
+        overflow: hidden;
+        overflow-x: scroll;
 
-        // &::-webkit-scrollbar {
-        //   display: none;
-        // }
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
 
-      button {
+      .options {
         border: none;
         outline: none;
         padding: 0.2rem 0.5rem;
@@ -66,6 +73,7 @@
         gap: 0.3rem;
         transition: all 0.3s ease-in-out;
         font-size: 0.7rem;
+        text-decoration: none;
 
         &.saveIdea {
           background-color: #2a5c9f;
@@ -105,8 +113,8 @@
     }
 
     .ideaGoal {
-      flex: 1;
       width: 100%;
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -123,6 +131,19 @@
 
       @media (max-width: 575.98px) {
         margin: 0.9rem 0;
+      }
+
+      p {
+        max-width: 10rem;
+        width: 10rem;
+        white-space: nowrap;
+        text-overflow: clip;
+        overflow: hidden;
+        overflow-x: scroll;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
 
       button {

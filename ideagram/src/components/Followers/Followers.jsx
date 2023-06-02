@@ -4,10 +4,7 @@ import { UserAccount } from "..";
 import AuthContext from "../../api/AuthContext";
 import axios from "axios";
 
-const Followers = () => {
-  const token = useContext(AuthContext).getAccessToken();
-  console.log(token);
-
+const Followers = ({ token }) => {
   const [userUserName, setUserUserName] = useState("");
   const [userFollowers, setUserFollowers] = useState([]);
 

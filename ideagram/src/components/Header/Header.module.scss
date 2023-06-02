@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.2rem 1rem;
-  background-color: #041562;
+  background-color: #008080;
 
   div {
     display: flex;
@@ -15,10 +15,11 @@
 
     &.options {
       div {
-        button {
+        .btn {
           border: none;
           outline: none;
           background-color: transparent;
+          text-decoration: none;
         }
 
         @media (max-width: 991.98px) {
@@ -38,6 +39,7 @@
           border: none;
           outline: none;
           background: transparent;
+          cursor: pointer;
         }
       }
     }
@@ -46,6 +48,7 @@
       .account {
         font-family: Verdana, sans-serif;
         color: white;
+        text-decoration: none;
 
         @media (max-width: 991.98px) {
           display: none;
@@ -53,6 +56,14 @@
       }
 
       .profile {
+        text-decoration: none;
+
+        img {
+          width: 3rem;
+          height: 3rem;
+          border-radius: 50%;
+        }
+
         @media (max-width: 991.98px) {
           display: none;
         }

@@ -17,10 +17,7 @@ import { UserMediaLinkElement } from "../Elements";
 
 const steps = ["1.Personal Information", "2.Change Password", "3.Manage Links"];
 
-const EditProfile = () => {
-  const token = useContext(AuthContext).getAccessToken();
-  console.log(token);
-
+const EditProfile = ({ token }) => {
   const [mainUserName, setMainUserName] = useState("");
   const [selectedProfile, setUserSelectedProfile] = useState(null);
   const [userProfile, setUserProfile] = useState(null);

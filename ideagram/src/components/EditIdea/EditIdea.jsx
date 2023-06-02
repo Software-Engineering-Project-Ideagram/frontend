@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useContext } from "react";
+import { React, useState, useEffect } from "react";
 import classes from "./EditIdea.module.scss";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -18,19 +18,23 @@ import Apply from "../../images/apply.png";
 import Previous from "../../images/prev.png";
 import AttachFile from "../../images/attachFile.png";
 import { UploadedFile } from "../../components";
-import { useLocation } from "react-router-dom";
 import axios from "axios";
-import AuthContext from "../../api/AuthContext";
+import { attachedFilesActions } from "../../store/attachedFilesForIdea";
+import { useDispatch, useSelector } from "react-redux";
+import { CircularProgress } from "@mui/material";
 
 const steps = ["1.primary Information", "2.Description", "3.Attached Files"];
 
-const CreateIdea = () => {
-  const token = useContext(AuthContext).getAccessToken();
-  console.log(token);
+const CreateIdea = ({ uuid, token }) => {
+  const dispatch = useDispatch();
+  const attachedFiles = useSelector(
+    (state) => state.attachedFiles.attachedFiles
+  );
+  const attachedFilesNum = useSelector(
+    (state) => state.attachedFiles.attachedFilesNum
+  );
 
   const [activeStep, setActiveStep] = useState(0);
-  const location = useLocation();
-  console.log(location.state);
 
   const [ideaImage, setIdeaImage] = useState(null);
   const [ideaTitle, setIdeaTitle] = useState("");
@@ -49,11 +53,13 @@ const CreateIdea = () => {
   const [showComments, setShowComments] = useState(false);
   const [ideaDescription, setIdeaDescription] = useState("");
 
+  const [isFileUploaded, setIsFileUploaded] = useState(true);
+
   useEffect(() => {
     const getUserData = async () => {
       try {
         const res = await axios.get(
-          `http://api.iwantnet.space:8001/api/idea/detail/${location.state.uuid}`,
+          `http://api.iwantnet.space:8001/api/idea/detail/${uuid}`,
 
           {
             headers: {
@@ -62,7 +68,8 @@ const CreateIdea = () => {
           }
         );
         console.log(res);
-        setIdeaImage(res.data.image);
+        res.data.image !== null &&
+          setIdeaImage(`http://api.iwantnet.space:8001${res.data.image}`);
         setIdeaTitle(res.data.title);
         setIdeaGoal(res.data.goal);
         setIdeaAbstraction(res.data.abstract);
@@ -85,16 +92,116 @@ const CreateIdea = () => {
     getUserData();
   }, []);
 
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const res = await axios.get(
+          `http://api.iwantnet.space:8001/api/idea/attachment/${uuid}`,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        console.log(res);
+        attachedFilesActions.deleteAllAttachedFiles();
+        for (const item of res.data) {
+          dispatch(
+            attachedFilesActions.addAttachedFiles({
+              uuid: item.uuid,
+              name: item.file,
+            })
+          );
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getUserData();
+  }, []);
+
+  const setChangedData = async () => {
+    const formData = new FormData();
+    isFilms && formData.append("classification", "films");
+    isScience && formData.append("classification", "science");
+    isPublishing && formData.append("classification", "publishing");
+    isMusics && formData.append("classification", "music");
+    isGames && formData.append("classification", "games");
+    isFoodCraft && formData.append("classification", "food-craft");
+    isDesignTech && formData.append("classification", "tech");
+    isArts && formData.append("classification", "art");
+    formData.append("title", ideaTitle);
+    formData.append("goal", ideaGoal);
+    formData.append("abstract", ideaAbstraction);
+    formData.append("description", ideaDescription);
+    ideaImage !== null && formData.append("image", ideaImage);
+    formData.append("show_likes", showLikes);
+    formData.append("show_views", showViews);
+    formData.append("show_comments", showComments);
+
+    for (const value of formData.values()) {
+      console.log(value);
+    }
+
+    await changeIdea(formData);
+  };
+
+  const changeIdea = async (formData) => {
+    try {
+      const res = await axios.put(
+        `http://api.iwantnet.space:8001/api/idea/detail/${uuid}`,
+        formData,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const uploadAttachFile = async (e) => {
+    console.log(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    try {
+      setIsFileUploaded(false);
+      const res = await axios.post(
+        `http://api.iwantnet.space:8001/api/idea/attachment/${uuid}`,
+        formData,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(res);
+      dispatch(
+        attachedFilesActions.addAttachedFiles({
+          uuid: res.data.uuid,
+          name: selectedFile.name,
+        })
+      );
+      setIsFileUploaded(true);
+    } catch (e) {
+      setIsFileUploaded(true);
+      alert("Couldn't upload file");
+      console.log(e);
+    }
+  };
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleUploadedFile = (e) => {
-    console.log(e.target.files[0].type.split("/")[1]);
   };
 
   return (
@@ -129,7 +236,7 @@ const CreateIdea = () => {
                 />
                 <label for="selectIdeaImage">
                   <img
-                    src={ideaImage === null ? SelectImage : ideaImage}
+                    src={ideaImage === null ? SelectImage : { ideaImage }}
                     alt="Select_Image"
                   />
                 </label>
@@ -171,56 +278,112 @@ const CreateIdea = () => {
               <p>Labels</p>
               <div className={classes.labels}>
                 <div>
-                  <input id="artLabel" type="checkbox" checked />
+                  <input
+                    id="artLabel"
+                    type="checkbox"
+                    checked={isArts}
+                    onClick={() => {
+                      setIsArts(!isArts);
+                    }}
+                  />
                   <label for="artLabel">
                     <img src={ArtLabel} alt="Art" />
                     Arts
                   </label>
                 </div>
                 <div>
-                  <input type="checkbox" id="gameLabel" />
+                  <input
+                    type="checkbox"
+                    id="gameLabel"
+                    checked={isGames}
+                    onClick={() => {
+                      setIsGames(!isGames);
+                    }}
+                  />
                   <label for="gameLabel">
                     <img src={GamesLabel} alt="Games" />
                     Games
                   </label>
                 </div>
                 <div>
-                  <input id="designTechLabel" type="checkbox" />
+                  <input
+                    id="designTechLabel"
+                    type="checkbox"
+                    checked={isDesignTech}
+                    onClick={() => {
+                      setIsDesignTech(!isDesignTech);
+                    }}
+                  />
                   <label for="designTechLabel">
                     <img src={DesignTechLabel} alt="Design_Tech" />
-                    Design & Tech
+                    Tech
                   </label>
                 </div>
                 <div>
-                  <input id="foodLabel" type="checkbox" />
+                  <input
+                    id="foodLabel"
+                    type="checkbox"
+                    checked={isFoodCraft}
+                    onClick={() => {
+                      setIsFoodCraft(!isFoodCraft);
+                    }}
+                  />
                   <label for="foodLabel">
                     <img src={FoodCraftLabel} alt="Food_Craft" />
                     Food & Craft
                   </label>
                 </div>
                 <div>
-                  <input id="filmLabel" type="checkbox" />
+                  <input
+                    id="filmLabel"
+                    type="checkbox"
+                    checked={isFilms}
+                    onClick={() => {
+                      setIsFilms(!isFilms);
+                    }}
+                  />
                   <label for="filmLabel">
                     <img src={FilmsLabel} alt="Films" />
                     Films
                   </label>
                 </div>
                 <div>
-                  <input id="musicLabel" type="checkbox" />
+                  <input
+                    id="musicLabel"
+                    type="checkbox"
+                    checked={isMusics}
+                    onClick={() => {
+                      setIsMusics(!isMusics);
+                    }}
+                  />
                   <label for="musicLabel">
                     <img src={MusicLabel} alt="Music" />
                     Music
                   </label>
                 </div>
                 <div>
-                  <input id="publishingLabel" type="checkbox" />
+                  <input
+                    id="publishingLabel"
+                    type="checkbox"
+                    checked={isPublishing}
+                    onClick={() => {
+                      setIsPublishing(!isPublishing);
+                    }}
+                  />
                   <label for="publishingLabel">
                     <img src={PublishingLabel} alt="Publishing" />
                     Publishing
                   </label>
                 </div>
                 <div>
-                  <input id="scienceLabel" type="checkbox" />
+                  <input
+                    id="scienceLabel"
+                    type="checkbox"
+                    checked={isScience}
+                    onClick={() => {
+                      setIsScience(!isScience);
+                    }}
+                  />
                   <label for="scienceLabel">
                     <img src={ScienceLabel} alt="Science" />
                     Science
@@ -239,13 +402,29 @@ const CreateIdea = () => {
 
                   <label for="showLike" className={classes.filter}>
                     Show
-                    <input type="radio" id="showLike" name="Likes" />
+                    <input
+                      type="radio"
+                      id="showLike"
+                      name="Likes"
+                      checked={showLikes}
+                      onClick={() => {
+                        setShowLikes(true);
+                      }}
+                    />
                     <span className={classes.custom}></span>
                   </label>
 
                   <label for="hiddenLike" className={classes.filter}>
                     Hidden
-                    <input type="radio" id="hiddenLike" name="Likes" />
+                    <input
+                      type="radio"
+                      id="hiddenLike"
+                      name="Likes"
+                      checked={!showLikes}
+                      onClick={() => {
+                        setShowLikes(false);
+                      }}
+                    />
                     <span className={classes.custom}></span>
                   </label>
                 </div>
@@ -254,13 +433,29 @@ const CreateIdea = () => {
 
                   <label for="showView" className={classes.filter}>
                     Show
-                    <input type="radio" id="showView" name="Views" />
+                    <input
+                      type="radio"
+                      id="showView"
+                      name="Views"
+                      checked={showViews}
+                      onClick={() => {
+                        setShowViews(true);
+                      }}
+                    />
                     <span className={classes.custom}></span>
                   </label>
 
                   <label for="hiddenView" className={classes.filter}>
                     Hidden
-                    <input type="radio" id="hiddenView" name="Views" />
+                    <input
+                      type="radio"
+                      id="hiddenView"
+                      name="Views"
+                      checked={!showViews}
+                      onClick={() => {
+                        setShowViews(false);
+                      }}
+                    />
                     <span className={classes.custom}></span>
                   </label>
                 </div>
@@ -269,13 +464,29 @@ const CreateIdea = () => {
 
                   <label for="showComments" className={classes.filter}>
                     Show
-                    <input type="radio" id="showComments" name="Comments" />
+                    <input
+                      type="radio"
+                      id="showComments"
+                      name="Comments"
+                      checked={showComments}
+                      onClick={() => {
+                        setShowComments(true);
+                      }}
+                    />
                     <span className={classes.custom}></span>
                   </label>
 
                   <label for="hiddenComments" className={classes.filter}>
                     Hidden
-                    <input type="radio" id="hiddenComments" name="Comments" />
+                    <input
+                      type="radio"
+                      id="hiddenComments"
+                      name="Comments"
+                      checked={!showComments}
+                      onClick={() => {
+                        setShowComments(false);
+                      }}
+                    />
                     <span className={classes.custom}></span>
                   </label>
                 </div>
@@ -295,13 +506,22 @@ const CreateIdea = () => {
           <div className={classes.newIdeaDesc}>
             <div className={classes.ideaDesc}>
               <h3>Description</h3>
-              <textarea />
+              <textarea
+                value={ideaDescription}
+                onChange={(e) => {
+                  setIdeaDescription(e.target.value);
+                }}
+              />
             </div>
 
             <div className={classes.newIdeaOptions}>
               <button onClick={handleBack}>
                 <img src={Previous} alt="previous" />
                 Previous
+              </button>
+              <button onClick={setChangedData}>
+                <img src={Apply} alt="apply" />
+                Apply
               </button>
               <button onClick={handleNext}>
                 <img src={Next} alt="next" />
@@ -317,78 +537,35 @@ const CreateIdea = () => {
               <h3>Attach Files</h3>
               <div className={classes.manageUploadedFiles}>
                 <div className={classes.attachFile}>
-                  <button>
-                    <img src={AttachFile} alt="attach_files" />
-                    <label for="AttachFile">Attach</label>
-                    <input
-                      type="file"
-                      id="AttachFile"
-                      onChange={handleUploadedFile}
-                    />
-                  </button>
+                  {isFileUploaded ? (
+                    <button>
+                      <img src={AttachFile} alt="attach_files" />
+                      <label for="AttachFile">Attach</label>
+                      <input
+                        type="file"
+                        id="AttachFile"
+                        onChange={uploadAttachFile}
+                      />
+                    </button>
+                  ) : (
+                    <CircularProgress />
+                  )}
                 </div>
-                <div className={classes.uploadedFilesList}>
-                  <UploadedFile
-                    type="doc"
-                    fileName="first"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="pdf"
-                    fileName="sec"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="png"
-                    fileName="third"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="jpg"
-                    fileName="fourth"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="pptx"
-                    fileName="fifth"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="pdf"
-                    fileName="sixth"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="doc"
-                    fileName="first"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="pdf"
-                    fileName="sec"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="png"
-                    fileName="third"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="jpg"
-                    fileName="fourth"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="pptx"
-                    fileName="fifth"
-                    downloadOrDelete="delete"
-                  />
-                  <UploadedFile
-                    type="pdf"
-                    fileName="sixth"
-                    downloadOrDelete="delete"
-                  />
-                </div>
+
+                {attachedFilesNum !== 0 && (
+                  <div className={classes.uploadedFilesList}>
+                    {attachedFiles.map((item, index) => (
+                      <UploadedFile
+                        key={index}
+                        token={token}
+                        uuid={item.uuid}
+                        type={item.name.split(".")[1]}
+                        fileName={item.name}
+                        downloadOrDelete="delete"
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -396,10 +573,6 @@ const CreateIdea = () => {
               <button onClick={handleBack}>
                 <img src={Previous} alt="previous" />
                 Previous
-              </button>
-              <button>
-                <img src={Apply} alt="apply" />
-                Apply
               </button>
             </div>
           </div>

@@ -20,6 +20,7 @@ function App() {
       <Header />
       <div className={classes.body}>
         <Routes>
+          <Route path="/" element={<Login />} />
           <Route path="/mainPage" element={<MainPage />} />
           <Route path="/accountReport" element={<AccountReport />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
@@ -55,40 +56,46 @@ function App() {
           />
           <Route path="/createAccount" element={<CreateAccount />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/stepsStructure/ideaShow" element={<StepsStructure />} />
           <Route
-            path="/stepsStructure/financialStepShow"
+            path="/stepsStructure/ideaShow/:ideaId"
             element={<StepsStructure />}
           />
           <Route
-            path="/stepsStructure/collaborationRequestShow"
+            path="/stepsStructure/financialStepShow/:ideaId"
             element={<StepsStructure />}
           />
           <Route
-            path="/stepsStructure/evolutionStepShow"
+            path="/stepsStructure/collaborationRequestShow/:ideaId"
             element={<StepsStructure />}
           />
           <Route
-            path="/stepsStructure/officialInformationShow"
+            path="/stepsStructure/evolutionStepShow/:ideaId"
             element={<StepsStructure />}
           />
           <Route
-            path="/ideaStructure/collaborationRequest"
+            path="/stepsStructure/officialInformationShow/:ideaId"
+            element={<StepsStructure />}
+          />
+          <Route
+            path="/ideaStructure/collaborationRequest/:ideaId"
             element={<IdeaStructure />}
           />
           <Route
-            path="/ideaStructure/evolutionStep"
+            path="/ideaStructure/evolutionStep/:ideaId"
             element={<IdeaStructure />}
           />
           <Route
-            path="/ideaStructure/financialStep"
+            path="/ideaStructure/financialStep/:ideaId"
             element={<IdeaStructure />}
           />
           <Route
-            path="/ideaStructure/officialInformation"
+            path="/ideaStructure/officialInformation/:ideaId"
             element={<IdeaStructure />}
           />
-          <Route path="/ideaStructure/editIdea" element={<IdeaStructure />} />
+          <Route
+            path="/ideaStructure/editIdea/:ideaId"
+            element={<IdeaStructure />}
+          />
         </Routes>
       </div>
       <Footer />

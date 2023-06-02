@@ -10,9 +10,9 @@ const UserAccount = ({
   type = "",
   profileImage,
   name,
-  followers,
-  followings,
-  ideas,
+  followers = 0,
+  followings = 0,
+  ideas = 0,
 }) => {
   return (
     <div className={classes.container}>
@@ -29,7 +29,6 @@ const UserAccount = ({
           src={profileImage === null ? Profile : profileImage}
           alt="profile"
         />
-
         <p>{name}</p>
       </div>
       <div className={classes.userFeedback}>

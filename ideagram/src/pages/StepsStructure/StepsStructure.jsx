@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useContext } from "react";
 import classes from "./StepsStructure.module.scss";
 import {
   EvolutionStepShow,
@@ -7,31 +7,64 @@ import {
   OfficialInformationShow,
   IdeaShow,
 } from "../../components";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
+import AuthContext from "../../api/AuthContext";
 
 const EvolutionStep = () => {
+  const token = useContext(AuthContext).getAccessToken();
+  console.log(token);
+
   const location = useLocation();
   console.log(location.pathname);
-  const url =
-    location.pathname.split("/")[location.pathname.split("/").length - 1];
+  const url = location.pathname.split("/")[2];
+  const uuid = useParams().ideaId;
 
   return (
     <div className={classes.container}>
       <div className={classes.toolbar}>
-        <button>Idea</button>
-        <button>Collaboration Request</button>
-        <button>Evolution Step</button>
-        <button>Financial Step</button>
-        <button>Official Information</button>
+        <Link
+          className={classes.sidebarOptions}
+          to={`/stepsStructure/ideaShow/${uuid}`}
+        >
+          Idea
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to={`/stepsStructure/collaborationRequestShow/${uuid}`}
+        >
+          Collaboration Request
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to={`/stepsStructure/evolutionStepShow/${uuid}`}
+        >
+          Evolution Step
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to={`/stepsStructure/financialStepShow/${uuid}`}
+        >
+          Financial Step
+        </Link>
+        <Link
+          className={classes.sidebarOptions}
+          to={`/stepsStructure/officialInformationShow/${uuid}`}
+        >
+          Official Information
+        </Link>
       </div>
 
       {
         {
-          ideaShow: <IdeaShow />,
-          collaborationRequestShow: <CollaborationRequestShow />,
-          evolutionStepShow: <EvolutionStepShow />,
-          financialStepShow: <FinancialStepShow />,
-          officialInformationShow: <OfficialInformationShow />,
+          ideaShow: <IdeaShow uuid={uuid} token={token} />,
+          collaborationRequestShow: (
+            <CollaborationRequestShow uuid={uuid} token={token} />
+          ),
+          evolutionStepShow: <EvolutionStepShow uuid={uuid} token={token} />,
+          financialStepShow: <FinancialStepShow uuid={uuid} token={token} />,
+          officialInformationShow: (
+            <OfficialInformationShow uuid={uuid} token={token} />
+          ),
         }[url]
       }
     </div>
