@@ -32,6 +32,7 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+        
       </label>
 
       <label for="DesignTechSmallMenu" className={classes.filter}>
@@ -45,6 +46,7 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+
       </label>
 
       <label for="FoodCraftSmallMenu" className={classes.filter}>
@@ -58,6 +60,7 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+
       </label>
 
       <label for="GamesSmallMenu" className={classes.filter}>
@@ -71,6 +74,7 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+
       </label>
 
       <label for="FilmsSmallMenu" className={classes.filter}>
@@ -84,6 +88,7 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+
       </label>
 
       <label for="MusicSmallMenu" className={classes.filter}>
@@ -97,6 +102,7 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+
       </label>
 
       <label for="PublishingSmallMenu" className={classes.filter}>
@@ -110,6 +116,7 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+
       </label>
 
       <label for="ScienceSmallMenu" className={classes.filter}>
@@ -123,6 +130,7 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+
       </label>
       <button className={classes.applyFilter} onClick={applyFilter}>
         Apply Filter
