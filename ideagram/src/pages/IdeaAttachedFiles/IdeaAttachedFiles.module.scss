@@ -12,6 +12,10 @@
         padding: 10px;
         background-color: #ffff;
         width: 100%;
+        h2 {
+            font-family: Rubik, sans-serif;
+            margin: 1rem 1.5rem;
+          }
     }
 
     .attached {
@@ -50,3 +54,9 @@
 
 
 }
+
+
+@font-face {
+    font-family: Rubik;
+    src: url("../../fonts/Rubik-VariableFont_wght.ttf");
+  }

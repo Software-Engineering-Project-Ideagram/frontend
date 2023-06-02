@@ -6,7 +6,7 @@ const IdeaAttachedFiles = () => {
   return (
     <div className="ideaAttachedFiles">
       <div className="containerFirst">
-        <h5>Description</h5>
+        <h2>Description</h2>
         <div>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic cum
           praesentium amet velit odio perferendis sunt. Commodi iusto fugit vero
