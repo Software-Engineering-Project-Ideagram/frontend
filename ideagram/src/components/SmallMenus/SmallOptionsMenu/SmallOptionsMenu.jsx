@@ -1,6 +1,9 @@
 import { React, useState, useContext, useEffect } from "react";
 import classes from "./SmallOptionsMenu.module.scss";
 import User from "../../../images/user.png";
+import Login from "../../../images/login.png";
+import Search from "../../../images/search.png";
+import Home from "../../../images/home.png";
 import { useLocation, Link } from "react-router-dom";
 import AuthContext from "../../../api/AuthContext";
 import axios from "axios";
@@ -54,14 +57,17 @@ const SmallOptionsMenu = ({ showOptionsMenuHandler, isShowOptionsMenu }) => {
       </li>
       <li onClick={showOptionsMenuHandler}>
         <Link className={classes.btn} to="/login">
+        <img src={Login} alt="login" />
         </Link>
       </li>
       <li onClick={showOptionsMenuHandler}>
         <Link className={classes.btn} to="/mainPage"> 
+        <img src={Home} alt="home" />
         </Link>
       </li>
       <li className={classes.searchIdea}>
         <button onClick={showOptionsMenuHandler}>
+        <img src={Search} alt="search" />
         </button>
         <input type="text" />
       </li>
