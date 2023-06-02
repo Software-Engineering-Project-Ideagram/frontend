@@ -47,7 +47,11 @@
         &:focus {
           background-color: #e57d64;
         }
-  
+        
+        img {
+            width: 2rem;
+            height: 2rem;
+        }  
       }
     }
   }
