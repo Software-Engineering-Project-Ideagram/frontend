@@ -9,6 +9,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/mainPage" element={<MainContainer />} />
         <Route path="/accountReport/:userId" element={<MainContainer />} />
+        <Route path="/ideaReport/:ideaId" element={<MainContainer />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/showProfile/:userId" element={<MainContainer />} />
         {/* <Route path="/categoriesPage" element={<CategoriesPage />} /> */}

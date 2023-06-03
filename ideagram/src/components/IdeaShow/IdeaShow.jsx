@@ -25,6 +25,7 @@ import Profile from "../../images/profile.jpg";
 import Send from "../../images/send.png";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const IdeaShow = ({ uuid, token }) => {
   const [ideaImage, setIdeaImage] = useState(null);
@@ -165,14 +166,16 @@ const IdeaShow = ({ uuid, token }) => {
               </div>
             </div>
             <div className={classes.options}>
-              <button className={classes.reportUserOption}>
+              <button>
                 <img src={SaveIcon} alt="save" />
                 Save
               </button>
-              <button className={classes.reportUserOption}>
-                <img src={ReportIcon} alt="report" />
-                Report
-              </button>
+              <Link to={`/ideaReport/${uuid}`}>
+                <button className={classes.reportUserOption}>
+                  <img src={ReportIcon} alt="report" />
+                  Report
+                </button>
+              </Link>
             </div>
           </div>
           {(showLikes || showViews || showComments) && (

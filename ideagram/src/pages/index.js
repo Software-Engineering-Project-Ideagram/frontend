@@ -3,6 +3,7 @@ export { default as ForgotPassword } from "./ForgotPassword/ForgotPassword";
 export { default as MainPage } from "./MainPage/MainPage";
 export { default as StepsStructure } from "./StepsStructure/StepsStructure";
 export { default as AccountReport } from "./AccountReport/AccountReport";
+export { default as IdeaReport } from "./IdeaReport/IdeaReport";
 export { default as ProfileStructure } from "./ProfileStructure/ProfileStructure";
 export { default as CategoriesPage } from "./CategoriesPage/CategoriesPage";
 export { default as IdeaStructure } from "./IdeaStructure/IdeaStructure";

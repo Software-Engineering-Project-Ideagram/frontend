@@ -86,6 +86,28 @@
             align-items: center;
           }
 
+          a {
+            text-decoration: none;
+            button {
+              width: 8rem;
+              border: none;
+              outline: none;
+              border-radius: 0.4rem;
+              color: white;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 0.5rem;
+              padding: 0.5rem 1rem;
+              background-color: #cd0404;
+
+              img {
+                width: 1rem;
+                height: 1rem;
+              }
+            }
+          }
+
           button {
             width: 8rem;
             border: none;
@@ -97,18 +119,11 @@
             justify-content: center;
             gap: 0.5rem;
             padding: 0.5rem 1rem;
+            background-color: #2a5c9f;
 
             img {
               width: 1rem;
               height: 1rem;
-            }
-
-            &:nth-child(1) {
-              background-color: #2a5c9f;
-            }
-
-            &:nth-child(2) {
-              background-color: #cd0404;
             }
           }
         }

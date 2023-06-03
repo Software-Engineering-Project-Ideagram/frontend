@@ -9,6 +9,7 @@ import {
   IdeaStructure,
   ShowProfile,
   StepsStructure,
+  IdeaReport,
 } from "../";
 import AuthContext from "../../api/AuthContext";
 
@@ -29,6 +30,7 @@ const MainContainer = () => {
           {
             mainPage: <MainPage token={token} />,
             accountReport: <AccountReport token={token} />,
+            ideaReport: <IdeaReport token={token} />,
             showProfile: <ShowProfile token={token} />,
             profileStructure: <ProfileStructure token={token} />,
             stepsStructure: <StepsStructure token={token} />,

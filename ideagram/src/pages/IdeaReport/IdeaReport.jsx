@@ -1,7 +1,7 @@
 import { React, useEffect } from "react";
-import { UserAccount } from "../../components";
+import { Idea, UserAccount } from "../../components";
 import ReportElement from "../../components/Elements/ReportElement/ReportElement";
-import classes from "./AccountReport.module.scss";
+import classes from "./IdeaReport.module.scss";
 import Add from "../../images/add.png";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,10 +10,11 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Apply from "../../images/apply.png";
 import Cancel from "../../images/cross.png";
+import IdeaImage from "../../images/idea.png";
 
 const AccountReport = ({ token }) => {
   const params = useParams();
-  const userId = params.userId;
+  const ideaId = params.ideaId;
 
   const dispatch = useDispatch();
   const reports = useSelector((state) => state.report.reports);
@@ -22,18 +23,17 @@ const AccountReport = ({ token }) => {
   const [titleData, setTitleData] = useState("spam");
   const [detailsData, setDetailsData] = useState("");
 
-  const [userProfileImage, setUserProfileImage] = useState(null);
-  const [userUserName, setUserUsername] = useState("");
-  const [userFollowerCount, setUserFollowerCount] = useState(0);
-  const [userFollowingCount, setUserFollowingCount] = useState(0);
-  const [userIdeaCount, setUserIdeaCount] = useState(0);
+  const [ideaImage, setIdeaImage] = useState(null);
+  const [ideaTitle, setIdeaTitle] = useState("");
+  const [ideaGoal, setIdeaGoal] = useState("");
+  const [ideaAbstraction, setIdeaAbstraction] = useState("");
 
   useEffect(() => {
     const getUserData = async () => {
       try {
         dispatch(reportsActions.deleteAllReports());
         const res = await axios.get(
-          `http://api.iwantnet.space:8001/api/user/general/profile/${userId}`,
+          `http://api.iwantnet.space:8001/api/idea/detail/${ideaId}`,
           {
             headers: {
               Authorization: "Bearer " + token,
@@ -41,11 +41,11 @@ const AccountReport = ({ token }) => {
           }
         );
         console.log(res);
-        setUserProfileImage(res.data.profile_image);
-        setUserUsername(res.data.username);
-        setUserFollowerCount(res.data.follower_count);
-        setUserFollowingCount(res.data.following_count);
-        setUserIdeaCount(res.data.idea_count);
+        res.data.image !== null &&
+          setIdeaImage(`http://api.iwantnet.space:8001${res.data.image}`);
+        setIdeaTitle(res.data.title);
+        setIdeaGoal(res.data.goal);
+        setIdeaAbstraction(res.data.abstract);
       } catch (err) {
         console.log(err);
       }
@@ -78,9 +78,9 @@ const AccountReport = ({ token }) => {
     for (const report of reports) {
       try {
         await axios.post(
-          "http://api.iwantnet.space:8001/api/report/profile/",
+          "http://api.iwantnet.space:8001/api/report/idea/",
           {
-            profile_username: userUserName,
+            idea: ideaId,
             report_reasons: report.title,
             description: report.details,
           },
@@ -103,19 +103,22 @@ const AccountReport = ({ token }) => {
 
   return (
     <div className={classes.container}>
-      <h1>Account Report</h1>
+      <h1>Idea Report</h1>
       <div className={classes.body}>
         <div className={classes.reportAccount}>
           <div className={classes.accountInfo}>
-            <h3>Account Information</h3>
-            <UserAccount
-              type="AccountReport"
-              profileImage={userProfileImage}
-              name={userUserName}
-              followers={userFollowerCount}
-              followings={userFollowingCount}
-              ideas={userIdeaCount}
-            />
+            <h3>Idea Information</h3>
+            <div className={classes.details}>
+              <img
+                src={ideaImage === null ? IdeaImage : ideaImage}
+                alt="Idea_Image"
+              />
+              <div>
+                <h4>{ideaTitle}</h4>
+                <h5>{ideaGoal}</h5>
+                <p>{ideaAbstraction}</p>
+              </div>
+            </div>
           </div>
           <div className={classes.report}>
             <div>
