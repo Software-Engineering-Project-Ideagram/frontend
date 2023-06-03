@@ -25,7 +25,6 @@ const UserFeedbackSmallMenu = ({ showMenuHandler, isShowMenu }) => {
       </li>
       <li onClick={showMenuHandler}>
         <button>
-          {" "}
           <img src={FollowingsWhiteIcon} alt="Followings" />
           Followings
         </button>

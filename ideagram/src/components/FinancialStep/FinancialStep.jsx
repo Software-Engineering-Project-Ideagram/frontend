@@ -32,6 +32,7 @@ const FinancialStep = ({ uuid, token }) => {
           }
         );
         console.log(res);
+        dispatch(financialStepsActions.deleteAll());
         for (const req of res.data) {
           dispatch(
             financialStepsActions.addFinancialStep({

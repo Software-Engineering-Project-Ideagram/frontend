@@ -290,6 +290,16 @@
       h2 {
         font-family: Rubik, sans-serif;
       }
+
+      .noFile {
+        text-align: center;
+        font-family: Verdana, sans-serif;
+        color: red;
+        font-weight: bold;
+        font-size: 1rem;
+        margin: 1rem 0 2rem 0;
+      }
+
       .uploadedFilesList {
         width: 100%;
         max-width: 100%;

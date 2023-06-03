@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./MainPageSmallMenu.module.scss";
 
-const MainPageSmallMenu = ({ showMenuHandler, isShowMenu }) => {
+const MainPageSmallMenu = ({ showMenuHandler, isShowMenu, applyFilter }) => {
   return (
     <ul
       className={`${classes.menu} ${
@@ -9,28 +9,76 @@ const MainPageSmallMenu = ({ showMenuHandler, isShowMenu }) => {
       }`}
     >
       <li onClick={showMenuHandler}>
-        <button>Arts</button>
+        <button
+          onClick={() => {
+            applyFilter("art");
+          }}
+        >
+          Arts
+        </button>
       </li>
       <li onClick={showMenuHandler}>
-        <button>Tech</button>
+        <button
+          onClick={() => {
+            applyFilter("tech");
+          }}
+        >
+          Tech
+        </button>
       </li>
       <li onClick={showMenuHandler}>
-        <button>Food</button>
+        <button
+          onClick={() => {
+            applyFilter("food");
+          }}
+        >
+          Food
+        </button>
       </li>
       <li onClick={showMenuHandler}>
-        <button>Games</button>
+        <button
+          onClick={() => {
+            applyFilter("games");
+          }}
+        >
+          Games
+        </button>
       </li>
       <li onClick={showMenuHandler}>
-        <button>Films</button>
+        <button
+          onClick={() => {
+            applyFilter("films");
+          }}
+        >
+          Films
+        </button>
       </li>
       <li onClick={showMenuHandler}>
-        <button>Music</button>
+        <button
+          onClick={() => {
+            applyFilter("music");
+          }}
+        >
+          Music
+        </button>
       </li>
       <li onClick={showMenuHandler}>
-        <button>Publishing</button>
+        <button
+          onClick={() => {
+            applyFilter("publishing");
+          }}
+        >
+          Publishing
+        </button>
       </li>
       <li onClick={showMenuHandler}>
-        <button>Science</button>
+        <button
+          onClick={() => {
+            applyFilter("science");
+          }}
+        >
+          Science
+        </button>
       </li>
     </ul>
   );

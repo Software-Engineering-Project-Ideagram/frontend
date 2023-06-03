@@ -310,6 +310,95 @@
                 }
               }
             }
+
+            .setUserStatus {
+              display: flex;
+              align-items: center;
+              justify-content: start;
+              gap: 3rem;
+              width: 100%;
+
+              @media (max-width: 575.98px) {
+                display: grid;
+                grid-template-columns: auto auto;
+                gap: 1rem;
+              }
+
+              p {
+                flex: 1;
+                font-family: Montserrat, sans-serif;
+                font-size: 0.9rem;
+
+                @media (max-width: 575.98px) {
+                  grid-column: 1/3;
+                }
+              }
+
+              .filter {
+                font-family: Montserrat, sans-serif;
+                flex: 1;
+                position: relative;
+                text-align: center;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.9rem;
+
+                @media (max-width: 575.98px) {
+                  padding-left: 1.5rem;
+                }
+
+                input[type="radio"] {
+                  visibility: hidden;
+                }
+
+                .custom {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  height: 15px;
+                  width: 15px;
+                  background-color: #c7c7c6;
+                  border: 1px solid #303030;
+                  border-radius: 0.1rem;
+
+                  &:after {
+                    left: 4px;
+                    bottom: 2px;
+                    width: 2px;
+                    height: 7px;
+                    border: solid white;
+                    border-width: 0 2px 2px 0;
+                    -webkit-transform: rotate(45deg);
+                    -ms-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                  }
+
+                  &:after {
+                    content: "";
+                    position: absolute;
+                    display: none;
+                  }
+                }
+
+                &:hover input ~ .custom {
+                  background-color: gray;
+                }
+
+                input:active ~ .custom {
+                  background-color: white;
+                }
+
+                input:checked ~ .custom {
+                  background-color: #4868f8;
+                }
+
+                input:checked ~ .custom:after {
+                  display: block;
+                }
+              }
+            }
           }
         }
 

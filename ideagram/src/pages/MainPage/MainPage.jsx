@@ -2,13 +2,22 @@ import { React, useEffect } from "react";
 import classes from "./MainPage.module.scss";
 import { Idea, Skeleton } from "../../components";
 import { useState } from "react";
-
+import Menu from "../../images/burger-menu.png";
+import { MainPageSmallMenu } from "../../components/SmallMenus";
 import axios from "axios";
 
 const MainPage = ({ token }) => {
   const [seeAll, setSeeAll] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [userIdeas, setUserIdeas] = useState([]);
+
+  const [isShowMenu, setIsShowMenu] = useState(false);
+  const [isShowOptionsMenu, setIsShowOptionsMenu] = useState(false);
+
+  const showMenuHandler = () => {
+    setIsShowOptionsMenu(false);
+    setIsShowMenu(!isShowMenu);
+  };
 
   useEffect(() => {
     const getUserData = async () => {
@@ -113,15 +122,28 @@ const MainPage = ({ token }) => {
         <div className={classes.seeAllContainer}>
           <h1>Ideas</h1>
 
-          <button
-            className={`${classes.seeAllIdeas} ${
-              seeAll && classes.disableButton
-            }`}
-            onClick={() => setSeeAll(true)}
-            disabled={seeAll}
-          >
-            See All
-          </button>
+          <div className={classes.optionsContainer}>
+            <button
+              className={`${classes.seeAllIdeas} ${
+                seeAll && classes.disableButton
+              }`}
+              onClick={() => setSeeAll(true)}
+              disabled={seeAll}
+            >
+              See All
+            </button>
+            <div className={classes.smallMenu}>
+              <button className={classes.showMenuBTN} onClick={showMenuHandler}>
+                <img src={Menu} alt="menu" />
+              </button>
+
+              <MainPageSmallMenu
+                showMenuHandler={showMenuHandler}
+                isShowMenu={isShowMenu}
+                applyFilter={applyFilter}
+              />
+            </div>
+          </div>
         </div>
 
         <div className={classes.ideasContainer}>

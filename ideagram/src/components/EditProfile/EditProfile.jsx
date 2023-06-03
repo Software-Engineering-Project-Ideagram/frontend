@@ -23,6 +23,7 @@ const EditProfile = ({ token }) => {
   const [userFirstName, setUserFirstName] = useState(null);
   const [userLastName, setUserLastName] = useState(null);
   const [userGender, setUserGender] = useState("male");
+  const [userIsPrivate, setUserIsPrivate] = useState();
   const [userBirthDate, setUserBirthDate] = useState(new Date());
   const [userCountry, setUserCountry] = useState(null);
   const [userState, setUserState] = useState(null);
@@ -77,17 +78,9 @@ const EditProfile = ({ token }) => {
         setUserAddress(res.data.address.address);
         setUserUserName(res.data.username);
         setMainUserName(res.data.username);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getUserData();
-  }, []);
+        setUserIsPrivate(res.data.is_public);
 
-  useEffect(() => {
-    const getUserSocialMediaLinks = async () => {
-      try {
-        const res = await axios.get(
+        const linksRes = await axios.get(
           "http://api.iwantnet.space:8001/api/user/social-media/",
           {
             headers: {
@@ -95,8 +88,8 @@ const EditProfile = ({ token }) => {
             },
           }
         );
-        console.log(res);
-        const links = res.data;
+        console.log(linksRes);
+        const links = linksRes.data;
         for (const item of links) {
           dispatch(
             userMediaLinksActions.addUserMediaLink({
@@ -111,7 +104,7 @@ const EditProfile = ({ token }) => {
         console.log(err);
       }
     };
-    getUserSocialMediaLinks();
+    getUserData();
   }, []);
 
   const changeUserInfo = async () => {
@@ -123,6 +116,7 @@ const EditProfile = ({ token }) => {
     formData.append("last_name", userLastName);
     formData.append("birth_date", userBirthDate);
     formData.append("gender", userGender);
+    formData.append("is_public", userIsPrivate);
     console.log(userCountry);
     if (selectedProfile !== null) {
       formData.append("profile_image", selectedProfile);
@@ -379,6 +373,37 @@ const EditProfile = ({ token }) => {
                         setUserUserName(e.target.value);
                       }}
                     />
+                  </div>
+                  <div className={classes.setUserStatus}>
+                    <p>Status</p>
+
+                    <label for="setUserPrivate" className={classes.filter}>
+                      Private
+                      <input
+                        type="radio"
+                        id="setUserPrivate"
+                        name="Status"
+                        checked={userIsPrivate}
+                        onClick={() => {
+                          setUserIsPrivate(true);
+                        }}
+                      />
+                      <span className={classes.custom}></span>
+                    </label>
+
+                    <label for="setUserPublic" className={classes.filter}>
+                      Public
+                      <input
+                        type="radio"
+                        id="setUserPublic"
+                        name="Status"
+                        checked={!userIsPrivate}
+                        onClick={() => {
+                          setUserIsPrivate(false);
+                        }}
+                      />
+                      <span className={classes.custom}></span>
+                    </label>
                   </div>
                 </div>
               </div>

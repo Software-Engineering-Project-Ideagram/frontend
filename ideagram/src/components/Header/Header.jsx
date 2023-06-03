@@ -117,45 +117,45 @@ const Header = () => {
               alt="user"
             />
           </Link>
-          <div className={classes.smallMenu}>
-            <button className={classes.showMenuBTN} onClick={showMenuHandler}>
-              <img src={Menu} alt="menu" />
-            </button>
-            {url === "mainPage" && (
-              <MainPageSmallMenu
-                showMenuHandler={showMenuHandler}
-                isShowMenu={isShowMenu}
-              />
-            )}
 
-            {url === "showProfile" && (
-              <UserFeedbackSmallMenu
-                showMenuHandler={showMenuHandler}
-                isShowMenu={isShowMenu}
-              />
-            )}
+          {(url === "showProfile" ||
+            url === "profileStructure" ||
+            url === "ideaStructure" ||
+            url === "stepsStructure") && (
+            <div className={classes.smallMenu}>
+              <button className={classes.showMenuBTN} onClick={showMenuHandler}>
+                <img src={Menu} alt="menu" />
+              </button>
 
-            {url === "profileStructure" && (
-              <ProfileStructureSmallMenu
-                showMenuHandler={showMenuHandler}
-                isShowMenu={isShowMenu}
-              />
-            )}
+              {url === "showProfile" && (
+                <UserFeedbackSmallMenu
+                  showMenuHandler={showMenuHandler}
+                  isShowMenu={isShowMenu}
+                />
+              )}
 
-            {url === "ideaStructure" && (
-              <IdeaStructureSmallMenu
-                showMenuHandler={showMenuHandler}
-                isShowMenu={isShowMenu}
-              />
-            )}
+              {url === "profileStructure" && (
+                <ProfileStructureSmallMenu
+                  showMenuHandler={showMenuHandler}
+                  isShowMenu={isShowMenu}
+                />
+              )}
 
-            {url === "stepsStructure" && (
-              <StepsStructureSmallMenu
-                showMenuHandler={showMenuHandler}
-                isShowMenu={isShowMenu}
-              />
-            )}
-          </div>
+              {url === "ideaStructure" && (
+                <IdeaStructureSmallMenu
+                  showMenuHandler={showMenuHandler}
+                  isShowMenu={isShowMenu}
+                />
+              )}
+
+              {url === "stepsStructure" && (
+                <StepsStructureSmallMenu
+                  showMenuHandler={showMenuHandler}
+                  isShowMenu={isShowMenu}
+                />
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>

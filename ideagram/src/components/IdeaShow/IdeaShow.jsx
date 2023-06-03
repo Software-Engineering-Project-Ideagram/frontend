@@ -293,21 +293,21 @@ const IdeaShow = ({ uuid, token }) => {
           <h2>Attached Files</h2>
           {isLoading ? (
             <CircularProgress />
+          ) : ideaAttachedFilesList.length !== 0 ? (
+            <div className={classes.uploadedFilesList}>
+              {ideaAttachedFilesList.map((item, index) => (
+                <UploadedFile
+                  key={index}
+                  token={token}
+                  uuid={item.uuid}
+                  type={item.file.split(".")[1]}
+                  fileName={item.file}
+                  downloadOrDelete="download"
+                />
+              ))}
+            </div>
           ) : (
-            ideaAttachedFilesList.length !== 0 && (
-              <div className={classes.uploadedFilesList}>
-                {ideaAttachedFilesList.map((item, index) => (
-                  <UploadedFile
-                    key={index}
-                    token={token}
-                    uuid={item.uuid}
-                    type={item.file.split(".")[1]}
-                    fileName={item.file}
-                    downloadOrDelete="download"
-                  />
-                ))}
-              </div>
-            )
+            <p className={classes.noFile}>No Attach File</p>
           )}
         </div>
       </div>
