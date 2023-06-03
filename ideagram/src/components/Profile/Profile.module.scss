@@ -80,6 +80,13 @@
               border-radius: 0.2rem;
               outline: none;
               padding: 0.2rem 0.5rem;
+              overflow: hidden;
+              overflow-x: scroll;
+              white-space: nowrap;
+
+              &::-webkit-scrollbar {
+                display: none;
+              }
 
               @media (max-width: 1199.98px) {
                 width: 25rem;
@@ -142,6 +149,13 @@
                 outline: none;
                 padding: 0.2rem 0.5rem;
                 font-size: 0.9rem;
+                overflow: hidden;
+                overflow-x: scroll;
+                white-space: nowrap;
+
+                &::-webkit-scrollbar {
+                  display: none;
+                }
 
                 @media (max-width: 1199.98px) {
                   width: 6rem;

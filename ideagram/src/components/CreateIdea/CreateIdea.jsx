@@ -218,89 +218,105 @@ const CreateIdea = ({ token }) => {
             <div className={classes.newIdeaLabels}>
               <p>Labels</p>
               <div className={classes.labels}>
-                <div
-                  onClick={() => {
-                    setIsArts(!isArts);
-                  }}
-                >
-                  <input id="artLabel" type="checkbox" />
+                <div>
+                  <input
+                    id="artLabel"
+                    type="checkbox"
+                    onChange={(e) => {
+                      setIsArts(e.target.checked);
+                    }}
+                  />
                   <label for="artLabel">
                     <img src={ArtLabel} alt="Art" />
                     Arts
                   </label>
                 </div>
-                <div
-                  onClick={() => {
-                    setIsGames(!isGames);
-                  }}
-                >
-                  <input type="checkbox" id="gameLabel" />
+                <div>
+                  <input
+                    type="checkbox"
+                    id="gameLabel"
+                    onChange={(e) => {
+                      setIsGames(e.target.checked);
+                    }}
+                  />
                   <label for="gameLabel">
                     <img src={GamesLabel} alt="Games" />
                     Games
                   </label>
                 </div>
-                <div
-                  onClick={() => {
-                    setIsDesignTech(!isDesignTech);
-                  }}
-                >
-                  <input id="designTechLabel" type="checkbox" />
+                <div>
+                  <input
+                    id="designTechLabel"
+                    type="checkbox"
+                    onChange={(e) => {
+                      setIsDesignTech(e.target.checked);
+                    }}
+                  />
                   <label for="designTechLabel">
                     <img src={DesignTechLabel} alt="Design_Tech" />
                     Tech
                   </label>
                 </div>
-                <div
-                  onClick={() => {
-                    setIsFoodCraft(!isFoodCraft);
-                  }}
-                >
-                  <input id="foodLabel" type="checkbox" />
+                <div>
+                  <input
+                    id="foodLabel"
+                    type="checkbox"
+                    onChange={(e) => {
+                      setIsFoodCraft(e.target.checked);
+                    }}
+                  />
                   <label for="foodLabel">
                     <img src={FoodCraftLabel} alt="Food_Craft" />
                     Food & Craft
                   </label>
                 </div>
-                <div
-                  onClick={() => {
-                    setIsFilms(!isFilms);
-                  }}
-                >
-                  <input id="filmLabel" type="checkbox" />
+                <div>
+                  <input
+                    id="filmLabel"
+                    type="checkbox"
+                    onChange={(e) => {
+                      setIsFilms(e.target.checked);
+                    }}
+                  />
                   <label for="filmLabel">
                     <img src={FilmsLabel} alt="Films" />
                     Films
                   </label>
                 </div>
-                <div
-                  onClick={() => {
-                    setIsMusics(!isMusics);
-                  }}
-                >
-                  <input id="musicLabel" type="checkbox" />
+                <div>
+                  <input
+                    id="musicLabel"
+                    type="checkbox"
+                    onChange={(e) => {
+                      setIsMusics(e.target.checked);
+                    }}
+                  />
                   <label for="musicLabel">
                     <img src={MusicLabel} alt="Music" />
                     Music
                   </label>
                 </div>
-                <div
-                  onClick={() => {
-                    setIsPublishing(!isPublishing);
-                  }}
-                >
-                  <input id="publishingLabel" type="checkbox" />
+                <div>
+                  <input
+                    id="publishingLabel"
+                    type="checkbox"
+                    onChange={(e) => {
+                      setIsPublishing(e.target.checked);
+                    }}
+                  />
                   <label for="publishingLabel">
                     <img src={PublishingLabel} alt="Publishing" />
                     Publishing
                   </label>
                 </div>
-                <div
-                  onClick={() => {
-                    setIsScience(!isScience);
-                  }}
-                >
-                  <input id="scienceLabel" type="checkbox" />
+                <div>
+                  <input
+                    id="scienceLabel"
+                    type="checkbox"
+                    onChange={(e) => {
+                      setIsScience(e.target.checked);
+                    }}
+                  />
                   <label for="scienceLabel">
                     <img src={ScienceLabel} alt="Science" />
                     Science

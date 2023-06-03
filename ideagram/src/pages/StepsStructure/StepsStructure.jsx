@@ -1,4 +1,4 @@
-import { React, useContext } from "react";
+import { React } from "react";
 import classes from "./StepsStructure.module.scss";
 import {
   EvolutionStepShow,
@@ -8,12 +8,8 @@ import {
   IdeaShow,
 } from "../../components";
 import { Link, useLocation, useParams } from "react-router-dom";
-import AuthContext from "../../api/AuthContext";
 
-const EvolutionStep = () => {
-  const token = useContext(AuthContext).getAccessToken();
-  console.log(token);
-
+const EvolutionStep = ({ token }) => {
   const location = useLocation();
   console.log(location.pathname);
   const url = location.pathname.split("/")[2];

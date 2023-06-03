@@ -8,3 +8,4 @@ export { default as CategoriesPage } from "./CategoriesPage/CategoriesPage";
 export { default as IdeaStructure } from "./IdeaStructure/IdeaStructure";
 export { default as CreateAccount } from "./CreateAccount/CreateAccount";
 export { default as Login } from "./Login/Login";
+export { default as MainContainer } from "./MainContainer/MainContainer";

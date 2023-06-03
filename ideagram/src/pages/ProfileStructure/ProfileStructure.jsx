@@ -1,4 +1,4 @@
-import { React, useContext } from "react";
+import { React } from "react";
 import classes from "./ProfileStructure.module.scss";
 import MyProfile from "../../images/MyProfile.png";
 import CreateIdeaIMG from "../../images/CreateIdea.png";
@@ -18,12 +18,8 @@ import {
   SavedIdeas,
   CreateIdea,
 } from "../../components";
-import AuthContext from "../../api/AuthContext";
 
-const ProfileStructure = () => {
-  const token = useContext(AuthContext).getAccessToken();
-  console.log(token);
-
+const ProfileStructure = ({ token }) => {
   const location = useLocation();
   console.log(location.pathname);
   const url =

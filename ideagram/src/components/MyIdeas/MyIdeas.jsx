@@ -159,6 +159,7 @@ const MyIdeas = ({ token }) => {
                     key={index}
                     type="MyIdeas"
                     uuid={item.uuid}
+                    token={token}
                     title={item.title}
                     goal={item.goal}
                     details={item.details}

@@ -1,4 +1,4 @@
-import { React, useState, useContext, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import classes from "./EditProfile.module.scss";
 import UserProfile from "../../images/user (2).png";
 import Apply from "../../images/apply.png";
@@ -9,11 +9,10 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import AuthContext from "../../api/AuthContext";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { userMediaLinksActions } from "../../store/userMediaLink";
-import { UserMediaLinkElement } from "../Elements";
+import UserMediaLinkElement from "../Elements/UserMediaLinkElement/UserMediaLinkElement";
 
 const steps = ["1.Personal Information", "2.Change Password", "3.Manage Links"];
 
@@ -23,8 +22,8 @@ const EditProfile = ({ token }) => {
   const [userProfile, setUserProfile] = useState(null);
   const [userFirstName, setUserFirstName] = useState(null);
   const [userLastName, setUserLastName] = useState(null);
-  const [userGender, setUserGender] = useState(null);
-  const [userBirthDate, setUserBirthDate] = useState(null);
+  const [userGender, setUserGender] = useState("male");
+  const [userBirthDate, setUserBirthDate] = useState(new Date());
   const [userCountry, setUserCountry] = useState(null);
   const [userState, setUserState] = useState(null);
   const [userCity, setUserCity] = useState(null);
@@ -63,12 +62,15 @@ const EditProfile = ({ token }) => {
           }
         );
         console.log(res);
-        setUserProfile(res.data.profile_image);
+        res.data.profile_image !== null &&
+          setUserProfile(
+            `http://api.iwantnet.space:8001${res.data.profile_image}`
+          );
         setUserFirstName(res.data.first_name);
         setUserLastName(res.data.last_name);
-        setUserGender(res.data.gender);
+        res.data.gender !== "other" && setUserGender(res.data.gender);
         setUserBio(res.data.bio);
-        setUserBirthDate(res.data.birth_date);
+        res.data.birth_date !== null && setUserBirthDate(res.data.birth_date);
         setUserCountry(res.data.address.country);
         setUserState(res.data.address.state);
         setUserCity(res.data.address.city);
@@ -121,13 +123,7 @@ const EditProfile = ({ token }) => {
     formData.append("last_name", userLastName);
     formData.append("birth_date", userBirthDate);
     formData.append("gender", userGender);
-    const userFullAddress = {
-      country: userCountry,
-      state: userState,
-      city: userCity,
-      address: userAddress,
-    };
-    formData.append("address", userFullAddress);
+    console.log(userCountry);
     if (selectedProfile !== null) {
       formData.append("profile_image", selectedProfile);
     }
@@ -136,7 +132,14 @@ const EditProfile = ({ token }) => {
       console.log(value);
     }
 
-    await uploadNewUserData(formData);
+    const userFullAddress = {
+      country: userCountry,
+      state: userState,
+      city: userCity,
+      address: userAddress,
+    };
+
+    await uploadNewUserData(formData, userFullAddress);
   };
 
   const changeBioInfo = async () => {
@@ -150,7 +153,7 @@ const EditProfile = ({ token }) => {
     await uploadNewUserData(formData);
   };
 
-  const uploadNewUserData = async (formData) => {
+  const uploadNewUserData = async (formData, userFullAddress = "") => {
     try {
       const res = await axios.put(
         "http://api.iwantnet.space:8001/api/user/profile/",
@@ -163,6 +166,17 @@ const EditProfile = ({ token }) => {
         }
       );
       console.log(res);
+
+      const result = await axios.put(
+        "http://api.iwantnet.space:8001/api/user/profile/",
+        { address: userFullAddress },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      console.log(result);
     } catch (err) {
       console.log(err);
     }
@@ -244,11 +258,7 @@ const EditProfile = ({ token }) => {
                   />
                   <label for="selectProfileImage">
                     <img
-                      src={
-                        userProfile == null
-                          ? UserProfile
-                          : `http://api.iwantnet.space:8001${userProfile}`
-                      }
+                      src={userProfile == null ? UserProfile : userProfile}
                       alt="User_Profile"
                     />
                   </label>

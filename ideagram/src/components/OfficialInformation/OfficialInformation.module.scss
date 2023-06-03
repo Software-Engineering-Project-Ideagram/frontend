@@ -67,8 +67,27 @@
               width: 7rem;
             }
 
+            select {
+              height: 2rem;
+              border: 1px solid #303030;
+              outline: none;
+              border-radius: 0.2rem;
+              width: 10rem;
+              padding: 0.2rem 0.5rem;
+
+              @media (max-width: 575.98px) {
+                width: 100%;
+              }
+
+              &:focus {
+                outline: none;
+                border: 1px solid #303030;
+              }
+            }
+
             input,
             textarea {
+              height: 2rem;
               border: 1px solid #303030;
               outline: none;
               border-radius: 0.2rem;
@@ -78,10 +97,19 @@
               @media (max-width: 575.98px) {
                 width: 100%;
               }
+
+              &:focus {
+                outline: none;
+                border: 1px solid #303030;
+              }
             }
 
             textarea {
               height: 4rem;
+
+              &::-webkit-scrollbar {
+                display: none;
+              }
             }
           }
         }
@@ -165,35 +193,6 @@
 
             &::-webkit-scrollbar-thumb:hover {
               background: gray;
-            }
-          }
-
-          .add {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            color: white;
-            border: none;
-            outline: none;
-            padding: 0.3rem 0.5rem;
-            background-color: #2a5c9f;
-            width: 26rem;
-            border-radius: 0.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-
-            @media (max-width: 575.98px) {
-              width: 100%;
-            }
-
-            img {
-              width: 1rem;
-              height: 1rem;
-            }
-
-            &:hover {
-              background-color: #158854;
             }
           }
         }

@@ -78,10 +78,7 @@ const CollaborationRequestShow = ({ uuid, token }) => {
             {requests.map((item, index) => (
               <CollaborationRequestElementShow
                 key={index}
-                uuid={item.uuid}
                 amount={index + 1}
-                showOptions={false}
-                token={token}
                 jobTitle={item.jobTitle}
                 skills={item.skills}
                 education={item.education}

@@ -1,4 +1,4 @@
-import { React, useContext } from "react";
+import { React } from "react";
 import classes from "./IdeaStructure.module.scss";
 import Edit_Idea from "../../images/edit_idea.png";
 import Collaboration_Request from "../../images/collaboration_request.png";
@@ -13,18 +13,12 @@ import {
   FinancialStep,
   EditIdea,
 } from "../../components";
-import AuthContext from "../../api/AuthContext";
 
-const IdeaStructure = () => {
+const IdeaStructure = ({ token }) => {
   const location = useLocation();
-  // console.log(params);
-  // console.log(location.pathname);
   const url = location.pathname.split("/")[2];
   const params = useParams();
   const uuid = params.ideaId;
-
-  const token = useContext(AuthContext).getAccessToken();
-  console.log(token);
 
   return (
     <div className={classes.container}>

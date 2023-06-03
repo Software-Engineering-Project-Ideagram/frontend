@@ -282,8 +282,8 @@ const CreateIdea = ({ uuid, token }) => {
                     id="artLabel"
                     type="checkbox"
                     checked={isArts}
-                    onClick={() => {
-                      setIsArts(!isArts);
+                    onChange={(e) => {
+                      setIsArts(e.target.selected);
                     }}
                   />
                   <label for="artLabel">
@@ -296,8 +296,8 @@ const CreateIdea = ({ uuid, token }) => {
                     type="checkbox"
                     id="gameLabel"
                     checked={isGames}
-                    onClick={() => {
-                      setIsGames(!isGames);
+                    onChange={(e) => {
+                      setIsGames(e.target.selected);
                     }}
                   />
                   <label for="gameLabel">
@@ -310,8 +310,8 @@ const CreateIdea = ({ uuid, token }) => {
                     id="designTechLabel"
                     type="checkbox"
                     checked={isDesignTech}
-                    onClick={() => {
-                      setIsDesignTech(!isDesignTech);
+                    onChange={(e) => {
+                      setIsDesignTech(e.target.selected);
                     }}
                   />
                   <label for="designTechLabel">
@@ -324,8 +324,8 @@ const CreateIdea = ({ uuid, token }) => {
                     id="foodLabel"
                     type="checkbox"
                     checked={isFoodCraft}
-                    onClick={() => {
-                      setIsFoodCraft(!isFoodCraft);
+                    onChange={(e) => {
+                      setIsFoodCraft(e.target.selected);
                     }}
                   />
                   <label for="foodLabel">
@@ -338,8 +338,8 @@ const CreateIdea = ({ uuid, token }) => {
                     id="filmLabel"
                     type="checkbox"
                     checked={isFilms}
-                    onClick={() => {
-                      setIsFilms(!isFilms);
+                    onChange={(e) => {
+                      setIsFilms(e.target.selected);
                     }}
                   />
                   <label for="filmLabel">
@@ -352,8 +352,8 @@ const CreateIdea = ({ uuid, token }) => {
                     id="musicLabel"
                     type="checkbox"
                     checked={isMusics}
-                    onClick={() => {
-                      setIsMusics(!isMusics);
+                    onChange={(e) => {
+                      setIsMusics(e.target.selected);
                     }}
                   />
                   <label for="musicLabel">
@@ -366,8 +366,8 @@ const CreateIdea = ({ uuid, token }) => {
                     id="publishingLabel"
                     type="checkbox"
                     checked={isPublishing}
-                    onClick={() => {
-                      setIsPublishing(!isPublishing);
+                    onChange={(e) => {
+                      setIsPublishing(e.target.selected);
                     }}
                   />
                   <label for="publishingLabel">
@@ -380,8 +380,8 @@ const CreateIdea = ({ uuid, token }) => {
                     id="scienceLabel"
                     type="checkbox"
                     checked={isScience}
-                    onClick={() => {
-                      setIsScience(!isScience);
+                    onChange={(e) => {
+                      setIsScience(e.target.selected);
                     }}
                   />
                   <label for="scienceLabel">

@@ -1,15 +1,20 @@
-import React from "react";
+import { React, useEffect } from "react";
 import { UserAccount } from "../../components";
-import { ReportElement } from "../../components/Elements";
+import ReportElement from "../../components/Elements/ReportElement/ReportElement";
 import classes from "./AccountReport.module.scss";
 import Add from "../../images/add.png";
-import Apply from "../../images/apply.png";
-import Cancel from "../../images/cross.png";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { reportsActions } from "../../store/report";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import Apply from "../../images/apply.png";
+import Cancel from "../../images/cross.png";
 
-const AccountReport = () => {
+const AccountReport = ({ token }) => {
+  const params = useParams();
+  const userId = params.userId;
+
   const dispatch = useDispatch();
   const reports = useSelector((state) => state.report.reports);
   const reportsNum = useSelector((state) => state.report.reportsNum);
@@ -17,7 +22,38 @@ const AccountReport = () => {
   const [titleData, setTitleData] = useState("");
   const [detailsData, setDetailsData] = useState("");
 
-  const addReportHandler = () => {
+  const [userProfileImage, setUserProfileImage] = useState(null);
+  const [userUserName, setUserUsername] = useState("");
+  const [userFollowerCount, setUserFollowerCount] = useState(0);
+  const [userFollowingCount, setUserFollowingCount] = useState(0);
+  const [userIdeaCount, setUserIdeaCount] = useState(0);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        dispatch(reportsActions.deleteAllReports());
+        const res = await axios.get(
+          `http://api.iwantnet.space:8001/api/user/general/profile/${userId}`,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        console.log(res);
+        setUserProfileImage(res.data.profile_image);
+        setUserUsername(res.data.username);
+        setUserFollowerCount(res.data.follower_count);
+        setUserFollowingCount(res.data.following_count);
+        setUserIdeaCount(res.data.idea_count);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUserData();
+  }, []);
+
+  const addReportHandler = async () => {
     if (titleData !== "" && detailsData !== "") {
       dispatch(
         reportsActions.addReport({
@@ -36,6 +72,34 @@ const AccountReport = () => {
     dispatch(reportsActions.deleteAllReports());
   };
 
+  const setAllReports = async () => {
+    for (const report of reports) {
+      try {
+        const res = await axios.post(
+          "http://api.iwantnet.space:8001/api/report/profile/",
+          {
+            profile_username: userUserName,
+            report_reasons: report.title,
+            description: report.details,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        console.log(res);
+        dispatch(
+          reportsActions.addReport({
+            title: report.title,
+          })
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <div className={classes.container}>
       <h1>Account Report</h1>
@@ -43,7 +107,14 @@ const AccountReport = () => {
         <div className={classes.reportAccount}>
           <div className={classes.accountInfo}>
             <h3>Account Information</h3>
-            <UserAccount type="AccountReport" />
+            <UserAccount
+              type="AccountReport"
+              profileImage={userProfileImage}
+              name={userUserName}
+              followers={userFollowerCount}
+              followings={userFollowingCount}
+              ideas={userIdeaCount}
+            />
           </div>
           <div className={classes.report}>
             <div>
@@ -97,7 +168,7 @@ const AccountReport = () => {
             )}
           </div>
           <div className={classes.options}>
-            <button className={classes.apply}>
+            <button className={classes.apply} onClick={setAllReports}>
               <img src={Apply} alt="apply" />
               Apply
             </button>

@@ -9,6 +9,7 @@ import downloadFile from "../../images/downloadIcon.png";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { attachedFilesActions } from "../../store/attachedFilesForIdea";
+import { Link } from "react-router-dom";
 
 const UploadedFile = ({ uuid, token, type, fileName, downloadOrDelete }) => {
   const dispatch = useDispatch();
@@ -39,10 +40,17 @@ const UploadedFile = ({ uuid, token, type, fileName, downloadOrDelete }) => {
     <div className={classes.container}>
       <div className={classes.deleteDownloadFile}>
         {downloadOrDelete === "download" && (
-          <button className={classes.download}>
-            <img src={downloadFile} alt="download_file" />
-            Download
-          </button>
+          <a
+            href={`http://api.iwantnet.space:8001${fileName}`}
+            target="_blank"
+            rel="noreferrer"
+            download
+          >
+            <button className={classes.download}>
+              <img src={downloadFile} alt="download_file" />
+              Download
+            </button>
+          </a>
         )}
         {downloadOrDelete === "delete" && (
           <button className={classes.delete} onClick={deleteFile}>

@@ -12,12 +12,66 @@ import Delete from "../../images/delete.png";
 import Edit from "../../images/edit2.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { ideasActions } from "../../store/idea";
 
-const Idea = ({ type, uuid, title, goal, details, likes, views, comments }) => {
+const Idea = ({
+  type,
+  uuid,
+  token,
+  title,
+  goal,
+  details,
+  likes,
+  views,
+  comments,
+  isShowLikes = true,
+  isShowComments = true,
+  isShowViews = true,
+}) => {
   const [isSave, setIsSave] = useState(false);
+  const dispatch = useDispatch();
 
-  const manageSave = () => {
+  const manageSave = async (e) => {
+    e.preventDefault();
     setIsSave(!isSave);
+    try {
+      await axios.post(
+        `http://api.iwantnet.space:8001/api/idea/save-idea/${uuid}`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const manageDelete = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        `http://api.iwantnet.space:8001/api/idea/evolution/detail/${uuid}`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      dispatch(
+        ideasActions.deleteIdea({
+          uuid: uuid,
+        })
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -30,12 +84,14 @@ const Idea = ({ type, uuid, title, goal, details, likes, views, comments }) => {
             type === "CategoriesPage") && (
             <button
               className={`${classes.options} ${classes.saveIdea}`}
-              onClick={manageSave}
+              onClick={(e) => {
+                manageSave(e);
+              }}
             >
               {isSave ? (
-                <BookmarkBorder className={classes.saveIdeaButton} />
-              ) : (
                 <Bookmark className={classes.saveIdeaButton} />
+              ) : (
+                <BookmarkBorder className={classes.saveIdeaButton} />
               )}
               Save
             </button>
@@ -59,7 +115,12 @@ const Idea = ({ type, uuid, title, goal, details, likes, views, comments }) => {
         <div className={classes.ideaGoal}>
           <p>{goal}</p>
           {type === "MyIdeas" && (
-            <button className={classes.deleteIdea}>
+            <button
+              className={classes.deleteIdea}
+              onClick={(e) => {
+                manageDelete(e);
+              }}
+            >
               <img src={Delete} alt="Delete_Idea" />
               Delete
             </button>
@@ -69,18 +130,24 @@ const Idea = ({ type, uuid, title, goal, details, likes, views, comments }) => {
           <p className={classes.ideaDesc}>{details}</p>
         </div>
         <div className={classes.feedback}>
-          <div>
-            <ThumbUp className={classes.icon} />
-            {likes}
-          </div>
-          <div>
-            <img className={classes.icon} src={Eye} alt="Views" />
-            {views}
-          </div>
-          <div>
-            <Message className={classes.icon} />
-            {comments}
-          </div>
+          {isShowLikes && (
+            <div>
+              <ThumbUp className={classes.icon} />
+              {likes}
+            </div>
+          )}
+          {isShowViews && (
+            <div>
+              <img className={classes.icon} src={Eye} alt="Views" />
+              {views}
+            </div>
+          )}
+          {isShowComments && (
+            <div>
+              <Message className={classes.icon} />
+              {comments}
+            </div>
+          )}
         </div>
       </div>
       <img className={classes.ideaImage} src={IdeaIMG} alt="Idea_Image" />

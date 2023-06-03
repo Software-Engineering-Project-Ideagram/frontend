@@ -1,4 +1,4 @@
-import { React, useContext, useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import classes from "./IdeaShow.module.scss";
 import ArtLabel from "../../images/ArtLabel.png";
 import GamesLabel from "../../images/GamesLabel.png";
@@ -23,8 +23,8 @@ import { UserAccount, UploadedFile } from "../";
 import Comment from "../Comment/Comment";
 import Profile from "../../images/profile.jpg";
 import Send from "../../images/send.png";
-import AuthContext from "../../api/AuthContext";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 const IdeaShow = ({ uuid, token }) => {
   const [ideaImage, setIdeaImage] = useState(null);
@@ -42,10 +42,20 @@ const IdeaShow = ({ uuid, token }) => {
   const [showLikes, setShowLikes] = useState(false);
   const [showViews, setShowViews] = useState(false);
   const [showComments, setShowComments] = useState(false);
+  const [likesCount, setLikesCount] = useState(null);
+  const [viewsCount, setViewsCount] = useState(null);
+  const [commentsCount, setCommentsCount] = useState(null);
   const [ideaDescription, setIdeaDescription] = useState("");
+  const [ideaComment, setIdeaComment] = useState("");
+  const [ideaCommentsList, setIdeaCommentsList] = useState([]);
+  const [ideaAttachedFilesList, setIdeaAttachedFilesList] = useState([]);
 
   const [userProfile, setUserProfile] = useState(null);
   const [userUsername, setUserUsername] = useState(null);
+  const [userFollowers, setUserFollowers] = useState(null);
+  const [userFollowings, setUserFollowings] = useState(null);
+  const [userIdeas, setUserIdeas] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getIdeaData = async () => {
@@ -75,34 +85,68 @@ const IdeaShow = ({ uuid, token }) => {
         setShowLikes(res.data.show_likes);
         setShowViews(res.data.show_views);
         setShowComments(res.data.show_comments);
+        setLikesCount(res.data.likes_count);
+        setViewsCount(res.data.views_count);
+        setCommentsCount(res.data.comments_count);
         setIdeaDescription(res.data.description);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getIdeaData();
-  }, []);
 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const res = await axios.get(
-          "http://api.iwantnet.space:8001/api/user/profile/",
+        setUserProfile(res.data.profile.profile_image);
+        setUserUsername(res.data.profile.username);
+        setUserFollowers(res.data.profile.follower_count);
+        setUserFollowings(res.data.profile.following_count);
+        setUserIdeas(res.data.profile.idea_count);
+
+        const attachedFilesRes = await axios.get(
+          `http://api.iwantnet.space:8001/api/idea/attachment/${uuid}`,
           {
             headers: {
               Authorization: "Bearer " + token,
             },
           }
         );
-        console.log(res);
-        setUserProfile(res.data.profile_image);
-        setUserUsername(res.data.username);
+        console.log(attachedFilesRes);
+        setIdeaAttachedFilesList(attachedFilesRes.data);
+
+        const commentsRes = await axios.get(
+          `http://api.iwantnet.space:8001/api/idea/comment/${uuid}`,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        console.log(commentsRes);
+        setIdeaCommentsList(commentsRes.data);
+
+        setIsLoading(false);
       } catch (err) {
+        setIsLoading(false);
         console.log(err);
       }
     };
-    getUserData();
+    getIdeaData();
   }, []);
+
+  const setComment = async () => {
+    try {
+      const res = await axios.post(
+        `http://api.iwantnet.space:8001/api/idea/comment/${uuid}`,
+        {
+          comment: ideaComment,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      console.log(res);
+      setIdeaCommentsList([...ideaCommentsList, res.data]);
+      setIdeaComment("");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className={classes.body}>
@@ -136,19 +180,19 @@ const IdeaShow = ({ uuid, token }) => {
               {showLikes && (
                 <div>
                   <ThumbUp className={classes.icon} />
-                  50
+                  {likesCount}
                 </div>
               )}
               {showViews && (
                 <div>
                   <img className={classes.icon} src={Eye} alt="Views" />
-                  60
+                  {viewsCount}
                 </div>
               )}
               {showComments && (
                 <div>
                   <Message className={classes.icon} />
-                  70
+                  {commentsCount}
                 </div>
               )}
             </div>
@@ -218,8 +262,11 @@ const IdeaShow = ({ uuid, token }) => {
             <h2>Creator</h2>
             <UserAccount
               type="AccountReport"
-              profileImage={`http://api.iwantnet.space:8001${userProfile}`}
+              profileImage={userProfile}
               name={userUsername}
+              followers={userFollowers}
+              followings={userFollowings}
+              ideas={userIdeas}
             />
           </div>
           <div className={classes.supportIdea}>
@@ -244,137 +291,50 @@ const IdeaShow = ({ uuid, token }) => {
         </div>
         <div className={classes.uploadedFiles}>
           <h2>Attached Files</h2>
-          <div className={classes.uploadedFilesList}>
-            <UploadedFile
-              type="doc"
-              fileName="first"
-              downloadOrDelete="download"
-            />
-            <UploadedFile
-              type="pdf"
-              fileName="sec"
-              downloadOrDelete="download"
-            />
-            <UploadedFile
-              type="png"
-              fileName="third"
-              downloadOrDelete="download"
-            />
-            <UploadedFile
-              type="jpg"
-              fileName="fourth"
-              downloadOrDelete="download"
-            />
-            <UploadedFile
-              type="pptx"
-              fileName="fifth"
-              downloadOrDelete="download"
-            />
-            <UploadedFile
-              type="pdf"
-              fileName="sixth"
-              downloadOrDelete="download"
-            />
-            <UploadedFile
-              type="doc"
-              fileName="first"
-              downloadOrDelete="download"
-            />
-            <UploadedFile
-              type="pdf"
-              fileName="sec"
-              downloadOrDelete="download"
-            />
-            <UploadedFile
-              type="png"
-              fileName="third"
-              downloadOrDelete="download"
-            />
-            <UploadedFile
-              type="jpg"
-              fileName="fourth"
-              downloadOrDelete="download"
-            />
-            <UploadedFile
-              type="pptx"
-              fileName="fifth"
-              downloadOrDelete="download"
-            />
-            <UploadedFile
-              type="pdf"
-              fileName="sixth"
-              downloadOrDelete="download"
-            />
-          </div>
+          {isLoading ? (
+            <CircularProgress />
+          ) : (
+            ideaAttachedFilesList.length !== 0 && (
+              <div className={classes.uploadedFilesList}>
+                {ideaAttachedFilesList.map((item, index) => (
+                  <UploadedFile
+                    key={index}
+                    token={token}
+                    uuid={item.uuid}
+                    type={item.file.split(".")[1]}
+                    fileName={item.file}
+                    downloadOrDelete="download"
+                  />
+                ))}
+              </div>
+            )
+          )}
         </div>
       </div>
       <div>
         <div className={classes.comments}>
           <h2>Comments</h2>
           <div className={classes.commentsList}>
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
-            <Comment
-              profile={Profile}
-              text="meow meow meow meow meow meow meow meow meow meow meow meow meow"
-            />
+            {isLoading ? (
+              <CircularProgress />
+            ) : (
+              ideaCommentsList.map((item, index) => (
+                <Comment profile={Profile} text={item.comment} />
+              ))
+            )}
           </div>
         </div>
         <div className={classes.ideaSupport}>
           <h2>Write Comment</h2>
           <div className={classes.support}>
-            <input type="text" />
-            <button>
+            <input
+              type="text"
+              value={ideaComment}
+              onChange={(e) => {
+                setIdeaComment(e.target.value);
+              }}
+            />
+            <button onClick={setComment}>
               <img src={Send} alt="send" />
               Send
             </button>

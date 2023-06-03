@@ -34,6 +34,7 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.setItem("tokens", JSON.stringify(apiResponse.data));
     setUser(jwt_decode(apiResponse.data.access));
     navigate("/mainPage");
+    return apiResponse.data.access;
   };
 
   const register = async (payload) => {

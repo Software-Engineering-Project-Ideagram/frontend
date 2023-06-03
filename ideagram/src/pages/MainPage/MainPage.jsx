@@ -1,14 +1,11 @@
-import { React, useContext, useEffect } from "react";
+import { React, useEffect } from "react";
 import classes from "./MainPage.module.scss";
 import { Idea, Skeleton } from "../../components";
 import { useState } from "react";
-import AuthContext from "../../api/AuthContext";
+
 import axios from "axios";
 
-const MainPage = () => {
-  const token = useContext(AuthContext).getAccessToken();
-  console.log(token);
-
+const MainPage = ({ token }) => {
   const [seeAll, setSeeAll] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [userIdeas, setUserIdeas] = useState([]);
@@ -34,7 +31,7 @@ const MainPage = () => {
   const applyFilter = async (filterItem) => {
     try {
       const res = await axios.post(
-        "http://api.iwantnet.space:8001/api/idea/filter/user/",
+        "http://api.iwantnet.space:8001/api/idea/filter/",
         {
           classification: [filterItem],
         },
@@ -139,12 +136,16 @@ const MainPage = () => {
                         type="MainPage"
                         key={index}
                         uuid={item.uuid}
+                        token={token}
                         title={item.title}
                         goal={item.goal}
                         details={item.details}
                         likes={item.likes}
                         views={item.views}
                         comments={item.comments}
+                        isShowLikes={item.likes_count === null ? false : true}
+                        isComments={item.comments_count === null ? false : true}
+                        isShowViews={item.views_count === null ? false : true}
                       />
                     ))
                   : userIdeas.map(
@@ -154,12 +155,22 @@ const MainPage = () => {
                             type="MainPage"
                             key={index}
                             uuid={item.uuid}
+                            token={token}
                             title={item.title}
                             goal={item.goal}
                             details={item.details}
-                            likes={item.likes}
-                            views={item.views}
-                            comments={item.comments}
+                            likes={item.likes_count}
+                            views={item.views_count}
+                            comments={item.views_count}
+                            isShowLikes={
+                              item.likes_count === null ? false : true
+                            }
+                            isComments={
+                              item.comments_count === null ? false : true
+                            }
+                            isShowViews={
+                              item.views_count === null ? false : true
+                            }
                           />
                         )
                     )}

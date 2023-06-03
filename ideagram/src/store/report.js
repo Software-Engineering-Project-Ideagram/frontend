@@ -24,7 +24,6 @@ const reportsSlice = createSlice({
       const existingItem = state.reports.find(
         (item) => item.title === newItem.title
       );
-      
 
       if (existingItem) {
         state.reportsNum--;
@@ -33,17 +32,15 @@ const reportsSlice = createSlice({
         );
       }
     },
-    
     deleteAllReports(state, action) {
-        state.reports = [];
-        state.reportsNum = 0;
-      },
-
+      state.reports = [];
+      state.reportsNum = 0;
+    },
     editReport(state, action) {
-        const newItem = action.payload;
-        const existingItem = state.reports.find(
-          (item) => item.title === newItem.title
-        );
+      const newItem = action.payload;
+      const existingItem = state.reports.find(
+        (item) => item.title === newItem.title
+      );
 
       if (existingItem) {
         state.reports = state.reports.filter(

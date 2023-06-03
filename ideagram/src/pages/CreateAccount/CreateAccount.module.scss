@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   padding: 1rem 1.5rem;
+  background-color: #f5f5f5;
 
   .titleContainer {
     display: flex;
@@ -16,7 +17,8 @@
   .changePassword {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 2rem;
 
     @media (max-width: 849.98px) {
       flex-direction: column-reverse;
