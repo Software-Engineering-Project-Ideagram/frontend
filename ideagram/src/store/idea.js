@@ -34,31 +34,6 @@ const ideasSlice = createSlice({
         state.ideas = state.ideas.filter((task) => task.uuid !== newItem.uuid);
       }
     },
-<<<<<<< HEAD
-=======
-    
->>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
-    deleteAllIdeas(state, action) {
-      state.ideas = [];
-      state.ideasNum = 0;
-    },
-<<<<<<< HEAD
-=======
-    
->>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
-    editIdea(state, action) {
-      const newItem = action.payload;
-      const existingItem = state.ideas.find(
-        (item) => item.title === newItem.title
-      );
-
-      if (existingItem) {
-        state.ideas = state.ideas.filter(
-          (task) => task.title !== newItem.title
-        );
-        state.ideas.push(newItem);
-      }
-    },
   },
 });
 

@@ -10,11 +10,7 @@ const collaborationRequestsSlice = createSlice({
         (item) => item.uuid === newItem.uuid
       );
 
-<<<<<<< HEAD
       if (state.collaborationRequestsNum === 0 || !existingItem) {
-=======
-      if (state.collaborationRequestsNum === 0 ||!existingItem) {
->>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
         state.collaborationRequestsNum++;
         state.collaborationRequests.push({
           uuid: newItem.uuid,
@@ -41,10 +37,6 @@ const collaborationRequestsSlice = createSlice({
         );
       }
     },
-<<<<<<< HEAD
-=======
-    
->>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
     deleteAll(state, action) {
       state.collaborationRequests = [];
       state.collaborationRequestsNum = 0;
