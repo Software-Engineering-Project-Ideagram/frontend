@@ -32,6 +32,10 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
       </label>
 
       <label for="DesignTechSmallMenu" className={classes.filter}>
@@ -45,6 +49,10 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
       </label>
 
       <label for="FoodCraftSmallMenu" className={classes.filter}>
@@ -58,6 +66,10 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
       </label>
 
       <label for="GamesSmallMenu" className={classes.filter}>
@@ -71,6 +83,10 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
       </label>
 
       <label for="FilmsSmallMenu" className={classes.filter}>
@@ -84,6 +100,10 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
       </label>
 
       <label for="MusicSmallMenu" className={classes.filter}>
@@ -97,6 +117,10 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
       </label>
 
       <label for="PublishingSmallMenu" className={classes.filter}>
@@ -110,6 +134,10 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
       </label>
 
       <label for="ScienceSmallMenu" className={classes.filter}>
@@ -123,6 +151,10 @@ const IdeaFilterSmallMenu = ({
           }}
         />
         <span className={classes.custom}></span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
       </label>
       <button className={classes.applyFilter} onClick={applyFilter}>
         Apply Filter

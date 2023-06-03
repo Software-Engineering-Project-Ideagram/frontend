@@ -57,17 +57,30 @@ const SmallOptionsMenu = ({ showOptionsMenuHandler, isShowOptionsMenu }) => {
       </li>
       <li onClick={showOptionsMenuHandler}>
         <Link className={classes.btn} to="/login">
+<<<<<<< HEAD
           <img src={Login} alt="login" />
         </Link>
       </li>
       <li onClick={showOptionsMenuHandler}>
         <Link className={classes.btn} to="/mainPage">
           <img src={Home} alt="home" />
+=======
+        <img src={Login} alt="login" />
+        </Link>
+      </li>
+      <li onClick={showOptionsMenuHandler}>
+        <Link className={classes.btn} to="/mainPage"> 
+        <img src={Home} alt="home" />
+>>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
         </Link>
       </li>
       <li className={classes.searchIdea}>
         <button onClick={showOptionsMenuHandler}>
+<<<<<<< HEAD
           <img src={Search} alt="search" />
+=======
+        <img src={Search} alt="search" />
+>>>>>>> 06602119ff224ecb95cb38430b7b95af186d111d
         </button>
         <input type="text" />
       </li>
